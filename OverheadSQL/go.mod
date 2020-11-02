@@ -1,3 +1,3 @@
-module github.com/iisharankov/GoStuff/FYSTDatabase/OverheadSQL
+module FYSTDatabase
 
 go 1.15
