@@ -95,13 +95,10 @@ func (dpCon *DatabaseConnection) queryRead(SQLQuery string, p interface{}) ([]in
 		s := reflect.New(reflect.TypeOf(p).Elem()).Elem()
 
 		// Uses reflect to create the correct columns and types from the struct (p) to scan() with.
-
 		numCols := s.NumField()
 		columns := make([]interface{}, numCols)
 		for i := 0; i < numCols; i++ {
 			field := s.Field(i)
-			fmt.Printf("Field is: %T -- %#v\n", field, field)
-
 			columns[i] = field.Addr().Interface()
 		}
 
