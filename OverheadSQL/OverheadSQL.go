@@ -1,4 +1,4 @@
-package main
+package overheadsql
 
 import (
 	"context"
@@ -10,7 +10,6 @@ import (
 
 	_ "github.com/go-sql-driver/mysql" // Used for SQL queries
 )
-
 
 // GlobalPTStackArray is a struct containing an array of structs
 var dbCon DatabaseConnection
@@ -36,7 +35,6 @@ func (dpCon *DatabaseConnection) connect(dbUsername, dbPassword, dbIP, dpName st
 	dbCon.dbConnection = db
 	return nil
 }
-
 
 func (dpCon *DatabaseConnection) checkConnection() error {
 
@@ -81,10 +79,10 @@ func (dpCon *DatabaseConnection) queryWrite(insertStatement string) {
 	}
 }
 
-
 // QueryRead takes a query returns a list of all the rows returned by the database
 func (dpCon *DatabaseConnection) queryRead(SQLQuery string, p interface{}) ([]interface{}, error) {
 	interfacetious := []interface{}{}
+
 	rows, err := dbCon.dbConnection.Query(SQLQuery)
 	defer rows.Close()
 	if err != nil {
@@ -97,6 +95,7 @@ func (dpCon *DatabaseConnection) queryRead(SQLQuery string, p interface{}) ([]in
 		s := reflect.New(reflect.TypeOf(p).Elem()).Elem()
 
 		// Uses reflect to create the correct columns and types from the struct (p) to scan() with.
+
 		numCols := s.NumField()
 		columns := make([]interface{}, numCols)
 		for i := 0; i < numCols; i++ {
