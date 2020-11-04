@@ -21,7 +21,7 @@ type DatabaseConnection struct {
 }
 
 // Connect connects to a database
-func (dpCon *DatabaseConnection) connect(dbUsername, dbPassword, dbIP, dpName string) error {
+func (dpCon *DatabaseConnection) Connect(dbUsername, dbPassword, dbIP, dpName string) error {
 	SQLConnectionString := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", dbUsername, dbPassword, dbIP, dpName)
 	db, err := sql.Open("mysql", SQLConnectionString)
 	if err != nil {
@@ -36,8 +36,7 @@ func (dpCon *DatabaseConnection) connect(dbUsername, dbPassword, dbIP, dpName st
 	return nil
 }
 
-func (dpCon *DatabaseConnection) checkConnection() error {
-
+func (dpCon *DatabaseConnection) CheckConnection() error {
 	err := dbCon.dbConnection.Ping()
 	if err != nil {
 		return err
@@ -47,7 +46,7 @@ func (dpCon *DatabaseConnection) checkConnection() error {
 
 // QueryWriteWithTransaction takes a query and executes it with a transaction for safety
 // TODO: make input a list of queries instead of just one!
-func (dpCon *DatabaseConnection) queryWriteWithTransaction(insertStatement []string) {
+func (dpCon *DatabaseConnection) QueryWriteWithTransaction(insertStatement []string) {
 
 	ctx := context.Background() // Create a new context, and begin a transaction
 	tx, err := dbCon.dbConnection.BeginTx(ctx, nil)
@@ -72,7 +71,7 @@ func (dpCon *DatabaseConnection) queryWriteWithTransaction(insertStatement []str
 }
 
 // QueryWrite takes a single query and executes it with no transactional safety
-func (dpCon *DatabaseConnection) queryWrite(insertStatement string) {
+func (dpCon *DatabaseConnection) QueryWrite(insertStatement string) {
 	_, err := dbCon.dbConnection.Query(insertStatement)
 	if err != nil {
 		fmt.Println(err)
@@ -80,7 +79,7 @@ func (dpCon *DatabaseConnection) queryWrite(insertStatement string) {
 }
 
 // QueryRead takes a query returns a list of all the rows returned by the database
-func (dpCon *DatabaseConnection) queryRead(SQLQuery string, p interface{}) ([]interface{}, error) {
+func (dpCon *DatabaseConnection) QueryRead(SQLQuery string, p interface{}) ([]interface{}, error) {
 	interfacetious := []interface{}{}
 
 	rows, err := dbCon.dbConnection.Query(SQLQuery)
