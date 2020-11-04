@@ -36,6 +36,7 @@ func (dpCon *DatabaseConnection) Connect(dbUsername, dbPassword, dbIP, dpName st
 	return nil
 }
 
+// CheckConnection checks if the connection to the database is active
 func (dpCon *DatabaseConnection) CheckConnection() error {
 	err := dbCon.dbConnection.Ping()
 	if err != nil {

@@ -1,13 +1,13 @@
 package overheadsql
 
-type backupLocationTable struct {
+type BackupLocationTable struct {
 	LocationID      int
 	LocationName    string
 	LocationAddress string
 	FTPIPAddress    string
 }
 
-type instrumentTable struct {
+type InstrumentTable struct {
 	InstrumentID   int
 	InstrumentName string
 	FullName       string
@@ -18,7 +18,7 @@ type instrumentTable struct {
 	TempRange      int
 }
 
-type objectFileTable struct {
+type ObjectFileTable struct {
 	FileID         int
 	DateCreated    string // dataetime?
 	InstrumentID   int
@@ -28,7 +28,7 @@ type objectFileTable struct {
 	ObjectStorage  string
 }
 
-type ruleTable struct {
+type RuleTable struct {
 	RuleID          int
 	RuleDescription int
 	InstrumentID    int
@@ -36,7 +36,7 @@ type ruleTable struct {
 	Active          int // tinyint or bool
 }
 
-type logTable struct {
+type LogTable struct {
 	FileID     int
 	RuleID     int
 	BackupDate string // datetime?
