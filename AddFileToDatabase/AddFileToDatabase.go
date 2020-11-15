@@ -148,9 +148,14 @@ func main() {
 		temp, _ = valOfVal.Interface().(struct{ FileID int })
 
 		// Create the query line to pass to the database
-		addQueryLine := fmt.Sprintf("insert into ObjectFile values(%v, %v, %v, %v, %v, %v, %v);", concreteCat.FileID+1, date, instrumentID, size, hashOfBytes, locationOnDisk, objectStorage)
-		dbCon.QueryWrite(addQueryLine) // Add to Database
-		fmt.Println("Added FileID row")
+		addQueryLine := fmt.Sprintf("insert into ObjectFile values(%v, %v, %v, %v, %v, %v, %v);", temp.FileID+1, date, instrumentID, size, hashOfBytes, locationOnDisk, objectStorage)
+		err := dbCon.QueryWrite(addQueryLine) // Add to Database
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			fmt.Println("Added FileID row")
+		}
+
 	}
 
 }
