@@ -30,9 +30,9 @@ type ObjectFileTable struct {
 
 type RuleTable struct {
 	RuleID          int
+	InstrumentID    string
 	RuleDescription int
-	InstrumentID    int
-	LocationIDint   int
+	LocationID      int
 	Active          int // tinyint or bool
 }
 
