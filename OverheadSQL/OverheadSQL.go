@@ -72,11 +72,12 @@ func (dpCon *DatabaseConnection) QueryWriteWithTransaction(insertStatement []str
 }
 
 // QueryWrite takes a single query and executes it with no transactional safety
-func (dpCon *DatabaseConnection) QueryWrite(insertStatement string) {
+func (dpCon *DatabaseConnection) QueryWrite(insertStatement string) error {
 	_, err := dbCon.dbConnection.Query(insertStatement)
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
+	return nil
 }
 
 // QueryRead takes a query returns a list of all the rows returned by the database
