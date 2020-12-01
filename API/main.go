@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"mime"
@@ -103,51 +104,53 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				}
 				outputData, _ := outputRows.Interface().([]OverheadSQL.ObjectFileTable)
 				for _, val := range outputData {
-					fmt.Fprintf(w, `{"%v"}`, val)
-					fmt.Fprintf(w, "\n")
-
+					data, _ := json.Marshal(val)
+					fmt.Fprintln(w, string(data))
 				}
 				statusCode = http.StatusAccepted
 
 			} else if len(endpointSections) == 3 {
-
+				if endpointSections[2] == "" {
+					errMsg := errors.New("No file ID given. Either give file ID after '/'  or remove the '/'")
+					jsonResponse(w, errMsg, http.StatusBadRequest)
+					return
+				}
 				// Check to see if input is an actual integer
 				_, err := strconv.Atoi(endpointSections[2])
 				if err != nil {
-					fmt.Fprintf(w, `{"err": "Could not convert ID given to int, check value after 'files/' - %v"}`, err)
-					fmt.Fprintf(w, "\n")
-					statusCode = http.StatusBadRequest
+					errMsg := errors.New("Could not convert ID given to int, check value after 'files/'")
+					jsonResponse(w, errMsg, http.StatusBadRequest)
+					return
 				}
 
-				// if int, use string version for simplicity
+				// if int, use string version for simplicity. No worry about SQL injection since above Atoi didn't fail
 				SQLQuery := "select * from ObjectFile where ObjectFile.FileID=" + endpointSections[2]
 				var objectTable OverheadSQL.ObjectFileTable
 				outputRows, err := dbCon.QueryRead(SQLQuery, &objectTable)
 				if err != nil {
-					fmt.Fprintf(w, `{"err": "%v"}`, err)
-					fmt.Fprintf(w, "\n")
-					statusCode = http.StatusBadRequest
+					jsonResponse(w, err, http.StatusBadRequest)
 					return
 				}
 
 				outputData, ok := outputRows.Interface().([]OverheadSQL.ObjectFileTable)
-				if ok {
-					fmt.Fprintf(w, `{"err": Error with ID given, may be out of range of last element}`)
-					fmt.Fprintf(w, "\n")
-					statusCode = http.StatusBadRequest
+				if !ok || len(outputData) == 0 { // Len will be 0 if index is out of range (nothing is returned)
+					errMsg := errors.New("Error with ID given, may be out of range of last element")
+					jsonResponse(w, errMsg, http.StatusBadRequest)
 					return
 				}
 
-				fmt.Fprintf(w, `{"%v"}`, outputData[0]) // Should only be a single output
+				data, _ := json.Marshal(outputData[0])
+				fmt.Fprintln(w, string(data)) // Should only be a single output
 				statusCode = http.StatusAccepted
 
 			} else if len(endpointSections) == 4 && endpointSections[3] == "copies" {
 				// Check to see if input is an actual integer
 				_, err := strconv.Atoi(endpointSections[2])
 				if err != nil {
-					fmt.Fprintf(w, `{"err": "Could not convert ID given to int, check value after 'files/' - %v"}`, err)
-					fmt.Fprintf(w, "\n")
-					statusCode = http.StatusBadRequest
+					errMsg := errors.New("Could not convert ID given to int, check value after 'files/'")
+					jsonResponse(w, errMsg, http.StatusBadRequest)
+					return
+
 				}
 
 				// if int, use string version for simplicity
@@ -156,14 +159,14 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				outputRows, err := dbCon.QueryRead(SQLQuery, &objectTable)
 				if err != nil {
 					fmt.Println(err)
-					statusCode = http.StatusBadRequest
+					jsonResponse(w, err, http.StatusBadRequest)
 					return
 				}
 
 				outputData, _ := outputRows.Interface().([]OverheadSQL.LogTable)
 				for _, val := range outputData {
-					fmt.Fprintf(w, `{"%v"}`, val)
-					fmt.Fprintf(w, "\n")
+					data, _ := json.Marshal(val)
+					fmt.Fprintln(w, string(data))
 				}
 				statusCode = http.StatusAccepted
 			}
@@ -172,56 +175,28 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 		statusCode = http.StatusNotFound
 	}
 	jsonResponse(w, err, statusCode)
-
 }
 
-// func getObjectFiles(ID string) []OverheadSQL.ObjectFileTable {
-// 	var outputData []OverheadSQL.ObjectFileTable
-// 	var objectFileTable OverheadSQL.ObjectFileTable
-
-// 	// Send query to database
-// 	outputRows, err := dbCon.QueryRead(SQLQuery, &objectFileTable)
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}
-
-// 	for _, val := range outputRows {
-// 		// Convert reflect.Value to a OverheadSQL.ObjectFileTable struct and append to list of structs
-// 		valOfVal, _ := val.(reflect.Value)
-
-// 		concreteRow, _ := valOfVal.Interface().(OverheadSQL.ObjectFileTable)
-// 		// xxx := reflect.TypeOf(objectFileTable)
-// 		// fmt.Printf("%T -- %v\n", xxx, xxx)
-// 		// concreteRow, _ := valOfVal.Interface().(reflect.TypeOf(objectFileTable))
-// 		outputData = append(outputData, concreteRow)
-// 	}
-// 	return outputData
-// }
-
 func diffFunc(cmd File) {
-	fmt.Println("Would have added")
-	// // Convert each field of the line to the proper format
-	// objectStorage := "??"
+	// Find largest index for FileID column, so we can increment by one
+	temp := struct{ FileID int }{} // Temp struct that has just integer (SQL query returns row of 1 int)
+	queryReturn, _ := dbCon.QueryRead("SELECT FileID FROM ObjectFile ORDER BY FileID DESC LIMIT 1", &temp)
+	lastFileID, _ := queryReturn.Interface().([]struct{ FileID int }) // type assert from reflect.Value to struct
+	FileID := lastFileID[0].FileID + 1                                // Takes the first element out, and then takes the FileID field
 
-	// // Find index for FileID column
-	// temp := struct{ FileID int }{}
-	// lastFileID, _ := dbCon.QueryRead("SELECT FileID FROM ObjectFile ORDER BY FileID DESC LIMIT 1", &temp)
+	// Use SQL Prepare() method to safely convert the field types.
+	stmt, err := dbCon.DBConnection.Prepare("insert into ObjectFile values(?, ?, ?, ?, ?, ?, ?);")
+	if err != nil {
+		fmt.Println("Error in db.Perpare()\n", err)
+	}
 
-	// // Convert reflect.Value to struct to extract the int
-	// valOfVal, _ := lastFileID[0].(reflect.Value)
-	// temp, _ = valOfVal.Interface().(struct{ FileID int })
-
-	// // Create the query line to pass to the database
-	// // use sql pachage instead of sprintf since they have formatting that can help
-	// addQueryLine := fmt.Sprintf("insert into ObjectFile values(%v, '%v', %v, %v, '%v', '%v', '%v');", temp.FileID+1, cmd.DateCreated, 1, cmd.Size, cmd.MD5Sum, cmd.Location, objectStorage)
-	// fmt.Println("query line is", addQueryLine)
-
-	// err := dbCon.QueryWrite(addQueryLine) // Add to Database
-	// if err != nil {
-	// 	fmt.Println(err)
-	// } else {
-	// 	fmt.Println("Added FileID row")
-	// }
+	// Execute the command on the database (encoded already in stmt)
+	_, err = stmt.Exec(FileID, cmd.DateCreated, 1, cmd.Size, cmd.MD5Sum, cmd.Location, "??")
+	if err != nil {
+		fmt.Println("Error in query execution. Field types may differ and could not be cast\n", err)
+	} else {
+		fmt.Println("Added FileID row")
+	}
 }
 
 // Shamelessly stolen
@@ -247,6 +222,7 @@ func jsonResponse(w http.ResponseWriter, err error, statusCode int) {
 }
 
 func main() {
+
 	err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName)
 	if err != nil {
 		fmt.Println(err)
