@@ -16,7 +16,7 @@ var dbCon DatabaseConnection
 
 // DatabaseConnection is a struct
 type DatabaseConnection struct {
-	dbConnection *sql.DB
+	DBConnection *sql.DB
 	sync.Mutex
 }
 
@@ -27,18 +27,17 @@ func (dpCon *DatabaseConnection) Connect(dbUsername, dbPassword, dbIP, dpName st
 	if err != nil {
 		return err
 	}
-
 	err = db.Ping()
 	if err != nil {
 		return err
 	}
-	dbCon.dbConnection = db
+	dbCon.DBConnection = db
 	return nil
 }
 
 // CheckConnection checks if the connection to the database is active
 func (dpCon *DatabaseConnection) CheckConnection() error {
-	err := dbCon.dbConnection.Ping()
+	err := dbCon.DBConnection.Ping()
 	if err != nil {
 		return err
 	}
@@ -50,7 +49,7 @@ func (dpCon *DatabaseConnection) CheckConnection() error {
 func (dpCon *DatabaseConnection) QueryWriteWithTransaction(insertStatement []string) {
 
 	ctx := context.Background() // Create a new context, and begin a transaction
-	tx, err := dbCon.dbConnection.BeginTx(ctx, nil)
+	tx, err := dbCon.DBConnection.BeginTx(ctx, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -73,7 +72,7 @@ func (dpCon *DatabaseConnection) QueryWriteWithTransaction(insertStatement []str
 
 // QueryWrite takes a single query and executes it with no transactional safety
 func (dpCon *DatabaseConnection) QueryWrite(insertStatement string) error {
-	_, err := dbCon.dbConnection.Query(insertStatement)
+	_, err := dbCon.DBConnection.Query(insertStatement)
 	if err != nil {
 		return err
 	}
@@ -81,13 +80,17 @@ func (dpCon *DatabaseConnection) QueryWrite(insertStatement string) error {
 }
 
 // QueryRead takes a query returns a list of all the rows returned by the database
-func (dpCon *DatabaseConnection) QueryRead(SQLQuery string, p interface{}) ([]interface{}, error) {
-	interfacetious := []interface{}{}
+func (dpCon *DatabaseConnection) QueryRead(SQLQuery string, p interface{}) (emptyOutput reflect.Value, err error) {
 
-	rows, err := dbCon.dbConnection.Query(SQLQuery)
+	// Here we are relying heavily on the reflect package to create a generic function for all types of SQL tables
+	// The output is a slice of Values that can be then type asserted to the given structure p (outside of this function)
+	outputData := reflect.New(reflect.SliceOf(reflect.TypeOf(p).Elem())).Elem()
+
+	// Send query to database to receive rows
+	rows, err := dbCon.DBConnection.Query(SQLQuery)
 	defer rows.Close()
 	if err != nil {
-		return interfacetious, err
+		return emptyOutput, err
 	}
 
 	for rows.Next() {
@@ -102,15 +105,15 @@ func (dpCon *DatabaseConnection) QueryRead(SQLQuery string, p interface{}) ([]in
 			field := s.Field(i)
 			columns[i] = field.Addr().Interface()
 		}
-
 		// Scans the next query row and populates columns, which has pointers to the memory addresses.
 		if err := rows.Scan(columns...); err != nil {
-			return []interface{}{}, err
+			return emptyOutput, err
 		}
-		interfacetious = append(interfacetious, s)
+		outputData = reflect.Append(outputData, s)
 	}
 	if err := rows.Err(); err != nil {
 		panic(err)
 	}
-	return interfacetious, nil
+
+	return outputData, nil
 }
