@@ -81,7 +81,6 @@ func (dpCon *DatabaseConnection) QueryWrite(insertStatement string) error {
 
 // QueryRead takes a query returns a list of all the rows returned by the database
 func (dpCon *DatabaseConnection) QueryRead(SQLQuery string, p interface{}) (emptyOutput reflect.Value, err error) {
-
 	// Here we are relying heavily on the reflect package to create a generic function for all types of SQL tables
 	// The output is a slice of Values that can be then type asserted to the given structure p (outside of this function)
 	outputData := reflect.New(reflect.SliceOf(reflect.TypeOf(p).Elem())).Elem()

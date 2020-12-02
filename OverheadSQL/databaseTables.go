@@ -1,5 +1,6 @@
 package overheadsql
 
+// BackupLocationTable is an SQL table
 type BackupLocationTable struct {
 	LocationID      int    `json:"location_id"`
 	LocationName    string `json:"location_name"`
@@ -7,6 +8,7 @@ type BackupLocationTable struct {
 	FTPIPAddress    string `json:"ftp_ip_address"`
 }
 
+// InstrumentTable is an SQL table
 type InstrumentTable struct {
 	InstrumentID   int    `json:"instrument_id"`
 	InstrumentName string `json:"instrument_name"`
@@ -18,6 +20,7 @@ type InstrumentTable struct {
 	TempRange      int    `json:"temp_range"`
 }
 
+// ObjectFileTable is an SQL table
 type ObjectFileTable struct {
 	FileID         int    `json:"file_id"`
 	DateCreated    string `json:"date_created"` // dataetime?
@@ -28,6 +31,7 @@ type ObjectFileTable struct {
 	ObjectStorage  string `json:"object_storage"`
 }
 
+// RuleTable is an SQL table
 type RuleTable struct {
 	RuleID          int    `json:"rule_id"`
 	RuleDescription string `json:"rule_description"`
@@ -36,6 +40,7 @@ type RuleTable struct {
 	Active          int    `json:"active"` // tinyint or bool
 }
 
+// LogTable is an SQL table
 type LogTable struct {
 	FileID     int    `json:"file_id"`
 	RuleID     int    `json:"rule_id"`
