@@ -66,10 +66,38 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		if endpointSections[1] == "files" {
 			if len(endpointSections) == 2 {
-				var x File
-				err = dec.Decode(&x)
-				statusCode = http.StatusAccepted
-				diffFunc(x)
+				var cmd File
+				err = dec.Decode(&cmd)
+
+				// Find largest index for FileID column, so we can increment by one
+				temp := struct{ FileID int }{} // Temp struct that has just integer (SQL query returns row of 1 int)
+				queryReturn, err := dbCon.QueryRead("SELECT FileID FROM ObjectFile ORDER BY FileID DESC LIMIT 1", &temp)
+				if err != nil {
+					jsonResponse(w, err, http.StatusBadRequest)
+					return
+				}
+
+				lastFileID, _ := queryReturn.Interface().([]struct{ FileID int }) // type assert from reflect.Value to struct
+				FileID := lastFileID[0].FileID + 1                                // Takes the first element out, and then takes the FileID field
+
+				// Use SQL Prepare() method to safely convert the field types.
+				stmt, err := dbCon.DBConnection.Prepare("insert into ObjectFile values(?, ?, ?, ?, ?, ?, ?);")
+				if err != nil {
+					fmt.Println("Error in db.Perpare()\n", err)
+					jsonResponse(w, err, http.StatusBadRequest)
+					return
+				}
+
+				// Execute the command on the database (encoded already in stmt)
+				_, err = stmt.Exec(FileID, cmd.DateCreated, 1, cmd.Size, cmd.MD5Sum, cmd.Location, "??")
+				if err != nil {
+					_ = errors.New("error in query execution")
+					jsonResponse(w, err, http.StatusBadRequest)
+					return
+				} else {
+					fmt.Println("Added FileID row")
+					statusCode = http.StatusAccepted
+				}
 			}
 		} else {
 			statusCode = http.StatusNotFound
@@ -89,9 +117,7 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 		// fmt.Println("Body is", r.Body)
 		// r.ParseForm()
 		// fmt.Println("form is", r.Form)
-
 		// if r.Form["Module"][0] != "Services.PositionFiles"
-		// fmt.Println(cmd)
 
 	} else if r.Method == "GET" {
 		if endpointSections[1] == "files" {
@@ -100,7 +126,8 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				var objectTable OverheadSQL.ObjectFileTable
 				outputRows, err := dbCon.QueryRead(SQLQuery, &objectTable)
 				if err != nil {
-					fmt.Println(err)
+					jsonResponse(w, err, http.StatusBadRequest)
+					return
 				}
 				outputData, _ := outputRows.Interface().([]OverheadSQL.ObjectFileTable)
 				for _, val := range outputData {
@@ -158,7 +185,6 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				var objectTable OverheadSQL.LogTable
 				outputRows, err := dbCon.QueryRead(SQLQuery, &objectTable)
 				if err != nil {
-					fmt.Println(err)
 					jsonResponse(w, err, http.StatusBadRequest)
 					return
 				}
@@ -175,28 +201,6 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 		statusCode = http.StatusNotFound
 	}
 	jsonResponse(w, err, statusCode)
-}
-
-func diffFunc(cmd File) {
-	// Find largest index for FileID column, so we can increment by one
-	temp := struct{ FileID int }{} // Temp struct that has just integer (SQL query returns row of 1 int)
-	queryReturn, _ := dbCon.QueryRead("SELECT FileID FROM ObjectFile ORDER BY FileID DESC LIMIT 1", &temp)
-	lastFileID, _ := queryReturn.Interface().([]struct{ FileID int }) // type assert from reflect.Value to struct
-	FileID := lastFileID[0].FileID + 1                                // Takes the first element out, and then takes the FileID field
-
-	// Use SQL Prepare() method to safely convert the field types.
-	stmt, err := dbCon.DBConnection.Prepare("insert into ObjectFile values(?, ?, ?, ?, ?, ?, ?);")
-	if err != nil {
-		fmt.Println("Error in db.Perpare()\n", err)
-	}
-
-	// Execute the command on the database (encoded already in stmt)
-	_, err = stmt.Exec(FileID, cmd.DateCreated, 1, cmd.Size, cmd.MD5Sum, cmd.Location, "??")
-	if err != nil {
-		fmt.Println("Error in query execution. Field types may differ and could not be cast\n", err)
-	} else {
-		fmt.Println("Added FileID row")
-	}
 }
 
 // Shamelessly stolen
