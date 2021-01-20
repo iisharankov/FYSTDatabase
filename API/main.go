@@ -81,7 +81,8 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				FileID := lastFileID[0].FileID + 1                                // Takes the first element out, and then takes the FileID field
 
 				// Use SQL Prepare() method to safely convert the field types.
-				stmt, err := dbCon.DBConnection.Prepare("insert into ObjectFile values(?, ?, ?, ?, ?, ?, ?);")
+				fmt.Println(&dbCon.DBConnection)
+				stmt, err := dbCon.DBConnection.Prepare("insert into ObjectFile values(?, ?, ?, ?, ?, ?);")
 				if err != nil {
 					fmt.Println("Error in db.Perpare()\n", err)
 					jsonResponse(w, err, http.StatusBadRequest)
@@ -89,7 +90,7 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				}
 
 				// Execute the command on the database (encoded already in stmt)
-				_, err = stmt.Exec(FileID, cmd.DateCreated, 1, cmd.Size, cmd.MD5Sum, cmd.Location, "??")
+				_, err = stmt.Exec(FileID, cmd.DateCreated, 1, cmd.Size, cmd.MD5Sum, "??")
 				if err != nil {
 					_ = errors.New("error in query execution")
 					jsonResponse(w, err, http.StatusBadRequest)
@@ -136,22 +137,20 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				}
 				statusCode = http.StatusAccepted
 
-			} else if len(endpointSections) == 3 {
-				if endpointSections[2] == "" {
-					errMsg := errors.New("No file ID given. Either give file ID after '/'  or remove the '/'")
-					jsonResponse(w, errMsg, http.StatusBadRequest)
-					return
-				}
-				// Check to see if input is an actual integer
-				_, err := strconv.Atoi(endpointSections[2])
-				if err != nil {
-					errMsg := errors.New("Could not convert ID given to int, check value after 'files/'")
-					jsonResponse(w, errMsg, http.StatusBadRequest)
-					return
+			} else if len(endpointSections) == 3 && checkID(endpointSections[2], w) == nil {
+
+				var SQLQuery string
+				if strings.Contains(endpointSections[2], "-") {
+					splitRange := strings.Split(endpointSections[2], "-")
+
+					a, _ := strconv.Atoi(splitRange[0])
+					b, _ := strconv.Atoi(splitRange[1])
+					SQLQuery = "select * from ObjectFile ORDER BY FileID LIMIT " + strconv.Itoa(b-a+1) + " OFFSET " + strconv.Itoa(a-1)
+				} else {
+					// if int, use string version for simplicity. No worry about SQL injection since above Atoi didn't fail
+					SQLQuery = "select * from ObjectFile where ObjectFile.FileID=" + endpointSections[2]
 				}
 
-				// if int, use string version for simplicity. No worry about SQL injection since above Atoi didn't fail
-				SQLQuery := "select * from ObjectFile where ObjectFile.FileID=" + endpointSections[2]
 				var objectTable OverheadSQL.ObjectFileTable
 				outputRows, err := dbCon.QueryRead(SQLQuery, &objectTable)
 				if err != nil {
@@ -166,8 +165,10 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 
-				data, _ := json.Marshal(outputData[0])
-				fmt.Fprintln(w, string(data)) // Should only be a single output
+				for _, val := range outputData {
+					data, _ := json.Marshal(val)
+					fmt.Fprintln(w, string(data))
+				}
 				statusCode = http.StatusAccepted
 
 			} else if len(endpointSections) == 4 && endpointSections[3] == "copies" {
@@ -177,7 +178,6 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 					errMsg := errors.New("Could not convert ID given to int, check value after 'files/'")
 					jsonResponse(w, errMsg, http.StatusBadRequest)
 					return
-
 				}
 
 				// if int, use string version for simplicity
@@ -196,11 +196,49 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				}
 				statusCode = http.StatusAccepted
 			}
+		} else if endpointSections[1] == "rules" {
+			if len(endpointSections) == 2 {
+				SQLQuery := "select * from Rule;"
+				var ruleTable OverheadSQL.RuleTable
+				outputRows, err := dbCon.QueryRead(SQLQuery, &ruleTable)
+				if err != nil {
+					jsonResponse(w, err, http.StatusBadRequest)
+					return
+				}
+				outputData, _ := outputRows.Interface().([]OverheadSQL.RuleTable)
+				for _, val := range outputData {
+					data, _ := json.Marshal(val)
+					fmt.Fprintln(w, string(data))
+				}
+				statusCode = http.StatusAccepted
+
+			} else if len(endpointSections) == 3 && checkID(endpointSections[2], w) == nil {
+				// if int, use string version for simplicity. No worry about SQL injection since above Atoi didn't fail
+				SQLQuery := "select * from Rule where Rule.RuleID=" + endpointSections[2]
+				var ruleTable OverheadSQL.RuleTable
+				outputRows, err := dbCon.QueryRead(SQLQuery, &ruleTable)
+				if err != nil {
+					jsonResponse(w, err, http.StatusBadRequest)
+					return
+				}
+
+				outputData, ok := outputRows.Interface().([]OverheadSQL.RuleTable)
+				if !ok || len(outputData) == 0 { // Len will be 0 if index is out of range (nothing is returned)
+					errMsg := errors.New("Error with ID given, may be out of range of last element")
+					jsonResponse(w, errMsg, http.StatusBadRequest)
+					return
+				}
+
+				data, _ := json.Marshal(outputData[0])
+				fmt.Fprintln(w, string(data)) // Should only be a single output
+				statusCode = http.StatusAccepted
+
+			}
 		}
 	} else {
 		statusCode = http.StatusNotFound
+		jsonResponse(w, err, statusCode)
 	}
-	jsonResponse(w, err, statusCode)
 }
 
 // Shamelessly stolen
@@ -224,13 +262,44 @@ func jsonResponse(w http.ResponseWriter, err error, statusCode int) {
 		log.Print(err)
 	}
 }
+func checkID(endpointSection string, w http.ResponseWriter) error {
+	var err error
+	// If endpointSection has a '-', it is a range and both elements should be tested recursively
+	if strings.Contains(endpointSection, "-") {
+		splitRange := strings.Split(endpointSection, "-")
+		err = checkID(splitRange[0], w)
+		if err != nil {
+			return err
+		}
+		err = checkID(splitRange[1], w)
+		if err != nil {
+			return err
+		}
+		return nil
+	}
+	if endpointSection == "" {
+		errMsg := errors.New("No file ID given. Either give file ID after '/'  or remove the '/'")
+		jsonResponse(w, errMsg, http.StatusBadRequest)
+		return errMsg
+	}
 
+	// Check to see if input is an actual integer
+	_, err = strconv.Atoi(endpointSection)
+	if err != nil {
+		errMsg := errors.New("Could not convert ID given to int, check value after 'files/'")
+		jsonResponse(w, errMsg, http.StatusBadRequest)
+		return errMsg
+	}
+
+	return nil
+}
 func main() {
 
-	err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName)
+	_, err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
+	// fmt.Println(DB)
 
 	connectionTimeout := 1000 * time.Millisecond
 	mux8700 := http.NewServeMux()
@@ -242,7 +311,7 @@ func main() {
 		WriteTimeout: connectionTimeout,
 	}
 
-	log.Println("Started filesing port on 8700")
+	log.Println("Started filesing port on 8700.")
 	server.ListenAndServe()
 	log.Println("Finished server and closing")
 }
