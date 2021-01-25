@@ -3,6 +3,7 @@ package overheadsql
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"fmt"
 	"log"
 	"reflect"
@@ -21,27 +22,39 @@ type DatabaseConnection struct {
 }
 
 // Connect connects to a database
-func (dpCon *DatabaseConnection) Connect(dbUsername, dbPassword, dbIP, dpName string) error {
+func (dpCon *DatabaseConnection) Connect(dbUsername, dbPassword, dbIP, dpName string) (emptyDB *sql.DB, err error) {
 	SQLConnectionString := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", dbUsername, dbPassword, dbIP, dpName)
 	db, err := sql.Open("mysql", SQLConnectionString)
 	if err != nil {
-		return err
+		return emptyDB, err
 	}
 	err = db.Ping()
 	if err != nil {
-		return err
+		return emptyDB, err
 	}
 	dbCon.DBConnection = db
-	return nil
+	return dbCon.DBConnection, nil
 }
 
 // CheckConnection checks if the connection to the database is active
 func (dpCon *DatabaseConnection) CheckConnection() error {
+	// Connection may be nil if never established
+	if dbCon.DBConnection == nil {
+		errMsg := errors.New("No connection to database established, could not connect")
+		return errMsg
+	}
 	err := dbCon.DBConnection.Ping()
 	if err != nil {
 		return err
 	}
 	return nil
+}
+
+// PrepareQuery prepares a query with the given string
+func (dpCon *DatabaseConnection) PrepareQuery(prepareString string) (*sql.Stmt, error) {
+
+	stmt, err := dbCon.DBConnection.Prepare(prepareString)
+	return stmt, err
 }
 
 // QueryWriteWithTransaction takes a query and executes it with a transaction for safety
@@ -81,6 +94,11 @@ func (dpCon *DatabaseConnection) QueryWrite(insertStatement string) error {
 
 // QueryRead takes a query returns a list of all the rows returned by the database
 func (dpCon *DatabaseConnection) QueryRead(SQLQuery string, p interface{}) (emptyOutput reflect.Value, err error) {
+	err = dbCon.CheckConnection()
+	if err != nil {
+		return emptyOutput, err
+	}
+
 	// Here we are relying heavily on the reflect package to create a generic function for all types of SQL tables
 	// The output is a slice of Values that can be then type asserted to the given structure p (outside of this function)
 	outputData := reflect.New(reflect.SliceOf(reflect.TypeOf(p).Elem())).Elem()

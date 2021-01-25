@@ -35,7 +35,7 @@ func scanFiles() []string {
 	for _, match := range matches {
 		filesList = append(filesList, match)
 	}
-
+	fmt.Println(matches)
 	return filesList
 }
 
@@ -108,9 +108,8 @@ func main() {
 	outputRow, err := dbCon.QueryRead("SELECT * FROM ObjectFile ORDER BY FileID DESC LIMIT 1", &objectFileTable)
 
 	// Convert reflect.Value to struct and find timestamp of element
-	valOfVal, _ := outputRow[0].(reflect.Value)
-	concreteRow, _ := valOfVal.Interface().(OverheadSQL.ObjectFileTable)
-	timeOfLastFileAdded = convertDate(sqlTimeLayout, concreteRow.DateCreated)
+	concreteRow, _ := outputRow.Interface().([]OverheadSQL.ObjectFileTable)
+	timeOfLastFileAdded = convertDate(sqlTimeLayout, concreteRow[0].DateCreated)
 
 	filepaths := scanFiles() // Scan files in "telescope" directory and create list of them
 	fileData := exctractData(filepaths)
@@ -139,23 +138,19 @@ func main() {
 		locationOnDisk := "'" + filepaths[element] + "'" // strings.ReplaceAll(lineData[4], " ", "")
 		objectStorage := strings.ReplaceAll(lineData[5], " ", "")
 
-		// Find index for FileID column
 		temp := struct{ FileID int }{}
-		lastFileID, _ := dbCon.QueryRead("SELECT FileID FROM ObjectFile ORDER BY FileID DESC LIMIT 1", &temp)
-
-		// Convert reflect.Value to struct to extract the int
-		valOfVal, _ := lastFileID[0].(reflect.Value)
-		temp, _ = valOfVal.Interface().(struct{ FileID int })
+		queryReturn, _ := dbCon.QueryRead("SELECT FileID FROM ObjectFile ORDER BY FileID DESC LIMIT 1", &temp)
+		lastFileID, _ := queryReturn.Interface().([]struct{ FileID int })
 
 		// Create the query line to pass to the database
-		addQueryLine := fmt.Sprintf("insert into ObjectFile values(%v, %v, %v, %v, %v, %v, %v);", temp.FileID+1, date, instrumentID, size, hashOfBytes, locationOnDisk, objectStorage)
+		addQueryLine := fmt.Sprintf("insert into ObjectFile values(%v, %v, %v, %v, %v, %v, %v);", lastFileID[0].FileID+1, date, instrumentID, size, hashOfBytes, locationOnDisk, objectStorage)
+
+		fmt.Println(addQueryLine)
 		err := dbCon.QueryWrite(addQueryLine) // Add to Database
 		if err != nil {
 			fmt.Println(err)
 		} else {
 			fmt.Println("Added FileID row")
 		}
-
 	}
-
 }

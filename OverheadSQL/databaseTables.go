@@ -22,13 +22,12 @@ type InstrumentTable struct {
 
 // ObjectFileTable is an SQL table
 type ObjectFileTable struct {
-	FileID         int    `json:"file_id"`
-	DateCreated    string `json:"date_created"` // dataetime?
-	InstrumentID   int    `json:"instrument_id"`
-	Size           int    `json:"size"`
-	HashOfBytes    string `json:"hash_of_bytes"`
-	LocationOnDisk string `json:"location_on_disk"`
-	ObjectStorage  string `json:"object_storage"`
+	FileID        int    `json:"file_id"`
+	DateCreated   string `json:"date_created"` // dataetime?
+	InstrumentID  int    `json:"instrument_id"`
+	Size          int    `json:"size"`
+	HashOfBytes   string `json:"hash_of_bytes"`
+	ObjectStorage string `json:"object_storage"`
 }
 
 // RuleTable is an SQL table
@@ -46,4 +45,5 @@ type LogTable struct {
 	RuleID     int    `json:"rule_id"`
 	BackupDate string `json:"backup_date"` // datetime?
 	IsCopying  int    `json:"is_copying"`  // tiny int or bool
+	URL        string `json:"url"`
 }

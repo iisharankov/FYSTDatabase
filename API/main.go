@@ -78,11 +78,18 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				}
 
 				lastFileID, _ := queryReturn.Interface().([]struct{ FileID int }) // type assert from reflect.Value to struct
-				FileID := lastFileID[0].FileID + 1                                // Takes the first element out, and then takes the FileID field
+
+				var newFileID int
+				if len(lastFileID) == 0 {
+					newFileID = 1 // If ObjectFile table empty, lastFileID is empty, so can't take FileID field
+				} else {
+					newFileID = lastFileID[0].FileID + 1 // Takes the first element out, and then takes the FileID field
+				}
 
 				// Use SQL Prepare() method to safely convert the field types.
-				fmt.Println(&dbCon.DBConnection)
-				stmt, err := dbCon.DBConnection.Prepare("insert into ObjectFile values(?, ?, ?, ?, ?, ?);")
+				stmt, err := dbCon.PrepareQuery("insert into ObjectFile values(?, ?, ?, ?, ?, ?);")
+				fmt.Println(stmt, "2")
+
 				if err != nil {
 					fmt.Println("Error in db.Perpare()\n", err)
 					jsonResponse(w, err, http.StatusBadRequest)
@@ -90,7 +97,7 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				}
 
 				// Execute the command on the database (encoded already in stmt)
-				_, err = stmt.Exec(FileID, cmd.DateCreated, 1, cmd.Size, cmd.MD5Sum, "??")
+				_, err = stmt.Exec(newFileID, cmd.DateCreated, 1, cmd.Size, cmd.MD5Sum, "??")
 				if err != nil {
 					_ = errors.New("error in query execution")
 					jsonResponse(w, err, http.StatusBadRequest)
@@ -206,6 +213,7 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 				outputData, _ := outputRows.Interface().([]OverheadSQL.RuleTable)
+
 				for _, val := range outputData {
 					data, _ := json.Marshal(val)
 					fmt.Fprintln(w, string(data))
