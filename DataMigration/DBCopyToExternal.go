@@ -33,7 +33,7 @@ func moveOffTelscope() {
 
 	// Make connection to Database if it does not exist or has failed
 	if err := dbCon.CheckConnection(); err != nil {
-		err := dbCon.Pconnect(dbUsername, dbPassword, dbAddress, dbName)
+		err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName)
 		if err != nil {
 			fmt.Println(err)
 		}

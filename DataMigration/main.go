@@ -1,7 +1,5 @@
 package main
 
-import OverheadSQL "github.com/iisharankov/FYSTDatabase/OverheadSQL"
-
 const (
 	dbUsername    string = "iisharankov"
 	dbPassword    string = "iisharankov"
@@ -16,7 +14,7 @@ const (
 )
 
 // GlobalPTStackArray is a struct containing an array of structs
-var dbCon OverheadSQL.DatabaseConnection
+var dbCon DatabaseConnection
 
 func main() {
 	startAPIServer()

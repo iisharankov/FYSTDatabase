@@ -284,7 +284,7 @@ func checkID(endpointSection string, w http.ResponseWriter) error {
 }
 
 func startAPIServer() {
-	if _, err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName); err != nil {
+	if err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName); err != nil {
 		log.Println(err)
 	}
 
