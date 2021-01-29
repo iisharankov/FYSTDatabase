@@ -1,6 +1,0 @@
-github.com/go-sql-driver/mysql v1.5.0 h1:ozyZYNQW3x3HtqT1jira07DN2PArx2v7/mN66gGcHOs=
-github.com/go-sql-driver/mysql v1.5.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
-github.com/iisharankov/FYSTDatabase v0.0.0-20210121201647-08ca781e611f h1:VzWDxwL1qbt/H7PNGbH+POjrwFSfQ1Dxgm6EumULicg=
-github.com/iisharankov/FYSTDatabase v0.0.0-20210121201647-08ca781e611f/go.mod h1:KsmDwdV9yT3MoAYEVZ4L1vwd1UA/SCgcDV+cVbxjtPg=
-github.com/iisharankov/FYSTDatabase/OverheadSQL v0.0.0-20210121201647-08ca781e611f h1:udKPytpwov3KtrgKtkEqhflECGmIJRko6qemBIgdrww=
-github.com/iisharankov/FYSTDatabase/OverheadSQL v0.0.0-20210121201647-08ca781e611f/go.mod h1:uOjxkK4DGI9rEVNV8xhvupuSElukBW+22lChoygwBck=
