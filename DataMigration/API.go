@@ -12,8 +12,10 @@ import (
 	"time"
 )
 
+// File has
 type File struct {
 	Name        string    `json:"name"`
+	Instrument  int       `json:"instrument"`
 	MD5Sum      string    `json:"md5sum"`
 	DateCreated time.Time `json:"date_created"`
 	Size        int       `json:"size"`
@@ -65,27 +67,23 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 					newFileID = lastFileID[0].FileID + 1 // Takes the first element out, and then takes the FileID field
 				}
 
-				if newFileID == 1 {
-					// Use SQL Prepare() method to safely convert the field types.
-					stmt, err := dbCon.PrepareQuery("insert into ObjectFile values(?, ?, ?, ?, ?, ?);")
-					if err != nil {
-						fmt.Println("Error in db.Perpare()\n", err)
-						jsonResponse(w, err, http.StatusBadRequest)
-						return
-					}
+				// Use SQL Prepare() method to safely convert the field types.
+				stmt, err := dbCon.PrepareQuery("insert into ObjectFile values(?, ?, ?, ?, ?, ?);")
+				if err != nil {
+					fmt.Println("Error in db.Perpare()\n", err)
+					jsonResponse(w, err, http.StatusBadRequest)
+					return
+				}
 
-					// Execute the command on the database (encoded already in stmt)
-					_, err = stmt.Exec(newFileID, newFile.DateCreated, 1, newFile.Size, newFile.MD5Sum, newFile.URL)
-					if err != nil {
-						_ = errors.New("error in query execution")
-						jsonResponse(w, err, http.StatusBadRequest)
-						return
-					}
+				// Execute the command on the database (encoded already in stmt)
+				_, err = stmt.Exec(newFileID, newFile.DateCreated, newFile.Instrument, newFile.Size, newFile.MD5Sum, newFile.URL)
+				if err != nil {
+					_ = errors.New("error in query execution")
+					jsonResponse(w, err, http.StatusBadRequest)
+					return
 				}
 
 				fmt.Println("Added FileID row")
-				moveOffTelscope()
-
 				statusCode = http.StatusAccepted
 			}
 		} else {

@@ -63,6 +63,17 @@ func (minioInstance *ObjectMetadata) removeBucket(bucketName string) {
 	}
 }
 
+// ListBuckets returns all buckets
+func (minioInstance *ObjectMetadata) ListBuckets() ([]minio.BucketInfo, error) {
+	// What to do with this, how do context.Contexts scale with other ctx's?
+	// ctx, cancel := context.WithCancel(context.Background())
+	// defer cancel()
+
+	buckets, err := minioInstance.minioClient.ListBuckets(minioInstance.ctx)
+	return buckets, err
+}
+
+// UploadObject uploads a given file from a given filepath to a cloud bucket
 func (minioInstance *ObjectMetadata) UploadObject(bucketName, objectName, filePath, contentType string) {
 	// Upload the zip file with FPutObject
 	n, err := minioInstance.minioClient.FPutObject(minioInstance.ctx, bucketName, objectName, filePath, minio.PutObjectOptions{ContentType: contentType})
@@ -70,7 +81,7 @@ func (minioInstance *ObjectMetadata) UploadObject(bucketName, objectName, filePa
 		log.Fatalln(err)
 	}
 
-	log.Printf("Successfully uploaded %s of size %d \n", objectName, n.Size)
+	log.Printf("Successfully uploaded %s of size %d to bucket %s \n", objectName, n.Size, bucketName)
 }
 
 func (minioInstance *ObjectMetadata) listObjects(bucketName, prefix string) {

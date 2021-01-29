@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"log"
 	"strings"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
+// FilesThatNeedToBeBackedUp lists all the data required to move file from FYST to external location
 type FilesThatNeedToBeBackedUp struct {
 	FileID         int
 	RuleID         int
@@ -21,7 +23,30 @@ type FilesThatNeedToBeBackedUp struct {
 	LocationName   string
 }
 
+func TransferClock() {
+	// Make connection to Database if it does not exist or has failed
+	if err := dbCon.CheckConnection(); err != nil {
+		err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName)
+		if err != nil {
+			fmt.Println("Connection to database failed:", err)
+		}
+	}
+
+	tenSecClock := time.NewTicker(3 * time.Second)
+	// oneMinClock := time.NewTicker(time.Minute)
+	go func() {
+		for {
+			select {
+			case _ = <-tenSecClock.C:
+				moveOffTelscope()
+			}
+		}
+	}()
+}
+
 func moveOffTelscope() {
+
+	// Start the Minio connection
 	var S3Instance = ObjectMetadata{
 		ctx:      context.Background(),
 		endpoint: minioEndpoint,
@@ -31,18 +56,10 @@ func moveOffTelscope() {
 
 	S3Instance.initMinio()
 
-	// Make connection to Database if it does not exist or has failed
-	if err := dbCon.CheckConnection(); err != nil {
-		err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName)
-		if err != nil {
-			fmt.Println(err)
-		}
-	}
-
 	var structOfFilesThatNeedToBeBackedUp FilesThatNeedToBeBackedUp
-
 	// What files have not been copied to locations where active rules exist (pending uploads per all locations)?
-	var SQLQuery string = `select f.FileID, r.RuleID, f.Size, i.InstrumentID, i.InstrumentName, f.DateCreated, f.ObjectStorage, f.HashOfBytes, BL.LocationName
+	var SQLQuery string = `select f.FileID, r.RuleID, f.Size, i.InstrumentID, 
+	i.InstrumentName, f.DateCreated, f.ObjectStorage, f.HashOfBytes, BL.LocationName
 	from ObjectFile f 
 	join Instrument i on i.InstrumentID=f.InstrumentID
 	join Rule r on r.InstrumentID=i.InstrumentID
@@ -55,24 +72,13 @@ func moveOffTelscope() {
 	}
 	listOfFilesThatNeedToBeBackedUp, _ := outputRows.Interface().([]FilesThatNeedToBeBackedUp)
 
+	// buckets, _ := S3Instance.ListBuckets()
+	// fmt.Println(buckets[0].Name)
+
 	//--------------------- Finds all the rules in the database
-
 	for _, val := range listOfFilesThatNeedToBeBackedUp {
-
-		var err error
-		switch val.RuleID {
-		case 1:
-			_, err = copyFile(S3Instance, val)
-		case 2:
-			_, err = copyFile(S3Instance, val)
-		case 3:
-			_, err = copyFile(S3Instance, val)
-		default:
-			fmt.Println("That field type not recognized")
-			return
-		}
-
-		if err == nil {
+		copyFile(S3Instance, val)
+		if err == nil { // Inverse of normal!
 			addRowToLog(val.FileID, val.RuleID)
 		}
 	}
@@ -80,20 +86,20 @@ func moveOffTelscope() {
 }
 
 func addRowToLog(FileID, location int) {
-	// date := time.Now().Format("2006-01-02 15:04:05")
+	date := time.Now().Format("2006-01-02 15:04:05")
 
-	// stmt, err := dbCon.PrepareQuery("insert into Log values(?, ?, ?, ?, ?);")
-	// if err != nil {
-	// 	log.Println("Error in db.Perpare()\n", err)
-	// 	return
-	// }
+	stmt, err := dbCon.PrepareQuery("insert into Log values(?, ?, ?, ?, ?);")
+	if err != nil {
+		log.Println("Error in db.Perpare()\n", err)
+		return
+	}
 
-	// // Execute the command on the database (encoded already in stmt)
-	// _, err = stmt.Exec(FileID, location, date, 0, "")
-	// if err != nil {
-	// 	log.Println("Error in query execution\n", err)
-	// 	return
-	// }
+	// Execute the command on the database (encoded already in stmt)
+	_, err = stmt.Exec(FileID, location, date, 0, "")
+	if err != nil {
+		log.Println("Error in query execution\n", err)
+		return
+	}
 
 	log.Println("Added row to Log")
 }
@@ -113,8 +119,9 @@ func getLocations(listOfRuleStructs []RuleTable, InstrumentID int) []int {
 
 func copyFile(minioInstance ObjectMetadata, src FilesThatNeedToBeBackedUp) (int64, error) {
 
-	location := "us-east-1"
-	minioInstance.makeBucket(src.LocationName, location)
+	// Is ths needed? Buckets should exist.
+	// location := "us-east-1"
+	// minioInstance.makeBucket(src.LocationName, location)
 
 	// Upload the zip file
 	last := src.Storage[strings.LastIndex(src.Storage, "/")+1:]

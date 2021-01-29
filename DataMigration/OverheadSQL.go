@@ -19,7 +19,7 @@ type DatabaseConnection struct {
 }
 
 // Connect connects to a database
-func (dpCon *DatabaseConnection) Pconnect(dbUsername, dbPassword, dbIP, dpName string) error {
+func (dpCon *DatabaseConnection) Connect(dbUsername, dbPassword, dbIP, dpName string) error {
 	SQLConnectionString := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", dbUsername, dbPassword, dbIP, dpName)
 	db, err := sql.Open("mysql", SQLConnectionString)
 	if err != nil {
