@@ -22,6 +22,11 @@ type File struct {
 	URL         string    `json:"url"`
 }
 
+type ClientUploadReply struct {
+	FileID         int    `json:"file_id"`
+	UploadLocation string `json:"upload_location"`
+}
+
 func returnQueryParameter(r *http.Request, name string) (string, error) {
 	parameterToReturn, ok := r.URL.Query()[name]
 	if !ok {
@@ -34,6 +39,26 @@ func returnQueryParameter(r *http.Request, name string) (string, error) {
 	return parameterToReturn[0], nil
 }
 
+func addRowToObjectFile(newFile File, newFileID int, w http.ResponseWriter) bool {
+	// Use SQL Prepare() method to safely convert the field types.
+	stmt, err := dbCon.PrepareQuery("insert into ObjectFile values(?, ?, ?, ?, ?, ?);")
+	if err != nil {
+		fmt.Println("Error in db.Perpare()\n", err)
+		jsonResponse(w, err, http.StatusBadRequest)
+		return false
+	}
+
+	// Execute the command on the database (encoded already in stmt)
+	_, err = stmt.Exec(newFileID, newFile.DateCreated, newFile.Instrument, newFile.Size, newFile.MD5Sum, newFile.URL)
+	if err != nil {
+		_ = errors.New("error in query execution")
+		jsonResponse(w, err, http.StatusBadRequest)
+		return false
+	}
+	fmt.Println("Added FileID row")
+	return true
+}
+
 // filesEndpoint listens to the http request header for a curl command to update the IP/Port of the filesing, or to enable/disable
 func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 	var err error
@@ -41,14 +66,17 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
+
 	endpoint := r.URL.Path
 	endpointSections := strings.Split(endpoint, "/")
 
 	if r.Method == "POST" {
 		if endpointSections[1] == "files" {
 			if len(endpointSections) == 2 {
+
 				var newFile File
 				err = dec.Decode(&newFile)
+				fmt.Println("got a new file which is", newFile)
 
 				// Find largest index for FileID column, so we can increment by one
 				temp := struct{ FileID int }{} // Temp struct that has just integer (SQL query returns row of 1 int)
@@ -56,10 +84,9 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				if err != nil {
 					jsonResponse(w, err, http.StatusBadRequest)
 					return
+
 				}
-
 				lastFileID, _ := queryReturn.Interface().([]struct{ FileID int }) // type assert from reflect.Value to struct
-
 				var newFileID int
 				if len(lastFileID) == 0 {
 					newFileID = 1 // If ObjectFile table empty, lastFileID is empty, so can't take FileID field
@@ -67,24 +94,51 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 					newFileID = lastFileID[0].FileID + 1 // Takes the first element out, and then takes the FileID field
 				}
 
-				// Use SQL Prepare() method to safely convert the field types.
-				stmt, err := dbCon.PrepareQuery("insert into ObjectFile values(?, ?, ?, ?, ?, ?);")
-				if err != nil {
-					fmt.Println("Error in db.Perpare()\n", err)
-					jsonResponse(w, err, http.StatusBadRequest)
-					return
+				ok := addRowToObjectFile(newFile, newFileID, w)
+				if ok {
+					// Reply to client with fileID of new file created and log
+					replyData, err := json.Marshal(ClientUploadReply{FileID: newFileID, UploadLocation: "fyst"})
+					if err != nil {
+						log.Fatal(err)
+					}
+
+					// Note... Don't send as []byte since it gets nested....
+					fmt.Fprintln(w, string(replyData))
 				}
 
-				// Execute the command on the database (encoded already in stmt)
-				_, err = stmt.Exec(newFileID, newFile.DateCreated, newFile.Instrument, newFile.Size, newFile.MD5Sum, newFile.URL)
-				if err != nil {
-					_ = errors.New("error in query execution")
-					jsonResponse(w, err, http.StatusBadRequest)
-					return
-				}
-
-				fmt.Println("Added FileID row")
 				statusCode = http.StatusAccepted
+			} else if len(endpointSections) == 3 {
+				if endpointSections[2] != "" {
+					var copyLocation string
+					err = dec.Decode(&copyLocation)
+					FileID, err := strconv.Atoi(endpointSections[2])
+
+					// Tells you which RuleID corresponds to a FileID and Location string (locationname in BackupLocation)
+					query := fmt.Sprintf(`select r.RuleID from Rule r 
+					join ObjectFile o on o.InstrumentID=r.InstrumentID 
+					join BackupLocation b on b.LocationID=r.LocationID
+					where o.FileId = %v and b.LocationName = "%v"`, FileID, copyLocation)
+
+					temp := struct{ RuleID int }{} // Temp struct that has just integer (SQL query returns row of 1 int)
+					queryReturn, err := dbCon.QueryRead(query, &temp)
+					if err != nil {
+						jsonResponse(w, err, http.StatusBadRequest)
+						return
+					}
+					returnQuery, _ := queryReturn.Interface().([]struct{ RuleID int }) // type assert from reflect.Value to struct
+
+					if err := addRowToLog(FileID, returnQuery[0].RuleID); err != nil {
+						jsonResponse(w, err, http.StatusBadRequest)
+						return
+					}
+					jsonResponse(w, nil, http.StatusAccepted)
+					statusCode = http.StatusAccepted
+				} else {
+
+					err = errors.New("value after /files/ ")
+					jsonResponse(w, err, http.StatusBadRequest)
+					statusCode = http.StatusBadRequest
+				}
 			}
 		} else {
 			statusCode = http.StatusNotFound
@@ -191,8 +245,8 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 					jsonResponse(w, err, http.StatusBadRequest)
 					return
 				}
-				outputData, _ := outputRows.Interface().([]RuleTable)
 
+				outputData, _ := outputRows.Interface().([]RuleTable)
 				for _, val := range outputData {
 					data, _ := json.Marshal(val)
 					fmt.Fprintln(w, string(data))
