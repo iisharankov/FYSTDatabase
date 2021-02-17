@@ -77,7 +77,7 @@ func moveOffTelscope() {
 
 	//--------------------- Finds all the rules in the database
 	for _, val := range listOfFilesThatNeedToBeBackedUp {
-		copyFile(S3Instance, val)
+		_, err = copyFile(S3Instance, val)
 		if err == nil { // Inverse of normal!
 			addRowToLog(val.FileID, val.RuleID)
 		}
@@ -85,23 +85,23 @@ func moveOffTelscope() {
 
 }
 
-func addRowToLog(FileID, location int) {
+func addRowToLog(FileID, location int) error {
 	date := time.Now().Format("2006-01-02 15:04:05")
 
 	stmt, err := dbCon.PrepareQuery("insert into Log values(?, ?, ?, ?, ?);")
 	if err != nil {
 		log.Println("Error in db.Perpare()\n", err)
-		return
+		return err
 	}
 
 	// Execute the command on the database (encoded already in stmt)
 	_, err = stmt.Exec(FileID, location, date, 0, "")
 	if err != nil {
 		log.Println("Error in query execution\n", err)
-		return
+		return err
 	}
 
-	log.Println("Added row to Log")
+	return nil
 }
 
 // getLocations returns valid/active LocationIDs to copy data for a given InstrumentID

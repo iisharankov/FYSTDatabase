@@ -17,7 +17,7 @@ const (
 var dbCon DatabaseConnection
 
 func main() {
-	go TransferClock()
+	// go TransferClock()
 	startAPIServer()
 
 }
