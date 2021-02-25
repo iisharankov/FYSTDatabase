@@ -2,10 +2,14 @@ package main
 
 // BackupLocationTable is an SQL table
 type BackupLocationTable struct {
-	LocationID      int    `json:"location_id"`
-	LocationName    string `json:"location_name"`
-	LocationAddress string `json:"location_address"`
-	FTPIPAddress    string `json:"ftp_ip_address"`
+	LocationID   int    `json:"location_id"`
+	LocationName string `json:"location_name"`
+	S3Bucket     string `json:"s3bucket"`
+	IPAddress    string `json:"ip_address"`
+	Port         int    `json:"port"`
+	Username     string `json:"username"`
+	Password     string `json:"password"`
+	SSL          bool   `json:"ssl"`
 }
 
 // InstrumentTable is an SQL table

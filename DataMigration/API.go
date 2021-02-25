@@ -96,14 +96,23 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 
 				ok := addRowToObjectFile(newFile, newFileID, w)
 				if ok {
+
+					var rule RuleTable
+					query := `select * from BackupLocation b where b.LocationID = 1`
+					queryReturn, err := dbCon.QueryRead(query, &rule)
+					if err != nil {
+						jsonResponse(w, err, http.StatusBadRequest)
+						return
+					}
+					returnQuery, _ := queryReturn.Interface().(RuleTable) // type assert from reflect.Value to struct
+
 					// Reply to client with fileID of new file created and log
 					replyData, err := json.Marshal(ClientUploadReply{FileID: newFileID, UploadLocation: "fyst"})
 					if err != nil {
 						log.Fatal(err)
 					}
 
-					// Note... Don't send as []byte since it gets nested....
-					fmt.Fprintln(w, string(replyData))
+					w.Write(replyData)
 				}
 
 				statusCode = http.StatusAccepted
@@ -117,7 +126,7 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 					query := fmt.Sprintf(`select r.RuleID from Rule r 
 					join ObjectFile o on o.InstrumentID=r.InstrumentID 
 					join BackupLocation b on b.LocationID=r.LocationID
-					where o.FileId = %v and b.LocationName = "%v"`, FileID, copyLocation)
+					where o.FileId = %v and b.S3Bucket = "%v"`, FileID, copyLocation)
 
 					temp := struct{ RuleID int }{} // Temp struct that has just integer (SQL query returns row of 1 int)
 					queryReturn, err := dbCon.QueryRead(query, &temp)
@@ -173,7 +182,7 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				outputData, _ := outputRows.Interface().([]ObjectFileTable)
 				for _, val := range outputData {
 					data, _ := json.Marshal(val)
-					fmt.Fprintln(w, string(data))
+					w.Write(data)
 				}
 				statusCode = http.StatusAccepted
 
@@ -207,7 +216,7 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 
 				for _, val := range outputData {
 					data, _ := json.Marshal(val)
-					fmt.Fprintln(w, string(data))
+					w.Write(data)
 				}
 				statusCode = http.StatusAccepted
 
@@ -232,15 +241,15 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				outputData, _ := outputRows.Interface().([]LogTable)
 				for _, val := range outputData {
 					data, _ := json.Marshal(val)
-					fmt.Fprintln(w, string(data))
+					w.Write(data)
 				}
 				statusCode = http.StatusAccepted
 			}
 		} else if endpointSections[1] == "rules" {
 			if len(endpointSections) == 2 {
-				SQLQuery := "select * from Rule;"
+
 				var ruleTable RuleTable
-				outputRows, err := dbCon.QueryRead(SQLQuery, &ruleTable)
+				outputRows, err := dbCon.QueryRead("select * from Rule;", &ruleTable)
 				if err != nil {
 					jsonResponse(w, err, http.StatusBadRequest)
 					return
@@ -249,7 +258,7 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				outputData, _ := outputRows.Interface().([]RuleTable)
 				for _, val := range outputData {
 					data, _ := json.Marshal(val)
-					fmt.Fprintln(w, string(data))
+					w.Write(data)
 				}
 				statusCode = http.StatusAccepted
 
@@ -271,7 +280,7 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				}
 
 				data, _ := json.Marshal(outputData[0])
-				fmt.Fprintln(w, string(data)) // Should only be a single output
+				w.Write(data) // Should only be a single output
 				statusCode = http.StatusAccepted
 
 			}
