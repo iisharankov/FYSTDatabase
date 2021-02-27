@@ -106,7 +106,6 @@ func (dbapi *DBAPI) requestToUpdateLog(reply ServerUploadReply) ([]byte, error) 
 	err := dec.Encode(reply.UploadLocation)
 
 	endpoint := fmt.Sprintf("/files/%d", reply.FileID)
-	fmt.Println(endpoint)
 	a, err := dbapi.post(endpoint, "application/x-www-form-urlencoded", &body)
 	return a, err
 }
