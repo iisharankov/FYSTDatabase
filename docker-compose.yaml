@@ -1,0 +1,31 @@
+version: '3' 
+
+services: 
+  myminio:
+    image: minio/minio
+    command: server http://minio{1...4}/data{1...2}
+    ports:
+      - "9000:9000"
+    environment:
+    - MINIO_ACCESS_KEY:iisharankov
+    - MINIO_SECRET_KEY:iisharankov
+  # -e "MINIO_ROOT_USER=AKIAIOSFODNN7EXAMPLE" \
+  # -e "MINIO_ROOT_PASSWORD=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \
+
+  mySQL:
+    image: mysql/mysql-server:latest
+    # build:
+      # context: kafka-connect-redis/
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_USER=iisharankov
+    - MYSQL_PASSWORD=iisharankov
+    - MYSQL_DATABASE=mydb
+    ports:
+      - 3306:3306
+    volumes:
+    - ./mysql-dump:/docker-entrypoint-initdb.d
+    # volumes:
+      # - ./Database/DBForwardEngineer.sql/docker-entrypoint-initdb.d
+      # - "./data/db/mysql:/var/lib/mysql"
+
