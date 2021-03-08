@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"mime"
 	"net/http"
 	"strconv"
 	"strings"
@@ -22,6 +21,7 @@ type File struct {
 	URL         string    `json:"url"`
 }
 
+// ClientUploadReply is the JSON sent to POST requests with metadata for where to upload given file
 type ClientUploadReply struct {
 	FileID         int    `json:"file_id"`
 	UploadLocation string `json:"upload_location"`
@@ -39,11 +39,12 @@ func returnQueryParameter(r *http.Request, name string) (string, error) {
 	return parameterToReturn[0], nil
 }
 
+// TODO: Generalized this by parsing db table name and number of parameters to upload? might be hard with reflect
 func addRowToObjectFile(newFile File, newFileID int, w http.ResponseWriter) bool {
 	// Use SQL Prepare() method to safely convert the field types.
 	stmt, err := dbCon.PrepareQuery("insert into ObjectFile values(?, ?, ?, ?, ?, ?);")
 	if err != nil {
-		fmt.Println("Error in db.Perpare()\n", err)
+		log.Println("Error in db.Perpare()\n", err)
 		jsonResponse(w, err, http.StatusBadRequest)
 		return false
 	}
@@ -51,11 +52,12 @@ func addRowToObjectFile(newFile File, newFileID int, w http.ResponseWriter) bool
 	// Execute the command on the database (encoded already in stmt)
 	_, err = stmt.Exec(newFileID, newFile.DateCreated, newFile.Instrument, newFile.Size, newFile.MD5Sum, newFile.URL)
 	if err != nil {
-		_ = errors.New("error in query execution")
+		log.Println("Error in query execution\n", err)
 		jsonResponse(w, err, http.StatusBadRequest)
 		return false
 	}
-	fmt.Println("Added FileID row")
+
+	log.Println("Added FileID row to ObjectFile Table")
 	return true
 }
 
@@ -70,13 +72,28 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 	endpoint := r.URL.Path
 	endpointSections := strings.Split(endpoint, "/")
 
+	// Check if connection to DB is possible, if not, fail.
+	if err = dbCon.CheckConnection(); err != nil {
+		var errstrings []string
+		errstrings = append(errstrings, err.Error())
+
+		// Concatonate error with additional one.
+		errstrings = append(errstrings, fmt.Errorf("connection to database failed and server aborted").Error())
+
+		// combine and return both errors for more useful debugging for user
+		jsonResponse(w, fmt.Errorf(strings.Join(errstrings, " - ")), http.StatusServiceUnavailable)
+		return
+	}
+
+	// Process POST or GET request
 	if r.Method == "POST" {
 		if endpointSections[1] == "files" {
 			if len(endpointSections) == 2 {
+				// This endpoint is when a file has been given to be added to a table within the database
 
 				var newFile File
 				err = dec.Decode(&newFile)
-				fmt.Println("got a new file which is", newFile)
+				log.Println("new file:", newFile)
 
 				// Find largest index for FileID column, so we can increment by one
 				temp := struct{ FileID int }{} // Temp struct that has just integer (SQL query returns row of 1 int)
@@ -84,42 +101,61 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				if err != nil {
 					jsonResponse(w, err, http.StatusBadRequest)
 					return
-
 				}
-				lastFileID, _ := queryReturn.Interface().([]struct{ FileID int }) // type assert from reflect.Value to struct
+
+				// Convert SQL output to golang int
+				lastFileID, _ := queryReturn.Interface().([]struct{ FileID int }) // type assert reflect.Value to struct
 				var newFileID int
 				if len(lastFileID) == 0 {
 					newFileID = 1 // If ObjectFile table empty, lastFileID is empty, so can't take FileID field
 				} else {
-					newFileID = lastFileID[0].FileID + 1 // Takes the first element out, and then takes the FileID field
+					// Takes the first (only) row out, and calls FileID field to increment
+					newFileID = lastFileID[0].FileID + 1
 				}
 
+				// Try to add given file to ObjectFile table with next FileID
 				ok := addRowToObjectFile(newFile, newFileID, w)
-				if ok {
+				if ok { // If sucessful, respond to client with upload location details
 
-					var rule RuleTable
+					// Query BackupLocation Table to find bucket to upload file
+					var rule BackupLocationTable
 					query := `select * from BackupLocation b where b.LocationID = 1`
 					queryReturn, err := dbCon.QueryRead(query, &rule)
 					if err != nil {
 						jsonResponse(w, err, http.StatusBadRequest)
 						return
 					}
-					returnQuery, _ := queryReturn.Interface().(RuleTable) // type assert from reflect.Value to struct
 
-					// Reply to client with fileID of new file created and log
-					replyData, err := json.Marshal(ClientUploadReply{FileID: newFileID, UploadLocation: "fyst"})
+					// convert reflect.Value to BackupLocationTable table
+					returnQuery, _ := queryReturn.Interface().([]BackupLocationTable)
+
+					// Create JSON with metadata necessary for the client
+					replyData, err := json.Marshal(ClientUploadReply{
+						FileID:         newFileID,
+						UploadLocation: returnQuery[0].S3Bucket,
+					})
 					if err != nil {
 						log.Fatal(err)
 					}
 
-					w.Write(replyData)
+					w.Write(replyData) // Upload JSON back to the client
+					jsonResponse(w, err, http.StatusAccepted)
+					return
+				} else {
+					var msg string = "addRowToObjectFile method failed, file not added to database"
+					log.Println(msg)
+					err := errors.New(msg)
+					jsonResponse(w, err, http.StatusBadRequest)
+					return
 				}
 
-				statusCode = http.StatusAccepted
 			} else if len(endpointSections) == 3 {
 				if endpointSections[2] != "" {
+					// POST reuqest to add file to Logs table of database
+
 					var copyLocation string
 					err = dec.Decode(&copyLocation)
+					log.Println("new log to add:", copyLocation)
 					FileID, err := strconv.Atoi(endpointSections[2])
 
 					// Tells you which RuleID corresponds to a FileID and Location string (locationname in BackupLocation)
@@ -140,38 +176,32 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 						jsonResponse(w, err, http.StatusBadRequest)
 						return
 					}
-					jsonResponse(w, nil, http.StatusAccepted)
-					statusCode = http.StatusAccepted
-				} else {
 
-					err = errors.New("value after /files/ ")
+					jsonResponse(w, nil, http.StatusAccepted)
+					return
+
+				} else {
+					err = errors.New("value after /files/ was empty or not given")
 					jsonResponse(w, err, http.StatusBadRequest)
-					statusCode = http.StatusBadRequest
+					return
 				}
 			}
 		} else {
-			statusCode = http.StatusNotFound
-		}
-
-		if err != nil {
-			statusCode = http.StatusBadRequest
-		}
-
-		_, _, err := mime.ParseMediaType(r.Header.Get("Content-Type"))
-		if err != nil {
-			fmt.Println(err)
+			jsonResponse(w, err, http.StatusNotFound)
 			return
 		}
 
-		// r.GetBody()
-		// fmt.Println("Body is", r.Body)
-		// r.ParseForm()
-		// fmt.Println("form is", r.Form)
-		// if r.Form["Module"][0] != "Services.PositionFiles"
+		// _, _, err := mime.ParseMediaType(r.Header.Get("Content-Type"))
+		// if err != nil {
+		// 	log.Println(err)
+		// 	return
+		// }
 
 	} else if r.Method == "GET" {
 		if endpointSections[1] == "files" {
 			if len(endpointSections) == 2 {
+				// Client is asking for all files from database
+
 				SQLQuery := "select * from ObjectFile;"
 				var objectTable ObjectFileTable
 				outputRows, err := dbCon.QueryRead(SQLQuery, &objectTable)
@@ -179,12 +209,15 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 					jsonResponse(w, err, http.StatusBadRequest)
 					return
 				}
+
+				// Convert reflect.Value() to ObjectFileTable, iterate over rows.
 				outputData, _ := outputRows.Interface().([]ObjectFileTable)
 				for _, val := range outputData {
 					data, _ := json.Marshal(val)
 					w.Write(data)
 				}
-				statusCode = http.StatusAccepted
+				jsonResponse(w, err, http.StatusAccepted)
+				return
 
 			} else if len(endpointSections) == 3 && checkID(endpointSections[2], w) == nil {
 
@@ -218,7 +251,9 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 					data, _ := json.Marshal(val)
 					w.Write(data)
 				}
-				statusCode = http.StatusAccepted
+
+				jsonResponse(w, err, http.StatusAccepted)
+				return
 
 			} else if len(endpointSections) == 4 && endpointSections[3] == "copies" {
 				// Check to see if input is an actual integer
@@ -243,7 +278,8 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 					data, _ := json.Marshal(val)
 					w.Write(data)
 				}
-				statusCode = http.StatusAccepted
+				jsonResponse(w, err, http.StatusAccepted)
+				return
 			}
 		} else if endpointSections[1] == "rules" {
 			if len(endpointSections) == 2 {
@@ -260,7 +296,8 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 					data, _ := json.Marshal(val)
 					w.Write(data)
 				}
-				statusCode = http.StatusAccepted
+				jsonResponse(w, err, http.StatusAccepted)
+				return
 
 			} else if len(endpointSections) == 3 && checkID(endpointSections[2], w) == nil {
 				// if int, use string version for simplicity. No worry about SQL injection since above Atoi didn't fail
@@ -281,13 +318,14 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 
 				data, _ := json.Marshal(outputData[0])
 				w.Write(data) // Should only be a single output
-				statusCode = http.StatusAccepted
+				jsonResponse(w, err, http.StatusAccepted)
+				return
 
 			}
 		}
 	} else {
-		statusCode = http.StatusNotFound
-		jsonResponse(w, err, statusCode)
+		jsonResponse(w, err, http.StatusNotFound)
+		return
 	}
 }
 
@@ -312,6 +350,7 @@ func jsonResponse(w http.ResponseWriter, err error, statusCode int) {
 		log.Print(err)
 	}
 }
+
 func checkID(endpointSection string, w http.ResponseWriter) error {
 	var err error
 	// If endpointSection has a '-', it is a range and both elements should be tested recursively
@@ -321,12 +360,14 @@ func checkID(endpointSection string, w http.ResponseWriter) error {
 		if err != nil {
 			return err
 		}
+
 		err = checkID(splitRange[1], w)
 		if err != nil {
 			return err
 		}
 		return nil
 	}
+
 	if endpointSection == "" {
 		errMsg := errors.New("No file ID given. Either give file ID after '/'  or remove the '/'")
 		jsonResponse(w, errMsg, http.StatusBadRequest)
@@ -345,9 +386,10 @@ func checkID(endpointSection string, w http.ResponseWriter) error {
 }
 
 func startAPIServer() {
-	if err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName); err != nil {
-		log.Println(err)
-	}
+	// Containers fail if db connection is first
+	// if err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName); err != nil {
+	// 	log.Println(err)
+	// }
 
 	connectionTimeout := 1000 * time.Millisecond
 	mux8700 := http.NewServeMux()
@@ -358,7 +400,9 @@ func startAPIServer() {
 		ReadTimeout:  connectionTimeout,
 		WriteTimeout: connectionTimeout,
 	}
-	server.ListenAndServe()
-	go server.ListenAndServe()
+	if err := server.ListenAndServe(); err != nil {
+		log.Println(err)
+	}
+	// go server.ListenAndServe()
 	log.Println("Started filesing port on 8700.")
 }
