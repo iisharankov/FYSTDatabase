@@ -29,24 +29,11 @@ func (dpCon *DatabaseConnection) Connect(dbUsername, dbPassword, dbIP, dpName st
 	if err := db.Ping(); err != nil {
 		return err
 	}
+
+	log.Println("Connection to database established")
 	dbCon.DBConnection = db
 	return nil
 }
-
-// // Connect connects to a database
-// func (dpCon *DatabaseConnection) Connect(dbUsername, dbPassword, dbIP, dpName string) (emptyDB *sql.DB, err error) {
-// 	SQLConnectionString := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", dbUsername, dbPassword, dbIP, dpName)
-// 	db, err := sql.Open("mysql", SQLConnectionString)
-// 	if err != nil {
-// 		return emptyDB, err
-// 	}
-// 	err = db.Ping()
-// 	if err != nil {
-// 		return emptyDB, err
-// 	}
-// 	dbCon.DBConnection = db
-// 	return dbCon.DBConnection, nil
-// }
 
 // CheckConnection checks if the connection to the database is active, reconnect if necessary
 func (dpCon *DatabaseConnection) CheckConnection() (err error) {
@@ -54,13 +41,21 @@ func (dpCon *DatabaseConnection) CheckConnection() (err error) {
 	// Connection may be nil if never established
 	if dbCon.DBConnection == nil {
 		log.Println("No connection to database established, attempting to connect")
-		if dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName); err != nil {
+		// DOES NOT WORK! ERR is NIL even though dbCon.Connect returns Error if db offline!??
+		// if dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName); err != nil {
+		// 	log.Println("Database reconnect failed")
+		// 	return err
+		// }
+
+		err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName)
+		if err != nil {
 			log.Println("Database reconnect failed")
 			return err
 		}
 	}
 
-	if dbCon.DBConnection.Ping(); err != nil {
+	err = dbCon.DBConnection.Ping()
+	if err != nil {
 		log.Println("Ping to Database returned error, reconnecting")
 		dbCon.DBConnection = nil
 
