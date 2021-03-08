@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strconv"
 	"strings"
 	"time"
 
@@ -45,9 +46,8 @@ func TransferClock() {
 }
 
 func moveOffTelscope() {
-
-	// Start the Minio connection
-	var S3Instance = ObjectMetadata{
+	minioUseSSL, _ := strconv.ParseBool(minioUseSSL) // Convert env var to bool
+	var S3Instance = ObjectMetadata{                 // Start the Minio connection
 		ctx:      context.Background(),
 		endpoint: minioEndpoint,
 		id:       minioAccessKeyID,
@@ -71,9 +71,6 @@ func moveOffTelscope() {
 		fmt.Println(err)
 	}
 	listOfFilesThatNeedToBeBackedUp, _ := outputRows.Interface().([]FilesThatNeedToBeBackedUp)
-
-	// buckets, _ := S3Instance.ListBuckets()
-	// fmt.Println(buckets[0].Name)
 
 	//--------------------- Finds all the rules in the database
 	for _, val := range listOfFilesThatNeedToBeBackedUp {
