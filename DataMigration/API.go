@@ -64,7 +64,6 @@ func addRowToObjectFile(newFile File, newFileID int, w http.ResponseWriter) bool
 // filesEndpoint listens to the http request header for a curl command to update the IP/Port of the filesing, or to enable/disable
 func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 	var err error
-	var statusCode int
 
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
