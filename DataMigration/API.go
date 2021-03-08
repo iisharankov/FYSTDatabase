@@ -40,25 +40,36 @@ func returnQueryParameter(r *http.Request, name string) (string, error) {
 }
 
 // TODO: Generalized this by parsing db table name and number of parameters to upload? might be hard with reflect
-func addRowToObjectFile(newFile File, newFileID int, w http.ResponseWriter) bool {
+func addRowToObjectFile(newFile File, newFileID int, w http.ResponseWriter) error {
 	// Use SQL Prepare() method to safely convert the field types.
 	stmt, err := dbCon.PrepareQuery("insert into ObjectFile values(?, ?, ?, ?, ?, ?);")
 	if err != nil {
 		log.Println("Error in db.Perpare()\n", err)
 		jsonResponse(w, err, http.StatusBadRequest)
-		return false
+		return nil
 	}
 
 	// Execute the command on the database (encoded already in stmt)
 	_, err = stmt.Exec(newFileID, newFile.DateCreated, newFile.Instrument, newFile.Size, newFile.MD5Sum, newFile.URL)
 	if err != nil {
 		log.Println("Error in query execution\n", err)
-		jsonResponse(w, err, http.StatusBadRequest)
-		return false
+		return err
 	}
 
 	log.Println("Added FileID row to ObjectFile Table")
-	return true
+	return nil
+}
+
+func concatErrors(err error, newError string) error {
+	var errstrings []string
+	errstrings = append(errstrings, err.Error())
+
+	// Concatonate error with additional one.
+	errstrings = append(errstrings, fmt.Errorf(newError).Error())
+
+	// combine and return both errors for more useful debugging for user
+	combinedErrors := fmt.Errorf(strings.Join(errstrings, " - "))
+	return combinedErrors
 }
 
 // filesEndpoint listens to the http request header for a curl command to update the IP/Port of the filesing, or to enable/disable
@@ -73,14 +84,8 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 
 	// Check if connection to DB is possible, if not, fail.
 	if err = dbCon.CheckConnection(); err != nil {
-		var errstrings []string
-		errstrings = append(errstrings, err.Error())
-
-		// Concatonate error with additional one.
-		errstrings = append(errstrings, fmt.Errorf("connection to database failed and server aborted").Error())
-
-		// combine and return both errors for more useful debugging for user
-		jsonResponse(w, fmt.Errorf(strings.Join(errstrings, " - ")), http.StatusServiceUnavailable)
+		combinedErrors := concatErrors(err, "connection to database failed and server aborted")
+		jsonResponse(w, combinedErrors, http.StatusServiceUnavailable)
 		return
 	}
 
@@ -113,40 +118,39 @@ func filesEndpoint(w http.ResponseWriter, r *http.Request) {
 				}
 
 				// Try to add given file to ObjectFile table with next FileID
-				ok := addRowToObjectFile(newFile, newFileID, w)
-				if ok { // If sucessful, respond to client with upload location details
-
-					// Query BackupLocation Table to find bucket to upload file
-					var rule BackupLocationTable
-					query := `select * from BackupLocation b where b.LocationID = 1`
-					queryReturn, err := dbCon.QueryRead(query, &rule)
-					if err != nil {
-						jsonResponse(w, err, http.StatusBadRequest)
-						return
-					}
-
-					// convert reflect.Value to BackupLocationTable table
-					returnQuery, _ := queryReturn.Interface().([]BackupLocationTable)
-
-					// Create JSON with metadata necessary for the client
-					replyData, err := json.Marshal(ClientUploadReply{
-						FileID:         newFileID,
-						UploadLocation: returnQuery[0].S3Bucket,
-					})
-					if err != nil {
-						log.Fatal(err)
-					}
-
-					w.Write(replyData) // Upload JSON back to the client
-					jsonResponse(w, err, http.StatusAccepted)
-					return
-				} else {
+				err = addRowToObjectFile(newFile, newFileID, w)
+				if err != nil {
 					var msg string = "addRowToObjectFile method failed, file not added to database"
 					log.Println(msg)
-					err := errors.New(msg)
+					jsonResponse(w, concatErrors(err, msg), http.StatusBadRequest)
+					return
+				}
+
+				// If sucessful, respond to client with upload location details
+				// Query BackupLocation Table to find bucket to upload file
+				var rule BackupLocationTable
+				query := `select * from BackupLocation b where b.LocationID = 1`
+				queryBackupLocation, err := dbCon.QueryRead(query, &rule)
+				if err != nil {
 					jsonResponse(w, err, http.StatusBadRequest)
 					return
 				}
+
+				// convert reflect.Value to BackupLocationTable table
+				returnQuery, _ := queryBackupLocation.Interface().([]BackupLocationTable)
+
+				// Create JSON with metadata necessary for the client
+				replyData, err := json.Marshal(ClientUploadReply{
+					FileID:         newFileID,
+					UploadLocation: returnQuery[0].S3Bucket,
+				})
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				w.Write(replyData) // Upload JSON back to the client
+				jsonResponse(w, err, http.StatusAccepted)
+				return
 
 			} else if len(endpointSections) == 3 {
 				if endpointSections[2] != "" {
