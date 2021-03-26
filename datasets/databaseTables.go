@@ -1,4 +1,4 @@
-package main
+package datasets
 
 // BackupLocationTable is an SQL table
 type BackupLocationTable struct {
