@@ -13,22 +13,16 @@ select * from Log;
 select * from Rule;
 
 DELETE FROM ObjectFile WHERE FileID=1;
-
-
+select * from BackupLocation b where b.LocationID = 1
 insert into Instrument values(1,'CHAI','expanded CHAI name','Multi-pixel heterodyne receiver for 2 frequency bands observable simultaneously', 64,450,495,99);
 insert into Instrument values(2,'PCAM','Primary Camera','It is very big',1024,25,900,99);
 
 
 -- Locations
 insert into BackupLocation values(1, 'Observatory', 'fyst', '0.0.0.0', '9000', 'iisharankov', 'iisharankov', false);
-
-
-
-
-insert into BackupLocation values(1,'fyst','FYST Servers','192.168.1.1');
-insert into BackupLocation values(2,'germany', 'Max Plack Bonn','192.168.1.1');
-insert into BackupLocation values(3,'cornell','USA','192.168.1.1');
-insert into BackupLocation values(4,'toronto','CITA Location','192.168.1.1');
+insert into BackupLocation values(1, 'Bonn', 'germany', '0.0.0.0', '9000', 'iisharankov', 'iisharankov', false);
+insert into BackupLocation values(1, 'Cornell', 'cornell', '0.0.0.0', '9000', 'iisharankov', 'iisharankov', false);
+insert into BackupLocation values(1, 'CITA', 'toronto', '0.0.0.0', '9000', 'iisharankov', 'iisharankov', false);
 
 
 -- Rules
@@ -78,7 +72,7 @@ insert into ObjectFile values(25, '2020-10-6 12:50:00', 3, 23234, '472383214', '
 
 
 
-insert into Log values (1, 1, date_add(sysdate(), interval 1 day), 0, '');
+insert into Log values (NULL, 1, date_add(sysdate(), interval 1 day), 0, '');
 insert into Log values (2, 1, date_add(sysdate(), interval 2 day), 0, '');
 insert into Log values (3, 1, date_add(sysdate(), interval 3 day), 0, '');
 insert into Log values (4, 1, date_add(sysdate(), interval 4 day), 0, '');
@@ -122,6 +116,7 @@ insert into Log values (21, 5, date_add(sysdate(), interval 23 day), 0, '');
 
 
 
+select * from BackupLocation b where b.LocationID = 1
 select concat('insert into Log values (', a.fileID, ', ', r.RuleID, ', ', 'date_add(sysdate(), interval ', a.fileId, ' day)', ');') from ObjectFile a
 join  Rule r on a.InstrumentId=r.InstrumentID
 where r.active = 1;

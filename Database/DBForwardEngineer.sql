@@ -18,7 +18,7 @@ USE `mydb` ;
 -- Table `mydb`.`BackupLocation`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`BackupLocation` (
-  `LocationID` INT NOT NULL,
+  `LocationID` INT NOT NULL AUTO_INCREMENT,
   `LocationName` VARCHAR(45) NOT NULL,
   `S3Bucket` VARCHAR(45) NOT NULL,
   `IPAddress` VARCHAR(100) NULL DEFAULT NULL,
@@ -36,7 +36,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `mydb`.`Instrument`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Instrument` (
-  `InstrumentID` INT NOT NULL,
+  `InstrumentID` INT NOT NULL AUTO_INCREMENT,
   `InstrumentName` VARCHAR(10) NOT NULL COMMENT 'Mianly CHAI and P-CAM for now',
   `FullName` VARCHAR(45) NOT NULL COMMENT 'Unabbreviated name',
   `Description` VARCHAR(2000) NOT NULL,
@@ -54,7 +54,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `mydb`.`Rule`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Rule` (
-  `RuleID` INT NOT NULL,
+  `RuleID` INT NOT NULL AUTO_INCREMENT,
   `RuleDescription` VARCHAR(2000) NULL DEFAULT NULL,
   `InstrumentID` INT NOT NULL,
   `LocationID` INT NOT NULL,
@@ -77,7 +77,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `mydb`.`ObjectFile`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`ObjectFile` (
-  `FileID` INT NOT NULL,
+  `FileID` INT NOT NULL AUTO_INCREMENT,
   `DateCreated` DATETIME NOT NULL,
   `InstrumentID` INT NOT NULL,
   `Size` INT UNSIGNED NOT NULL COMMENT 'In bytes',
