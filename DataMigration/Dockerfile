@@ -1,5 +1,3 @@
-# #This is a sample Image 
-# # FROM ubuntu
 # FROM golang:1.14-alpine AS build 
 
 # # RUN apt-get update 
