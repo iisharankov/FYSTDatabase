@@ -26,11 +26,11 @@ func AddFileToDatabaseEndpoint(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 
-	var newFileID int
+	var newFileID int // There's a reason this is here!
 	if IDStruct, _ := queryReturn.Interface().([]struct{ FileID int }); len(IDStruct) == 0 {
-		newFileID = 0 // Necessary due to empty table case (returns no row)
+		newFileID = 1 // Necessary due to empty table case (returns no row)
 	} else {
-		newFileID = IDStruct[0].FileID
+		newFileID = IDStruct[0].FileID + 1
 	}
 
 	// Try to add given file to ObjectFile table with next FileID
@@ -97,9 +97,6 @@ func GetAllFilesFromDBEndpoint(w http.ResponseWriter, r *http.Request) {
 
 func GetFilesFromDBEndpoint(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-
-	pathComponents := strings.Split(r.URL.Path, "/")
-	log.Println("pathComponents were", pathComponents)
 
 	// Set up SQL Query depending if request asks for one file or multiple
 	var SQLQuery string

@@ -2,36 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 	"strings"
 
 	"github.com/gorilla/mux"
-	"github.com/iisharankov/FYSTDatabase/datasets"
 )
-
-// TODO: Generalized this by parsing db table name and number of parameters to upload? might be hard with reflect
-func addRowToObjectFile(newFile datasets.File, w http.ResponseWriter) error {
-	// Use SQL Prepare() method to safely convert the field types.
-	stmt, err := dbCon.PrepareQuery("insert into ObjectFile values(?, ?, ?, ?, ?, ?);")
-	if err != nil {
-		log.Println("Error in db.Perpare()\n", err)
-		return err
-	}
-
-	// Execute the command on the database (encoded already in stmt)
-	_, err = stmt.Exec(nil, newFile.DateCreated, newFile.Instrument, newFile.Size, newFile.MD5Sum, newFile.URL)
-	if err != nil {
-		log.Println("Error in query execution\n", err)
-		return err
-	}
-
-	log.Println("Added FileID row to ObjectFile Table")
-	return nil
-}
 
 func concatErrors(err error, newError string) error {
 	var errstrings []string
@@ -67,38 +44,6 @@ func jsonResponse(w http.ResponseWriter, err error, statusCode int) {
 	if err != nil {
 		log.Print(err)
 	}
-}
-
-func checkID(endpointSection string, w http.ResponseWriter) error {
-	var err error
-	// If endpointSection has a '-', it is a range and both elements should be tested recursively
-	if strings.Contains(endpointSection, "-") {
-		splitRange := strings.Split(endpointSection, "-")
-		err = checkID(splitRange[0], w)
-		if err != nil {
-			return err
-		}
-
-		err = checkID(splitRange[1], w)
-		if err != nil {
-			return err
-		}
-		return nil
-	}
-
-	if endpointSection == "" {
-		errMsg := errors.New("No file ID given. Either give file ID after '/'  or remove the '/'")
-		return errMsg
-	}
-
-	// Check to see if input is an actual integer
-	_, err = strconv.Atoi(endpointSection)
-	if err != nil {
-		errMsg := errors.New("Could not convert ID given to int, check value after 'files/'")
-		return errMsg
-	}
-
-	return nil
 }
 
 func startAPIServer() {

@@ -16,15 +16,15 @@ func GetRulesFromDBEndpoint(w http.ResponseWriter, r *http.Request) {
 
 	// Set up SQL Query depending if request asks for one file or multiple
 	var SQLQuery string
-	if strings.Contains(params["id"], "-") {
+	if strings.Contains(params["id"], "-") { // Hyphen suggests range of values
 		splitRange := strings.Split(params["id"], "-")
-
 		a, _ := strconv.Atoi(splitRange[0])
 		b, _ := strconv.Atoi(splitRange[1])
 		SQLQuery = "select * from Rule ORDER BY RuleID LIMIT " + strconv.Itoa(b-a+1) + " OFFSET " + strconv.Itoa(a-1)
-	} else {
-		// if int, use string version for simplicity. No worry about SQL injection since above Atoi didn't fail
-		SQLQuery = "select * from Rule where Rule.RuleID=" + params["id"]
+
+	} else { // Single row requested
+		idAsInt, _ := strconv.Atoi(params["id"]) // to avoid SQL injection
+		SQLQuery = "select * from Rule where Rule.RuleID=" + string(idAsInt)
 	}
 
 	var ruleTable datasets.RuleTable

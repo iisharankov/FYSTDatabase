@@ -16,6 +16,11 @@ import (
 func AddLogToDBEndpoint(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
+	var fileName string
+	dec := json.NewDecoder(r.Body)
+	dec.DisallowUnknownFields()
+	err := dec.Decode(&fileName)
+
 	FileID, err := strconv.Atoi(params["id"])
 	if err != nil {
 		combinedErrors := concatErrors(err, "File ID could not be converted to an int!")
@@ -37,7 +42,7 @@ func AddLogToDBEndpoint(w http.ResponseWriter, r *http.Request) {
 	}
 	returnQuery, _ := queryReturn.Interface().([]struct{ RuleID int }) // type assert from reflect.Value to struct
 
-	if err = addRowToLog(FileID, returnQuery[0].RuleID); err != nil {
+	if err = addRowToLog(FileID, returnQuery[0].RuleID, fileName); err != nil {
 		jsonResponse(w, err, http.StatusBadRequest)
 	} else {
 		jsonResponse(w, nil, http.StatusAccepted)
