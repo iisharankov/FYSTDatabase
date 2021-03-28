@@ -1,89 +1,37 @@
 package main
 
 import (
-	"context"
-	"fmt"
 	"log"
-	"strconv"
-	"strings"
+	"net/http"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/iisharankov/FYSTDatabase/datasets"
 )
 
-// FilesThatNeedToBeBackedUp lists all the data required to move file from FYST to external location
-type FilesThatNeedToBeBackedUp struct {
-	FileID         int
-	RuleID         int
-	InstrumentID   int
-	Size           int
-	InstrumentName string
-	DateCreated    string
-	Storage        string
-	ByteHash       string
-	LocationName   string
-}
-
-func TransferClock() {
-	// Make connection to Database if it does not exist or has failed
-	if err := dbCon.CheckConnection(); err != nil {
-		err := dbCon.Connect(dbUsername, dbPassword, dbAddress, dbName)
-		if err != nil {
-			fmt.Println("Connection to database failed:", err)
-		}
-	}
-
-	tenSecClock := time.NewTicker(3 * time.Second)
-	// oneMinClock := time.NewTicker(time.Minute)
-	go func() {
-		for {
-			select {
-			case _ = <-tenSecClock.C:
-				moveOffTelscope()
-			}
-		}
-	}()
-}
-
-func moveOffTelscope() {
-	minioUseSSL, _ := strconv.ParseBool(minioUseSSL) // Convert env var to bool
-	var S3Instance = ObjectMetadata{                 // Start the Minio connection
-		ctx:      context.Background(),
-		endpoint: minioEndpoint,
-		id:       minioAccessKeyID,
-		password: minioSecretAccessKey,
-		useSSL:   minioUseSSL}
-
-	S3Instance.initMinio()
-
-	var structOfFilesThatNeedToBeBackedUp FilesThatNeedToBeBackedUp
-	// What files have not been copied to locations where active rules exist (pending uploads per all locations)?
-	var SQLQuery string = `select f.FileID, r.RuleID, f.Size, i.InstrumentID, 
-	i.InstrumentName, f.DateCreated, f.ObjectStorage, f.HashOfBytes, BL.LocationName
-	from ObjectFile f 
-	join Instrument i on i.InstrumentID=f.InstrumentID
-	join Rule r on r.InstrumentID=i.InstrumentID
-	join BackupLocation BL on BL.LocationID=r.LocationID
-	left join Log l on l.FileID=f.FileID and r.RuleId=l.RuleID
-	where l.FileID is null AND r.Active=1 order by f.DateCreated;`
-	outputRows, err := dbCon.QueryRead(SQLQuery, &structOfFilesThatNeedToBeBackedUp)
+// TODO: Generalized this by parsing db table name and number of parameters to upload? might be hard with reflect
+func addRowToObjectFile(newFile datasets.File, w http.ResponseWriter) error {
+	// Use SQL Prepare() method to safely convert the field types.
+	stmt, err := dbCon.PrepareQuery("insert into ObjectFile values(?, ?, ?, ?, ?, ?);")
 	if err != nil {
-		fmt.Println(err)
-	}
-	listOfFilesThatNeedToBeBackedUp, _ := outputRows.Interface().([]FilesThatNeedToBeBackedUp)
-
-	//--------------------- Finds all the rules in the database
-	for _, val := range listOfFilesThatNeedToBeBackedUp {
-		_, err = copyFile(S3Instance, val)
-		if err == nil { // Inverse of normal!
-			addRowToLog(val.FileID, val.RuleID)
-		}
+		log.Println("Error in db.Perpare()\n", err)
+		return err
 	}
 
+	// Execute the command on the database (encoded already in stmt)
+	_, err = stmt.Exec(nil, newFile.DateCreated, newFile.Instrument, newFile.Size, newFile.MD5Sum, newFile.URL)
+	if err != nil {
+		log.Println("Error in query execution\n", err)
+		return err
+	}
+
+	log.Println("Added FileID row to ObjectFile Table")
+	return nil
 }
 
-func addRowToLog(FileID, location int) error {
+func addRowToLog(FileID, RuleID int, name string) error {
 	date := time.Now().Format("2006-01-02 15:04:05")
+	log.Println("Adding row to Log table")
 
 	stmt, err := dbCon.PrepareQuery("insert into Log values(?, ?, ?, ?, ?);")
 	if err != nil {
@@ -92,7 +40,7 @@ func addRowToLog(FileID, location int) error {
 	}
 
 	// Execute the command on the database (encoded already in stmt)
-	_, err = stmt.Exec(FileID, location, date, 0, "")
+	_, err = stmt.Exec(FileID, RuleID, date, 0, name)
 	if err != nil {
 		log.Println("Error in query execution\n", err)
 		return err
@@ -102,7 +50,7 @@ func addRowToLog(FileID, location int) error {
 }
 
 // getLocations returns valid/active LocationIDs to copy data for a given InstrumentID
-func getLocations(listOfRuleStructs []RuleTable, InstrumentID int) []int {
+func getLocations(listOfRuleStructs []datasets.RuleTable, InstrumentID int) []int {
 	var listOfValidLocationsToCopyTo []int // output list
 
 	for _, val := range listOfRuleStructs {
@@ -112,17 +60,4 @@ func getLocations(listOfRuleStructs []RuleTable, InstrumentID int) []int {
 		}
 	}
 	return listOfValidLocationsToCopyTo
-}
-
-func copyFile(minioInstance ObjectMetadata, src FilesThatNeedToBeBackedUp) (int64, error) {
-
-	// Is ths needed? Buckets should exist.
-	// location := "us-east-1"
-	// minioInstance.makeBucket(src.LocationName, location)
-
-	// Upload the zip file
-	last := src.Storage[strings.LastIndex(src.Storage, "/")+1:]
-	minioInstance.UploadObject(src.LocationName, last, src.Storage, "application/zip")
-
-	return 0, nil
 }
