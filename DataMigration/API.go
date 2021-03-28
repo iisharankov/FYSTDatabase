@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	"github.com/gorilla/mux"
-	// "github.com/iisharankov/FYSTDatabase/datasets"
 	"github.com/iisharankov/FYSTDatabase/datasets"
 )
 
@@ -101,18 +100,6 @@ func checkID(endpointSection string, w http.ResponseWriter) error {
 
 	return nil
 }
-
-// func returnQueryParameter(r *http.Request, name string) (string, error) {
-// 	parameterToReturn, ok := r.URL.Query()[name]
-// 	if !ok {
-// 		errMsg := fmt.Sprintf(`{"err": "r.URL.Query() returned false. Check parameter %v"}`, name)
-// 		return "", fmt.Errorf(errMsg)
-// 	} else if len(parameterToReturn) != 1 {
-// 		errMsg := fmt.Sprintf(`{"err": "%v parameters found in URL query for '%v', only 1 accepted "}`, len(parameterToReturn), name)
-// 		return "", fmt.Errorf(errMsg)
-// 	}
-// 	return parameterToReturn[0], nil
-// }
 
 func startAPIServer() {
 
