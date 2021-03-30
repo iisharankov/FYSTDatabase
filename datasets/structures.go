@@ -20,9 +20,10 @@ type FilesThatNeedToBeBackedUp struct {
 	Size           int
 	InstrumentName string
 	DateCreated    string
+	URL            string
 	Storage        string
 	ByteHash       string
-	LocationName   string
+	BucketName     string
 }
 
 // S3Metadata holds the connection information for a given minio instance
