@@ -12,6 +12,19 @@ type File struct {
 	URL         string    `json:"url"`
 }
 
+// FilesThatNeedToBeBackedUp lists all the data required to move file from FYST to external location
+type FilesThatNeedToBeBackedUp struct {
+	FileID         int
+	RuleID         int
+	InstrumentID   int
+	Size           int
+	InstrumentName string
+	DateCreated    string
+	Storage        string
+	ByteHash       string
+	LocationName   string
+}
+
 // S3Metadata holds the connection information for a given minio instance
 type S3Metadata struct {
 	Endpoint        string `json:"endpoint"`
