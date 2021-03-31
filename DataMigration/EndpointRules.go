@@ -40,12 +40,12 @@ func GetRulesFromDBEndpoint(w http.ResponseWriter, r *http.Request) {
 		jsonResponse(w, errMsg, http.StatusBadRequest)
 		return
 	}
+
 	for _, val := range outputData {
 		data, _ := json.Marshal(val)
 		w.Write(data)
 	}
-
-	jsonResponse(w, err, http.StatusAccepted)
+	jsonResponse(w, nil, http.StatusAccepted)
 }
 
 func GetAllRulesFromDBEndpoint(w http.ResponseWriter, r *http.Request) {
@@ -61,6 +61,5 @@ func GetAllRulesFromDBEndpoint(w http.ResponseWriter, r *http.Request) {
 		data, _ := json.Marshal(val)
 		w.Write(data)
 	}
-	jsonResponse(w, err, http.StatusAccepted)
-	return
+	jsonResponse(w, nil, http.StatusAccepted)
 }

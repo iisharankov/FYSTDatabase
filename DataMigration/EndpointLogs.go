@@ -16,11 +16,13 @@ import (
 func AddLogToDBEndpoint(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
+	// Extract the body of the POST request
 	var fileName string
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
 	err := dec.Decode(&fileName)
 
+	// Make sure the ID in the header is actually an integer
 	FileID, err := strconv.Atoi(params["id"])
 	if err != nil {
 		combinedErrors := concatErrors(err, "File ID could not be converted to an int!")
@@ -28,13 +30,11 @@ func AddLogToDBEndpoint(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Tells you which RuleID corresponds to a FileID and Location string (locationname in BackupLocation)
+	// Tells you which RuleID corresponds to a FileID and Location string (locationName in BackupLocation)
 	query := fmt.Sprintf(`select r.RuleID from Rule r 
 		join ObjectFile o on o.InstrumentID=r.InstrumentID 
 		join BackupLocation b on b.LocationID=r.LocationID
 		where o.FileId = %v and b.S3Bucket = "%v"`, params["id"], params["location"])
-
-	// Temp struct that has just integer (SQL query returns row of 1 int)
 	queryReturn, err := dbCon.QueryRead(query, &struct{ RuleID int }{})
 	if err != nil {
 		jsonResponse(w, err, http.StatusBadRequest)
@@ -44,9 +44,10 @@ func AddLogToDBEndpoint(w http.ResponseWriter, r *http.Request) {
 
 	if err = addRowToLog(FileID, returnQuery[0].RuleID, fileName); err != nil {
 		jsonResponse(w, err, http.StatusBadRequest)
-	} else {
-		jsonResponse(w, nil, http.StatusAccepted)
+		return
 	}
+
+	jsonResponse(w, nil, http.StatusAccepted)
 }
 
 func GetCopiesOFLogFromDBEndpoint(w http.ResponseWriter, r *http.Request) {

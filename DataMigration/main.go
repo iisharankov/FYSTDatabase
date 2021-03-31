@@ -9,6 +9,7 @@ import (
 	"github.com/minio/minio-go/v7"
 )
 
+// Recieved from docker-compose or env vars if running locally
 var dbName = os.Getenv("DATABASE_NAME")
 var dbAddress = os.Getenv("MYSQL_IP")
 var dbUsername = os.Getenv("MYSQL_USER")
@@ -28,14 +29,13 @@ const (
 	sqlTimeLayout string = "2006-01-2 15:04:05"
 )
 
-// GlobalPTStackArray is a struct containing an array of structs
+// DatabaseConnection holds the connection to the database
+// so methods in DBOverhead can share the connection
 var dbCon DatabaseConnection
 
-// SimulatorMetadata is a class to easily pass around internal channels
-type ServerMetadata struct {
-}
-
-// ObjectMetadata is a struct
+/* ObjectMetadata stores all the information for a given minio instance,
+currently it also stores the buckets created during the instance, but this
+may be possible to offload to the database. */
 type ObjectMetadata struct {
 	ctx         context.Context
 	minioClient *minio.Client
@@ -46,6 +46,7 @@ type ObjectMetadata struct {
 	Buckets     map[string]bool `json:"buckets"`
 }
 
+// This may need an overhaul since this is not generalized well.
 type TransferData struct {
 	S3TransferChan chan int
 	srcS3          *ObjectMetadata
@@ -58,6 +59,7 @@ func main() {
 	s3UseSSL, _ := strconv.ParseBool(s3UseSSL)       // Convert env var to bool
 	minioUseSSL, _ := strconv.ParseBool(minioUseSSL) // Convert env var to bool
 
+	// See above struct definition
 	transferData := TransferData{
 		S3TransferChan: make(chan int),
 		srcS3: &ObjectMetadata{ // Destination S3 instance
@@ -79,8 +81,8 @@ func main() {
 	transferData.srcS3.initMinio()
 	transferData.dstS3.initMinio()
 
-	// p := makeSimulator()
-	go transferData.Clock()
+	go transferData.uploadQueue()
 
+	// Start API that has all the endpoints ready to listen for traffic
 	startAPIServer()
 }

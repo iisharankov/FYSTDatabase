@@ -8,6 +8,13 @@ import (
 	"github.com/minio/minio-go/v7/pkg/credentials"
 )
 
+/* I initially created this file to hold all the methods I'd use for minio handeling, but
+I found two issues pop up. 1) most of these methods are wrappers that don't really save
+much (if any) code, like requestObject. It's literally wrapping another function for no
+benifit. Also, I found I needed this library for both the server and client, so the
+question arose if it should be it's own package. I don't think that's necessary, and this
+file can probably be removed and integrated where the minio methods are used directly */
+
 func (minioInstance *ObjectMetadata) initMinio() {
 	// Initialize minio client object.
 	client, err := minio.New(minioInstance.endpoint, &minio.Options{
@@ -20,16 +27,6 @@ func (minioInstance *ObjectMetadata) initMinio() {
 	} else {
 		minioInstance.minioClient = client
 	}
-}
-
-func (minioInstance *ObjectMetadata) makeBuckett(bucketName, location string) error {
-	opts := minio.MakeBucketOptions{Region: location}
-
-	if err := minioInstance.minioClient.MakeBucket(minioInstance.ctx, bucketName, opts); err != nil {
-		return err
-	}
-	log.Printf("Successfully created bucket called %s\n", bucketName)
-	return nil
 }
 
 func (minioInstance *ObjectMetadata) makeBucket(bucketName, location string) {
