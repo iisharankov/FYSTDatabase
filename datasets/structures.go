@@ -21,7 +21,6 @@ type FilesThatNeedToBeBackedUp struct {
 	InstrumentName string
 	DateCreated    string
 	URL            string
-	Storage        string
 	ByteHash       string
 	BucketName     string
 }
@@ -38,5 +37,6 @@ type S3Metadata struct {
 type ClientUploadReply struct {
 	S3Metadata     S3Metadata
 	FileID         int    `json:"file_id"`
+	LocationID     int    `json:"location_id"`
 	UploadLocation string `json:"upload_location"`
 }

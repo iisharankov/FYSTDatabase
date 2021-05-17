@@ -1,6 +1,6 @@
 package datasets
 
-// BackupLocationTable is an SQL table
+// LocationsTable is an SQL table
 type BackupLocationTable struct {
 	LocationID   int    `json:"location_id"`
 	LocationName string `json:"location_name"`
@@ -12,7 +12,7 @@ type BackupLocationTable struct {
 	SSL          bool   `json:"ssl"`
 }
 
-// InstrumentTable is an SQL table
+// InstrumentsTable is an SQL table
 type InstrumentTable struct {
 	InstrumentID   int    `json:"instrument_id"`
 	InstrumentName string `json:"instrument_name"`
@@ -21,20 +21,18 @@ type InstrumentTable struct {
 	NumberOfPixels int    `json:"number_of_pixels"`
 	FrequencyMin   int    `json:"frequency_min"`
 	FrequencyMax   int    `json:"frequency_max"`
-	TempRange      int    `json:"temp_range"`
 }
 
-// ObjectFileTable is an SQL table
+// FilesTable is an SQL table
 type ObjectFileTable struct {
-	FileID        int    `json:"file_id"`
-	DateCreated   string `json:"date_created"` // dataetime?
-	InstrumentID  int    `json:"instrument_id"`
-	Size          int    `json:"size"`
-	HashOfBytes   string `json:"hash_of_bytes"`
-	ObjectStorage string `json:"object_storage"`
+	FileID       int    `json:"file_id"`
+	DateCreated  string `json:"date_created"` // dataetime?
+	InstrumentID int    `json:"instrument_id"`
+	Size         int    `json:"size"`
+	HashOfBytes  string `json:"hash_of_bytes"`
 }
 
-// RuleTable is an SQL table
+// RulesTable is an SQL table
 type RuleTable struct {
 	RuleID          int    `json:"rule_id"`
 	RuleDescription string `json:"rule_description"`
@@ -43,11 +41,16 @@ type RuleTable struct {
 	Active          int    `json:"active"` // tinyint or bool
 }
 
-// LogTable is an SQL table
+// LogsTable is an SQL table
 type LogTable struct {
 	FileID     int    `json:"file_id"`
 	RuleID     int    `json:"rule_id"`
 	BackupDate string `json:"backup_date"` // datetime?
-	IsCopying  int    `json:"is_copying"`  // tiny int or bool
+}
+
+// CopiesTable is an SQL table
+type CopiesTable struct {
+	FileID     int    `json:"file_id"`
+	LocationID int    `json:"location_id"`
 	URL        string `json:"url"`
 }
