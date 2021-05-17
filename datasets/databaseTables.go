@@ -1,7 +1,7 @@
 package datasets
 
 // LocationsTable is an SQL table
-type BackupLocationTable struct {
+type LocationsTable struct {
 	LocationID   int    `json:"location_id"`
 	LocationName string `json:"location_name"`
 	S3Bucket     string `json:"s3bucket"`
@@ -13,7 +13,7 @@ type BackupLocationTable struct {
 }
 
 // InstrumentsTable is an SQL table
-type InstrumentTable struct {
+type InstrumentsTable struct {
 	InstrumentID   int    `json:"instrument_id"`
 	InstrumentName string `json:"instrument_name"`
 	FullName       string `json:"full_name"`
@@ -24,7 +24,7 @@ type InstrumentTable struct {
 }
 
 // FilesTable is an SQL table
-type ObjectFileTable struct {
+type FilesTable struct {
 	FileID       int    `json:"file_id"`
 	DateCreated  string `json:"date_created"` // dataetime?
 	InstrumentID int    `json:"instrument_id"`
@@ -33,7 +33,7 @@ type ObjectFileTable struct {
 }
 
 // RulesTable is an SQL table
-type RuleTable struct {
+type RulesTable struct {
 	RuleID          int    `json:"rule_id"`
 	RuleDescription string `json:"rule_description"`
 	InstrumentID    int    `json:"instrument_id"`
@@ -42,7 +42,7 @@ type RuleTable struct {
 }
 
 // LogsTable is an SQL table
-type LogTable struct {
+type LogsTable struct {
 	FileID     int    `json:"file_id"`
 	RuleID     int    `json:"rule_id"`
 	BackupDate string `json:"backup_date"` // datetime?
