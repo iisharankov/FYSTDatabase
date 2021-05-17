@@ -41,8 +41,8 @@ type RulesTable struct {
 	Active          int    `json:"active"` // tinyint or bool
 }
 
-// LogsTable is an SQL table
-type LogsTable struct {
+// RecordsTable is an SQL table
+type RecordsTable struct {
 	FileID     int    `json:"file_id"`
 	RuleID     int    `json:"rule_id"`
 	BackupDate string `json:"backup_date"` // datetime?
