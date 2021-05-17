@@ -15,9 +15,9 @@ CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4
 USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`BackupLocation`
+-- Table `mydb`.`Locations`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`BackupLocation` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Locations` (
   `LocationID` INT NOT NULL AUTO_INCREMENT,
   `LocationName` VARCHAR(45) NOT NULL,
   `S3Bucket` VARCHAR(45) NOT NULL,
@@ -33,9 +33,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Instrument`
+-- Table `mydb`.`Instruments`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Instrument` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Instruments` (
   `InstrumentID` INT NOT NULL AUTO_INCREMENT,
   `InstrumentName` VARCHAR(10) NOT NULL COMMENT 'Mianly CHAI and P-CAM for now',
   `FullName` VARCHAR(45) NOT NULL COMMENT 'Unabbreviated name',
@@ -43,7 +43,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Instrument` (
   `NumberOfPixels` INT NOT NULL,
   `FrequencyMin` INT NOT NULL,
   `FrequencyMax` INT NOT NULL,
-  `TempRange` INT NOT NULL,
   PRIMARY KEY (`InstrumentID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -51,68 +50,95 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Rule`
+-- Table `mydb`.`Rules`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Rule` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Rules` (
   `RuleID` INT NOT NULL AUTO_INCREMENT,
   `RuleDescription` VARCHAR(2000) NULL DEFAULT NULL,
   `InstrumentID` INT NOT NULL,
   `LocationID` INT NOT NULL,
   `Active` TINYINT NOT NULL,
   PRIMARY KEY (`RuleID`),
-  INDEX `FK_BackupLocation_idx` (`LocationID` ASC) VISIBLE,
-  INDEX `FK_InstrumentID_idx` (`InstrumentID` ASC) VISIBLE,
-  CONSTRAINT `FK_BackupRules_InstrumentID`
+  INDEX `FK_Rules_LocationID` (`LocationID` ASC) VISIBLE,
+  INDEX `FK_Rules_InstrumentID` (`InstrumentID` ASC) VISIBLE,
+  CONSTRAINT `FK_Rules_InstrumentID`
     FOREIGN KEY (`InstrumentID`)
-    REFERENCES `mydb`.`Instrument` (`InstrumentID`),
-  CONSTRAINT `FK_BackupRules_LocationID`
+    REFERENCES `mydb`.`Instruments` (`InstrumentID`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_Rules_LocationID`
     FOREIGN KEY (`LocationID`)
-    REFERENCES `mydb`.`BackupLocation` (`LocationID`))
+    REFERENCES `mydb`.`Locations` (`LocationID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`ObjectFile`
+-- Table `mydb`.`Files`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`ObjectFile` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Files` (
   `FileID` INT NOT NULL AUTO_INCREMENT,
   `DateCreated` DATETIME NOT NULL,
   `InstrumentID` INT NOT NULL,
   `Size` INT UNSIGNED NOT NULL COMMENT 'In bytes',
   `HashOfBytes` VARCHAR(500) NOT NULL,
-  `ObjectStorage` VARCHAR(1000) NOT NULL COMMENT 'Not sure how to map ObjectStorage, never confronted with it before\\n',
   PRIMARY KEY (`FileID`),
-  INDEX `FK_InstrumentID_idx` (`InstrumentID` ASC) VISIBLE,
+  INDEX `FK_Files_InstrumentID` (`InstrumentID` ASC) VISIBLE,
   CONSTRAINT `FK_Files_InstrumentID`
     FOREIGN KEY (`InstrumentID`)
-    REFERENCES `mydb`.`Instrument` (`InstrumentID`))
+    REFERENCES `mydb`.`Instruments` (`InstrumentID`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Log`
+-- Table `mydb`.`Records`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Log` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Records` (
   `FileID` INT NOT NULL,
   `RuleID` INT NOT NULL,
   `BackupDate` DATETIME NOT NULL,
-  `IsCopying` TINYINT(3) UNSIGNED ZEROFILL NULL DEFAULT NULL,
-  `URL` VARCHAR(1000) NOT NULL,
-  INDEX `FK_BackupRule_idx` (`RuleID` ASC) VISIBLE,
-  INDEX `FK_BackupLog_FileID` (`FileID` ASC) VISIBLE,
-  CONSTRAINT `FK_BackupLog_BackupRuleID`
+  INDEX `FK_Records_RuleID` (`RuleID` ASC) VISIBLE,
+  INDEX `FK_Records_FileID` (`FileID` ASC) VISIBLE,
+  CONSTRAINT `FK_Logs_RuleID`
     FOREIGN KEY (`RuleID`)
-    REFERENCES `mydb`.`Rule` (`RuleID`),
-  CONSTRAINT `FK_BackupLog_FileID`
+    REFERENCES `mydb`.`Rules` (`RuleID`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_Logs_FileID`
     FOREIGN KEY (`FileID`)
-    REFERENCES `mydb`.`ObjectFile` (`FileID`))
+    REFERENCES `mydb`.`Files` (`FileID`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Copies`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Copies` (
+  `FileID` INT NULL,
+  `LocationID` INT NULL,
+  `URL` VARCHAR(1000) NULL,
+  INDEX `FK_Copies_FileID` (`FileID` ASC) VISIBLE,
+  INDEX `FK_Copies_LocationID` (`LocationID` ASC) VISIBLE,
+  CONSTRAINT `FK_Copies_FileID`
+    FOREIGN KEY (`FileID`)
+    REFERENCES `mydb`.`Files` (`FileID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_Copies_LocationID`
+    FOREIGN KEY (`LocationID`)
+    REFERENCES `mydb`.`Locations` (`LocationID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
