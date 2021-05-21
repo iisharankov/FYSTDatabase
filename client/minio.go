@@ -8,13 +8,6 @@ import (
 	"github.com/minio/minio-go/v7/pkg/credentials"
 )
 
-const (
-	minioEndpoint        string = "0.0.0.0:9000"
-	minioAccessKeyID     string = "iisharankov"
-	minioSecretAccessKey string = "iisharankov"
-	minioUseSSL          bool   = false
-)
-
 // ObjectMetadata is a struct
 type ObjectMetadata struct {
 	ctx         context.Context
@@ -71,7 +64,7 @@ func (minioInstance *ObjectMetadata) removeBucket(bucketName string) {
 
 // ListBuckets returns all buckets
 func (minioInstance *ObjectMetadata) ListBuckets() ([]minio.BucketInfo, error) {
-	// What to do with this, how do context.Contexts scale with other ctx's?
+	// What to do with this, how do context.Contexts scale with other contexts?
 	// ctx, cancel := context.WithCancel(context.Background())
 	// defer cancel()
 
@@ -82,7 +75,8 @@ func (minioInstance *ObjectMetadata) ListBuckets() ([]minio.BucketInfo, error) {
 // UploadObject uploads a given file from a given filepath to a cloud bucket
 func (minioInstance *ObjectMetadata) UploadObject(bucketName, objectName, filePath, contentType string) {
 	// Upload the zip file with FPutObject
-	n, err := minioInstance.minioClient.FPutObject(minioInstance.ctx, bucketName, objectName, filePath, minio.PutObjectOptions{ContentType: contentType})
+	// TODO: Setting filePath as objectName as well to help uniqueness
+	n, err := minioInstance.minioClient.FPutObject(minioInstance.ctx, bucketName, filePath, filePath, minio.PutObjectOptions{ContentType: contentType})
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -91,7 +85,7 @@ func (minioInstance *ObjectMetadata) UploadObject(bucketName, objectName, filePa
 }
 
 func (minioInstance *ObjectMetadata) listObjects(bucketName, prefix string) {
-	// What to do with this, how do context.Contexts scale with other ctx's?
+	// What to do with this, how do context.Contexts scale with other contexts?
 	// ctx, cancel := context.WithCancel(context.Background())
 	// defer cancel()
 
@@ -115,37 +109,3 @@ func (minioInstance *ObjectMetadata) removeObject(bucketName, objectName string)
 
 	log.Printf("Successfully removed object %s \n", objectName)
 }
-
-// func main() {
-
-// 	endpoint := "0.0.0.0:9000"
-// 	accessKeyID := "iisharankov"
-// 	secretAccessKey := "iisharankov"
-// 	useSSL := false
-// 	var S3Instance = ObjectMetadata{ctx: context.Background(), endpoint: endpoint, id: accessKeyID, password: secretAccessKey, useSSL: useSSL}
-
-// 	S3Instance.initMinio()
-
-// 	// Make a new bucket called mymusic.
-// 	bucketName := "testminiobucket"
-// 	location := "us-east-1"
-// 	S3Instance.makeBucket(bucketName, location)
-
-// 	// Upload the zip file
-// 	objectName := "TheBeatles_LetItBe.zip"
-// 	filePath := "/home/iisharankov/Downloads/" + objectName
-// 	contentType := "application/zip"
-// 	S3Instance.uploadObject(bucketName, objectName, filePath, contentType)
-
-// 	S3Instance.listObjects(bucketName, "myprefix")
-
-// 	S3Instance.removeBucket(bucketName)
-
-// 	S3Instance.removeObject(bucketName, objectName)
-
-// 	S3Instance.listObjects(bucketName, "myprefix")
-
-// 	S3Instance.removeBucket(bucketName)
-// }
-
-// More reading: https://dev.to/maelvls/why-is-go111module-everywhere-and-everything-about-go-modules-24k

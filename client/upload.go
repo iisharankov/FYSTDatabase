@@ -2,37 +2,32 @@ package main
 
 import (
 	"context"
+	"log"
+	"strconv"
 
+	"github.com/iisharankov/FYSTDatabase/datasets"
 	"github.com/minio/minio-go/v7"
 )
 
-// FilesThatNeedToBeBackedUp lists all the data required to move file from FYST to external location
-type FilesThatNeedToBeBackedUp struct {
-	FileID         int
-	RuleID         int
-	InstrumentID   int
-	Size           int
-	InstrumentName string
-	DateCreated    string
-	Storage        string
-	ByteHash       string
-	LocationName   string
-}
+func uploadData(reply datasets.ClientUploadReply, file datasets.File) error {
+	minioUseSSL, _ := strconv.ParseBool(minioUseSSL) // Convert env var to bool
 
-func uploadData(reply ServerUploadReply, file File) error {
+	minioEndpoint = "0.0.0.0:9001"
 	var S3Instance = ObjectMetadata{
 		ctx:      context.Background(),
 		endpoint: minioEndpoint,
 		id:       minioAccessKeyID,
 		password: minioSecretAccessKey,
-		useSSL:   minioUseSSL}
+		useSSL:   minioUseSSL,
+	}
 
 	S3Instance.initMinio()
-
 	_, err := copyFile(S3Instance, file, reply)
-	if err != nil { // Inverse of normal!
+	if err != nil {
+		log.Println("err in copyFile", err)
 		return err
 	}
+
 	return nil
 }
 
@@ -45,14 +40,17 @@ func stringInSlice(a string, list []minio.BucketInfo) bool {
 	return false
 }
 
-func copyFile(minioInstance ObjectMetadata, file File, serverReply ServerUploadReply) (int64, error) {
+func copyFile(minioInstance ObjectMetadata, file datasets.File, serverReply datasets.ClientUploadReply) (int64, error) {
 	reply := serverReply.UploadLocation
 	bucketList, _ := minioInstance.ListBuckets()
+
 	if !stringInSlice(reply, bucketList) {
 		minioInstance.makeBucket(reply, "us-east-1")
 	}
 
 	// Upload the zip file
+	log.Println(file.Name, file.URL)
+
 	minioInstance.UploadObject(reply, file.Name, file.URL, "application/zip")
 	return 0, nil
 }

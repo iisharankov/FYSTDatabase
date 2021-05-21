@@ -7,21 +7,14 @@ import (
 	"log"
 	"os"
 	"time"
+
+	"github.com/iisharankov/FYSTDatabase/datasets"
 )
 
-type File struct {
-	Name        string    `json:"name"`
-	Instrument  int       `json:"instrument"`
-	MD5Sum      string    `json:"md5sum"`
-	DateCreated time.Time `json:"date_created"`
-	Size        int       `json:"size"`
-	URL         string    `json:"url"`
-}
-
-type ServerUploadReply struct {
-	FileID         int    `json:"file_id"`
-	UploadLocation string `json:"upload_location"`
-}
+var minioEndpoint = os.Getenv("MINIO_ENDPOINT")
+var minioAccessKeyID = os.Getenv("MINIO_ACCESS_ID")
+var minioSecretAccessKey = os.Getenv("MINIO_SECRET_KEY")
+var minioUseSSL = os.Getenv("MINIO_SSL")
 
 func getenv(key, def string) string {
 	if val, ok := os.LookupEnv(key); ok {
@@ -70,35 +63,61 @@ func main() {
 		url := uploadcmd.String("url", "", "")
 		uploadcmd.Parse(os.Args[2:])
 
-		layout := "2006-01-02T15:04:05Z" // Golang Time is a mess...
-		formatedDate, err := time.Parse(layout, *date)
+		formatedDate, err := time.Parse("2006-01-02T15:04:05Z", *date)
 		if err != nil {
-			fmt.Println(err)
+			log.Println(err)
 		}
 
-		file := File{Name: *name, Instrument: *instrument, MD5Sum: *md5,
-			DateCreated: formatedDate, Size: *size, URL: *url}
+		file := datasets.File{
+			Name:        *name,
+			Instrument:  *instrument,
+			MD5Sum:      *md5,
+			DateCreated: formatedDate,
+			Size:        *size,
+			URL:         *url,
+		}
 
 		// Tell server new file exists and unmarshal the reply for use
-		var ans ServerUploadReply
+		var ans datasets.ClientUploadReply
 		if reply, err := connection.requestToUploadFile(file); err != nil {
-			log.Println(err)
-		} else {
-			if err = json.Unmarshal(reply, &ans); err != nil {
-				panic(err)
-			}
+			log.Println(err.Error())
+			return
+		} else if err = json.Unmarshal(reply, &ans); err != nil {
+			panic(err)
 		}
-		fmt.Printf("Reply was %v\n", ans)
+
+		log.Printf("Reply was %v\n", ans)
+
+		// a, err := connection.logGET()
+		// log.Println("a was", string(a), "err was", err)
+
 		// upload file to bucket URL in JSON reply and then ask server to update log
-		if err := uploadData(ans, file); err != nil {
+		err = uploadData(ans, file)
+		if err != nil {
 			log.Println(err)
+			// TODO: what to do if upload fails?
 		} else {
-			a, err := connection.requestToUpdateLog(ans)
+			a, err := connection.requestToUpdateLog(file.Name, ans)
 			if err != nil {
 				log.Println(err)
-			} else {
-				fmt.Println("update Log response was:", string(a))
 			}
+			log.Println("Log response:", string(a))
+
+			temp := datasets.CopiesTable{
+				FileID:     ans.FileID,
+				LocationID: ans.LocationID,
+				URL:        file.URL,
+			}
+			a, err = connection.requestToUpdateCopies(temp)
+			if err != nil {
+				log.Println(err)
+			}
+			log.Println("Copies response:", string(a))
+
+			// _, err = connection.requestToUpdateObjectFile(file, ans)
+			// if err != nil {
+			// 	log.Println(err)
+			// }
 		}
 
 	default:
