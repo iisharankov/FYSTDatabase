@@ -37,7 +37,7 @@ type RulesTable struct {
 	RuleDescription string `json:"rule_description"`
 	InstrumentID    int    `json:"instrument_id"`
 	LocationID      int    `json:"location_id"`
-	Active          int    `json:"active"` // tinyint or bool
+	Active          int    `json:"active"` // tinyint or boolgo get
 }
 
 // RecordsTable is an SQL table
