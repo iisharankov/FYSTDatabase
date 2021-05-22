@@ -5,10 +5,9 @@ type LocationsTable struct {
 	LocationID   int    `json:"location_id"`
 	LocationName string `json:"location_name"`
 	S3Bucket     string `json:"s3bucket"`
-	IPAddress    string `json:"ip_address"`
-	Port         int    `json:"port"`
-	Username     string `json:"username"`
-	Password     string `json:"password"`
+	Address      string `json:"ip_address"`
+	AccessID     string `json:"username"`
+	SecretID     string `json:"password"`
 	SSL          bool   `json:"ssl"`
 }
 
