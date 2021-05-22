@@ -25,6 +25,7 @@ type InstrumentsTable struct {
 // FilesTable is an SQL table
 type FilesTable struct {
 	FileID       int    `json:"file_id"`
+	FileName     string `json:"file_name"`
 	DateCreated  string `json:"date_created"` // dataetime?
 	InstrumentID int    `json:"instrument_id"`
 	Size         int    `json:"size"`
