@@ -20,7 +20,6 @@ type FilesThatNeedToBeBackedUp struct {
 	Size           int
 	InstrumentName string
 	DateCreated    string
-	URL            string
 	ByteHash       string
 	BucketName     string
 }
@@ -31,12 +30,12 @@ type S3Metadata struct {
 	AccessKeyID     string `json:"access_key"`
 	SecretAccessKey string `json:"secret_key"`
 	UseSSL          string `json:"use_ssl"`
-}
+} // TODO: Change UseSSL to bool finally?
 
 // ClientUploadReply is the JSON sent to POST requests with metadata for where to upload given file
 type ClientUploadReply struct {
 	S3Metadata     S3Metadata
-	FileID         int    `json:"file_id"`
+	FileName       string `json:"file_name"`
 	LocationID     int    `json:"location_id"`
 	UploadLocation string `json:"upload_location"`
 }
