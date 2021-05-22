@@ -54,3 +54,5 @@ type CopiesTable struct {
 	LocationID int    `json:"location_id"`
 	URL        string `json:"url"`
 }
+
+var randomvar int
