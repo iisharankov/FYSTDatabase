@@ -15,7 +15,7 @@ type LocationsTable struct {
 type InstrumentsTable struct {
 	InstrumentID   int    `json:"instrument_id"`
 	InstrumentName string `json:"instrument_name"`
-	FullName       string `json:"full_name"`
+	FullName       string `json:"full_name"` //
 	Description    string `json:"description"`
 	NumberOfPixels int    `json:"number_of_pixels"`
 	FrequencyMin   int    `json:"frequency_min"`
