@@ -39,3 +39,5 @@ type ClientUploadReply struct {
 	LocationID     int    `json:"location_id"`
 	UploadLocation string `json:"upload_location"`
 }
+
+// Random update
