@@ -22,7 +22,7 @@ type FilesThatNeedToBeBackedUp struct {
 	DateCreated    string
 	ByteHash       string
 	BucketName     string
-	LocationName   string
+	LocationName   string //
 }
 
 // S3Metadata holds the connection information for a given minio instance
