@@ -22,6 +22,7 @@ type FilesThatNeedToBeBackedUp struct {
 	DateCreated    string
 	ByteHash       string
 	BucketName     string
+	LocationName   string
 }
 
 // S3Metadata holds the connection information for a given minio instance
@@ -39,5 +40,3 @@ type ClientUploadReply struct {
 	LocationID     int    `json:"location_id"`
 	UploadLocation string `json:"upload_location"`
 }
-
-// Random update
