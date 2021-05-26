@@ -20,9 +20,9 @@ type FilesThatNeedToBeBackedUp struct {
 	Size           int
 	InstrumentName string
 	DateCreated    string
-	ByteHash       string
+	MD5sum         string
 	BucketName     string
-	LocationName   string //
+	LocationName   string
 }
 
 // S3Metadata holds the connection information for a given minio instance
@@ -39,4 +39,10 @@ type ClientUploadReply struct {
 	FileName       string `json:"file_name"`
 	LocationID     int    `json:"location_id"`
 	UploadLocation string `json:"upload_location"`
+}
+
+// Response given from FYST Server to client connections through HTTP
+type ServerHTTPResponse struct {
+	S string `json:"status"`
+	M string `json:"message,omitempty"`
 }

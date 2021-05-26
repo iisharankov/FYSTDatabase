@@ -29,7 +29,7 @@ type FilesTable struct {
 	DateCreated  string `json:"date_created"` // dataetime?
 	InstrumentID int    `json:"instrument_id"`
 	Size         int    `json:"size"`
-	HashOfBytes  string `json:"hash_of_bytes"`
+	MD5sum       string `json:"md5_sum"`
 }
 
 // RulesTable is an SQL table
