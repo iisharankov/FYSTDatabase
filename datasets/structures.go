@@ -14,15 +14,14 @@ type File struct {
 
 // FilesThatNeedToBeBackedUp lists all the data required to move file from FYST to external location
 type FilesThatNeedToBeBackedUp struct {
-	FileID         int
-	RuleID         int
-	InstrumentID   int
-	Size           int
-	InstrumentName string
-	DateCreated    string
-	MD5sum         string
-	BucketName     string
-	LocationName   string
+	FileID         int    `json:"file_d"`
+	FileName       string `json:"file_name"`
+	FileSize       int    `json:"file_size"`
+	DateCreated    string `json:"date"`
+	MD5sum         string `json:"md5"`
+	RuleID         int    `json:"rule_id"`
+	BucketName     string `json:"bucket_name"`
+	UploadLocation string `json:"upload_location"`
 }
 
 // S3Metadata holds the connection information for a given minio instance
