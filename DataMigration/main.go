@@ -1,7 +1,7 @@
 package main
 
 import (
-	"context"
+	"log"
 	"os"
 	"sync"
 
@@ -22,11 +22,10 @@ const (
 // so methods in DBOverhead can share the connection
 var dbCon DatabaseConnection
 
-/* ObjectMetadata stores all the information for a given minio instance,
+/* ObjectStorageConnection stores all the information for a given minio instance,
 currently it also stores the buckets created during the instance, but this
 may be possible to offload to the database. */
-type ObjectMetadata struct {
-	ctx         context.Context
+type ObjectStorageConnection struct { // TODO Rename
 	minioClient *minio.Client
 	address     string
 	accessID    string
@@ -41,6 +40,7 @@ type TransferData struct {
 }
 
 func main() {
+	log.SetFlags(log.LstdFlags | log.Lmicroseconds)
 
 	transferData := TransferData{S3TransferChan: make(chan int)}
 	go transferData.uploadQueue()

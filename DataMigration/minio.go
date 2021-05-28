@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 
@@ -15,7 +16,7 @@ benifit. Also, I found I needed this library for both the server and client, so 
 question arose if it should be it's own package. I don't think that's necessary, and this
 file can probably be removed and integrated where the minio methods are used directly */
 
-func (minioInstance *ObjectMetadata) initMinio() {
+func (minioInstance *ObjectStorageConnection) initMinio() {
 	// Initialize minio client object.
 	// TODO: Return error for this!
 	if client, err := minio.New(minioInstance.address, &minio.Options{
@@ -28,13 +29,13 @@ func (minioInstance *ObjectMetadata) initMinio() {
 	}
 }
 
-func (minioInstance *ObjectMetadata) makeBucket(bucketName, location string) {
+func (minioInstance *ObjectStorageConnection) makeBucket(bucketName, location string) {
 	opts := minio.MakeBucketOptions{Region: location}
-
-	err := minioInstance.minioClient.MakeBucket(minioInstance.ctx, bucketName, opts)
+	ctx := context.Background()
+	err := minioInstance.minioClient.MakeBucket(ctx, bucketName, opts)
 	if err != nil {
 		// Check to see if we already own this bucket (which happens if you run this twice)
-		exists, errBucketExists := minioInstance.minioClient.BucketExists(minioInstance.ctx, bucketName)
+		exists, errBucketExists := minioInstance.minioClient.BucketExists(ctx, bucketName)
 		if errBucketExists == nil && exists {
 			log.Printf("Bucket named %s already exists!\n", bucketName)
 		} else {
@@ -46,9 +47,11 @@ func (minioInstance *ObjectMetadata) makeBucket(bucketName, location string) {
 	}
 }
 
-func (minioInstance *ObjectMetadata) requestObject(bucketName, objectName string) {
+func (minioInstance *ObjectStorageConnection) requestObject(bucketName, objectName string) {
+	ctx := context.Background()
+
 	// Upload the zip file with FPutObject
-	err := minioInstance.minioClient.FGetObject(minioInstance.ctx,
+	err := minioInstance.minioClient.FGetObject(ctx,
 		bucketName, objectName, "/tmp/myobject", minio.GetObjectOptions{})
 	if err != nil {
 		fmt.Println(err)

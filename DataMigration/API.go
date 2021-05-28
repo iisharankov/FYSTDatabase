@@ -18,22 +18,21 @@ func concatErrors(err error, newError string) error {
 func jsonResponse(w http.ResponseWriter, err error, statusCode int) {
 	var response datasets.ServerHTTPResponse
 
-	// v // Encode message M and Status S depending on statusCode
+	// Encode message M and Status S depending on statusCode
 	if 200 <= statusCode && statusCode < 300 { //
 		response.S = "ok"
 	} else {
 		response.S = "error"
 		response.M = err.Error()
 	}
-	// ^ //
 
-	// v // Write header then populate body
+	// Write header then populate body
 	w.WriteHeader(statusCode)
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
 		log.Println("Error while encoding jsonResponse body: ", err)
 	}
-	// ^ //
+
 }
 
 func startAPIServer() {

@@ -1,0 +1,1326 @@
+
+----------------------
+Clients ^^^
+----------------------
+Sever vvv
+----------------------
+021/05/28 00:39:05 Connected to database 'mydb' at 0.0.0.0 with following credentials 
+Username: iisharankov, Password: iisharankov
+2021/05/28 00:39:06 ??? []
+2021/05/28 00:39:07 ??? []
+2021/05/28 00:39:08 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:08 new file:  {428_2_file1.txt 1 c33c7107ab105e7b43d712a9d21307ba 2021-05-28 00:39:08.146242592 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_2_file1.txt}
+2021/05/28 00:39:08 Number of fields 6
+2021/05/28 00:39:08 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:08 new file:  {428_3_file1.txt 1 2af672ea92326ddf6e5221c3c47957cf 2021-05-28 00:39:08.148277293 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_3_file1.txt}
+2021/05/28 00:39:08 Number of fields 6
+2021/05/28 00:39:08 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:08 new file:  {428_10_file1.txt 1 6e4a8c5b93bc2ca3d0c2aaf0a787f130 2021-05-28 00:39:08.150478472 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_10_file1.txt}
+2021/05/28 00:39:08 Number of fields 6
+2021/05/28 00:39:08 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:08 new file:  {428_8_file1.txt 1 de876a637882bbb2d5912c490cc944ed 2021-05-28 00:39:08.150807665 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_8_file1.txt}
+2021/05/28 00:39:08 Number of fields 6
+2021/05/28 00:39:08 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:08 new file:  {428_9_file1.txt 1 bb880f42d7bb511a68a7880ba3f76d44 2021-05-28 00:39:08.150449708 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_9_file1.txt}
+2021/05/28 00:39:08 Number of fields 6
+2021/05/28 00:39:08 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:08 new file:  {428_5_file1.txt 1 b77df555dcbbe2c1f9c52da7c3fcd98d 2021-05-28 00:39:08.151143406 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_5_file1.txt}
+2021/05/28 00:39:08 Number of fields 6
+2021/05/28 00:39:08 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:08 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:08 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:08 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:08 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:08 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:08 AddRecordToDBEndpoint - /records/428_5_file1.txt/fyst
+2021/05/28 00:39:08 AddRecordToDBEndpoint - /records/428_3_file1.txt/fyst
+2021/05/28 00:39:08 AddRecordToDBEndpoint - /records/428_9_file1.txt/fyst
+2021/05/28 00:39:08 AddRecordToDBEndpoint - /records/428_8_file1.txt/fyst
+2021/05/28 00:39:08 AddRecordToDBEndpoint - /records/428_10_file1.txt/fyst
+2021/05/28 00:39:08 MD5Sum verification successful for 428_3_file1.txt
+2021/05/28 00:39:08 /records/428_3_file1.txt/fyst 1
+2021/05/28 00:39:08 MD5Sum verification successful for 428_5_file1.txt
+2021/05/28 00:39:08 /records/428_5_file1.txt/fyst 1
+2021/05/28 00:39:08 MD5Sum verification successful for 428_9_file1.txt
+2021/05/28 00:39:08 /records/428_9_file1.txt/fyst 1
+2021/05/28 00:39:08 /records/428_5_file1.txt/fyst 2
+2021/05/28 00:39:08 /records/428_3_file1.txt/fyst 2
+2021/05/28 00:39:08 /records/428_5_file1.txt/fyst 3
+2021/05/28 00:39:08 /records/428_3_file1.txt/fyst 3
+2021/05/28 00:39:08 /records/428_5_file1.txt/fyst 4
+2021/05/28 00:39:08 /records/428_3_file1.txt/fyst 4
+2021/05/28 00:39:08 /records/428_9_file1.txt/fyst 2
+2021/05/28 00:39:08 /records/428_9_file1.txt/fyst 3
+2021/05/28 00:39:08 /records/428_9_file1.txt/fyst 4
+2021/05/28 00:39:08 AddRecordToDBEndpoint - /records/428_2_file1.txt/fyst
+2021/05/28 00:39:08 /records/428_5_file1.txt/fyst 5
+2021/05/28 00:39:08 /records/428_3_file1.txt/fyst 5
+2021/05/28 00:39:08 AddRowToCopiesTableEndpoint - /files/428_3_file1.txt/copies
+2021/05/28 00:39:08 AddRowToCopiesTableEndpoint - /files/428_5_file1.txt/copies
+2021/05/28 00:39:08 /records/428_9_file1.txt/fyst 5
+2021/05/28 00:39:08 AddRowToCopiesTableEndpoint - /files/428_9_file1.txt/copies
+2021/05/28 00:39:08 MD5Sum verification successful for 428_8_file1.txt
+2021/05/28 00:39:08 /records/428_8_file1.txt/fyst 1
+2021/05/28 00:39:08 MD5Sum verification successful for 428_2_file1.txt
+2021/05/28 00:39:08 /records/428_2_file1.txt/fyst 1
+2021/05/28 00:39:08 MD5Sum verification successful for 428_10_file1.txt
+2021/05/28 00:39:08 /records/428_10_file1.txt/fyst 1
+2021/05/28 00:39:08 /records/428_8_file1.txt/fyst 2
+2021/05/28 00:39:08 /records/428_8_file1.txt/fyst 3
+2021/05/28 00:39:08 /records/428_2_file1.txt/fyst 2
+2021/05/28 00:39:08 /records/428_2_file1.txt/fyst 3
+2021/05/28 00:39:08 /records/428_8_file1.txt/fyst 4
+2021/05/28 00:39:08 /records/428_2_file1.txt/fyst 4
+2021/05/28 00:39:08 /records/428_10_file1.txt/fyst 2
+2021/05/28 00:39:08 /records/428_10_file1.txt/fyst 3
+2021/05/28 00:39:08 /records/428_10_file1.txt/fyst 4
+2021/05/28 00:39:08 /records/428_2_file1.txt/fyst 5
+2021/05/28 00:39:08 /records/428_8_file1.txt/fyst 5
+2021/05/28 00:39:08 AddRowToCopiesTableEndpoint - /files/428_2_file1.txt/copies
+2021/05/28 00:39:08 AddRowToCopiesTableEndpoint - /files/428_8_file1.txt/copies
+2021/05/28 00:39:08 /records/428_10_file1.txt/fyst 5
+2021/05/28 00:39:08 AddRowToCopiesTableEndpoint - /files/428_10_file1.txt/copies
+2021/05/28 00:39:08 ??? [{1 428_2_file1.txt 1048576 2021-05-28 00:39:08 c33c7107ab105e7b43d712a9d21307ba 5 toronto CITA Canada} {1 428_2_file1.txt 1048576 2021-05-28 00:39:08 c33c7107ab105e7b43d712a9d21307ba 3 germany Max Plack Bonn} {2 428_3_file1.txt 1048576 2021-05-28 00:39:08 2af672ea92326ddf6e5221c3c47957cf 5 toronto CITA Canada} {2 428_3_file1.txt 1048576 2021-05-28 00:39:08 2af672ea92326ddf6e5221c3c47957cf 3 germany Max Plack Bonn} {3 428_8_file1.txt 1048576 2021-05-28 00:39:08 de876a637882bbb2d5912c490cc944ed 5 toronto CITA Canada} {3 428_8_file1.txt 1048576 2021-05-28 00:39:08 de876a637882bbb2d5912c490cc944ed 3 germany Max Plack Bonn} {4 428_10_file1.txt 1048576 2021-05-28 00:39:08 6e4a8c5b93bc2ca3d0c2aaf0a787f130 5 toronto CITA Canada} {4 428_10_file1.txt 1048576 2021-05-28 00:39:08 6e4a8c5b93bc2ca3d0c2aaf0a787f130 3 germany Max Plack Bonn} {5 428_9_file1.txt 1048576 2021-05-28 00:39:08 bb880f42d7bb511a68a7880ba3f76d44 5 toronto CITA Canada} {5 428_9_file1.txt 1048576 2021-05-28 00:39:08 bb880f42d7bb511a68a7880ba3f76d44 3 germany Max Plack Bonn} {6 428_5_file1.txt 1048576 2021-05-28 00:39:08 b77df555dcbbe2c1f9c52da7c3fcd98d 5 toronto CITA Canada} {6 428_5_file1.txt 1048576 2021-05-28 00:39:08 b77df555dcbbe2c1f9c52da7c3fcd98d 3 germany Max Plack Bonn}]
+2021/05/28 00:39:08 Bucket 'toronto' doesn't exist, creating. 
+2021/05/28 00:39:08 Successfully created bucket called toronto
+2021/05/28 00:39:08 Added file=1 with rule=5 into Records table
+2021/05/28 00:39:08 Bucket 'germany' doesn't exist, creating. 
+2021/05/28 00:39:08 Successfully created bucket called germany
+2021/05/28 00:39:08 Added file=1 with rule=3 into Records table
+2021/05/28 00:39:08 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:08 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:08 new file:  {428_6_file1.txt 1 b58144b7f4a05ec201dd1e2d7d0f9227 2021-05-28 00:39:08.686722512 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_6_file1.txt}
+2021/05/28 00:39:08 Number of fields 6
+2021/05/28 00:39:08 new file:  {428_4_file1.txt 1 386b6e37f224488e64a041ec168f2c73 2021-05-28 00:39:08.588776491 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_4_file1.txt}
+2021/05/28 00:39:08 Number of fields 6
+2021/05/28 00:39:08 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:08 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:08 AddRecordToDBEndpoint - /records/428_6_file1.txt/fyst
+2021/05/28 00:39:08 AddRecordToDBEndpoint - /records/428_4_file1.txt/fyst
+2021/05/28 00:39:08 MD5Sum verification successful for 428_4_file1.txt
+2021/05/28 00:39:08 /records/428_4_file1.txt/fyst 1
+2021/05/28 00:39:08 MD5Sum verification successful for 428_6_file1.txt
+2021/05/28 00:39:08 /records/428_4_file1.txt/fyst 2
+2021/05/28 00:39:08 /records/428_6_file1.txt/fyst 1
+2021/05/28 00:39:08 /records/428_4_file1.txt/fyst 3
+2021/05/28 00:39:08 /records/428_4_file1.txt/fyst 4
+2021/05/28 00:39:08 /records/428_6_file1.txt/fyst 2
+2021/05/28 00:39:08 /records/428_6_file1.txt/fyst 3
+2021/05/28 00:39:08 /records/428_6_file1.txt/fyst 4
+2021/05/28 00:39:08 Added file=2 with rule=5 into Records table
+2021/05/28 00:39:08 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:08 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:08 new file:  {428_1_file1.txt 1 9d91fc0aa540dc1495e21794c9baf2f7 2021-05-28 00:39:08.795410978 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_1_file1.txt}
+2021/05/28 00:39:08 Number of fields 6
+2021/05/28 00:39:08 new file:  {428_7_file1.txt 1 bc1798bbb92a9dee221c5cc742ed7709 2021-05-28 00:39:08.795709256 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_7_file1.txt}
+2021/05/28 00:39:08 Number of fields 6
+2021/05/28 00:39:08 /records/428_4_file1.txt/fyst 5
+2021/05/28 00:39:08 /records/428_6_file1.txt/fyst 5
+2021/05/28 00:39:08 AddRowToCopiesTableEndpoint - /files/428_4_file1.txt/copies
+2021/05/28 00:39:08 AddRowToCopiesTableEndpoint - /files/428_6_file1.txt/copies
+2021/05/28 00:39:08 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 new file:  {428_10_file2.txt 1 b6c1922a6bfbd86ea2d1c3f8f8ac583f 2021-05-28 00:39:08.841773592 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_10_file2.txt}
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 new file:  {428_3_file2.txt 1 fb9572540da3a6fb3fa0e0edb0eef7a0 2021-05-28 00:39:08.874911616 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_3_file2.txt}
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 new file:  {428_2_file2.txt 1 3887e73f9e0f3a5a6ccc358c0a487035 2021-05-28 00:39:08.944135544 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_2_file2.txt}
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 new file:  {428_8_file2.txt 1 f83c4ec71bcfaac716d805ec5fbd8f3a 2021-05-28 00:39:08.937382391 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_8_file2.txt}
+2021/05/28 00:39:09 new file:  {428_9_file2.txt 1 969727776a3b790e6a1ed857b9226712 2021-05-28 00:39:09.070146304 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_9_file2.txt}
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 new file:  {428_5_file2.txt 1 2eb884f1d7caf767a915760d887a7705 2021-05-28 00:39:09.166226113 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_5_file2.txt}
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 new file:  {428_6_file2.txt 1 13fe42cfe6a85ca5992b19b2fbef27fa 2021-05-28 00:39:09.259807526 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_6_file2.txt}
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 AddRecordToDBEndpoint - /records/428_6_file2.txt/fyst
+2021/05/28 00:39:09 AddRecordToDBEndpoint - /records/428_5_file2.txt/fyst
+2021/05/28 00:39:09 MD5Sum verification successful for 428_6_file2.txt
+2021/05/28 00:39:09 /records/428_6_file2.txt/fyst 1
+2021/05/28 00:39:09 MD5Sum verification successful for 428_5_file2.txt
+2021/05/28 00:39:09 /records/428_5_file2.txt/fyst 1
+2021/05/28 00:39:09 /records/428_5_file2.txt/fyst 2
+2021/05/28 00:39:09 /records/428_5_file2.txt/fyst 3
+2021/05/28 00:39:09 /records/428_6_file2.txt/fyst 2
+2021/05/28 00:39:09 /records/428_6_file2.txt/fyst 3
+2021/05/28 00:39:09 /records/428_5_file2.txt/fyst 4
+2021/05/28 00:39:09 /records/428_6_file2.txt/fyst 4
+2021/05/28 00:39:09 /records/428_5_file2.txt/fyst 5
+2021/05/28 00:39:09 /records/428_6_file2.txt/fyst 5
+2021/05/28 00:39:09 AddRowToCopiesTableEndpoint - /files/428_6_file2.txt/copies
+2021/05/28 00:39:09 AddRowToCopiesTableEndpoint - /files/428_5_file2.txt/copies
+2021/05/28 00:39:09 Added file=2 with rule=3 into Records table
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 new file:  {428_9_file3.txt 1 7fab29358791c15557185e0549b1ea32 2021-05-28 00:39:09.730048664 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_9_file3.txt}
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 new file:  {428_10_file3.txt 1 04ad7b3c28b85f2fd276dd59e7703d0b 2021-05-28 00:39:09.727696488 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_10_file3.txt}
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 new file:  {428_8_file3.txt 1 bcfd2c5af50a82f40b3afc03c56088c5 2021-05-28 00:39:09.769155254 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_8_file3.txt}
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 AddRecordToDBEndpoint - /records/428_9_file3.txt/fyst
+2021/05/28 00:39:09 AddRecordToDBEndpoint - /records/428_10_file3.txt/fyst
+2021/05/28 00:39:09 Added file=3 with rule=5 into Records table
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 MD5Sum verification successful for 428_10_file3.txt
+2021/05/28 00:39:09 /records/428_10_file3.txt/fyst 1
+2021/05/28 00:39:09 /records/428_10_file3.txt/fyst 2
+2021/05/28 00:39:09 /records/428_10_file3.txt/fyst 3
+2021/05/28 00:39:09 MD5Sum verification successful for 428_9_file3.txt
+2021/05/28 00:39:09 /records/428_9_file3.txt/fyst 1
+2021/05/28 00:39:09 /records/428_10_file3.txt/fyst 4
+2021/05/28 00:39:09 /records/428_9_file3.txt/fyst 2
+2021/05/28 00:39:09 /records/428_9_file3.txt/fyst 3
+2021/05/28 00:39:09 /records/428_9_file3.txt/fyst 4
+2021/05/28 00:39:09 /records/428_10_file3.txt/fyst 5
+2021/05/28 00:39:09 AddRowToCopiesTableEndpoint - /files/428_10_file3.txt/copies
+2021/05/28 00:39:09 AddRecordToDBEndpoint - /records/428_8_file3.txt/fyst
+2021/05/28 00:39:09 /records/428_9_file3.txt/fyst 5
+2021/05/28 00:39:09 AddRowToCopiesTableEndpoint - /files/428_9_file3.txt/copies
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 new file:  {428_7_file2.txt 1 11b2cdb128fded8d42edf0517d252d06 2021-05-28 00:39:09.949024932 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_7_file2.txt}
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:09 new file:  {428_4_file2.txt 1 4e79e56269dc01ffd4548c5bb054bc2e 2021-05-28 00:39:09.951820085 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_4_file2.txt}
+2021/05/28 00:39:09 Number of fields 6
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:09 MD5Sum verification successful for 428_8_file3.txt
+2021/05/28 00:39:09 /records/428_8_file3.txt/fyst 1
+2021/05/28 00:39:09 /records/428_8_file3.txt/fyst 2
+2021/05/28 00:39:09 /records/428_8_file3.txt/fyst 3
+2021/05/28 00:39:10 /records/428_8_file3.txt/fyst 4
+2021/05/28 00:39:10 /records/428_8_file3.txt/fyst 5
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_8_file3.txt/copies
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_7_file2.txt/fyst
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_4_file2.txt/fyst
+2021/05/28 00:39:10 MD5Sum verification successful for 428_7_file2.txt
+2021/05/28 00:39:10 /records/428_7_file2.txt/fyst 1
+2021/05/28 00:39:10 /records/428_7_file2.txt/fyst 2
+2021/05/28 00:39:10 /records/428_7_file2.txt/fyst 3
+2021/05/28 00:39:10 /records/428_7_file2.txt/fyst 4
+2021/05/28 00:39:10 MD5Sum verification successful for 428_4_file2.txt
+2021/05/28 00:39:10 /records/428_4_file2.txt/fyst 1
+2021/05/28 00:39:10 /records/428_4_file2.txt/fyst 2
+2021/05/28 00:39:10 /records/428_4_file2.txt/fyst 3
+2021/05/28 00:39:10 /records/428_4_file2.txt/fyst 4
+2021/05/28 00:39:10 Added file=3 with rule=3 into Records table
+2021/05/28 00:39:10 /records/428_4_file2.txt/fyst 5
+2021/05/28 00:39:10 /records/428_7_file2.txt/fyst 5
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_4_file2.txt/copies
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_7_file2.txt/copies
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_1_file2.txt 1 006fec0cee331d67b468c8a02eb75299 2021-05-28 00:39:10.04931641 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_1_file2.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_10_file4.txt 1 a7e6510932d5eae6fa852e29db2478bf 2021-05-28 00:39:10.165598217 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_10_file4.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_8_file4.txt 1 31b2ea014c71396ba4fd8542bec245c6 2021-05-28 00:39:10.179768524 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_8_file4.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_1_file2.txt/fyst
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_3_file3.txt 1 2b8bc16d4f87aaf9adec4b6527c485d3 2021-05-28 00:39:10.191374159 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_3_file3.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 MD5Sum verification successful for 428_1_file2.txt
+2021/05/28 00:39:10 /records/428_1_file2.txt/fyst 1
+2021/05/28 00:39:10 /records/428_1_file2.txt/fyst 2
+2021/05/28 00:39:10 /records/428_1_file2.txt/fyst 3
+2021/05/28 00:39:10 /records/428_1_file2.txt/fyst 4
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_5_file3.txt 1 1a3ae1fce9e50b21b59f2dba0ae40d96 2021-05-28 00:39:10.205216522 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_5_file3.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_6_file3.txt 1 a5c9fbda81514388069250195e05414a 2021-05-28 00:39:10.205587846 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_6_file3.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 /records/428_1_file2.txt/fyst 5
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_1_file2.txt/copies
+2021/05/28 00:39:10 Added file=4 with rule=5 into Records table
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_10_file4.txt/fyst
+2021/05/28 00:39:10 MD5Sum verification successful for 428_10_file4.txt
+2021/05/28 00:39:10 /records/428_10_file4.txt/fyst 1
+2021/05/28 00:39:10 /records/428_10_file4.txt/fyst 2
+2021/05/28 00:39:10 /records/428_10_file4.txt/fyst 3
+2021/05/28 00:39:10 /records/428_10_file4.txt/fyst 4
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_8_file4.txt/fyst
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_6_file3.txt/fyst
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_3_file3.txt/fyst
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_5_file3.txt/fyst
+2021/05/28 00:39:10 /records/428_10_file4.txt/fyst 5
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_10_file4.txt/copies
+2021/05/28 00:39:10 MD5Sum verification successful for 428_8_file4.txt
+2021/05/28 00:39:10 /records/428_8_file4.txt/fyst 1
+2021/05/28 00:39:10 /records/428_8_file4.txt/fyst 2
+2021/05/28 00:39:10 /records/428_8_file4.txt/fyst 3
+2021/05/28 00:39:10 /records/428_8_file4.txt/fyst 4
+2021/05/28 00:39:10 MD5Sum verification successful for 428_6_file3.txt
+2021/05/28 00:39:10 /records/428_6_file3.txt/fyst 1
+2021/05/28 00:39:10 MD5Sum verification successful for 428_3_file3.txt
+2021/05/28 00:39:10 /records/428_3_file3.txt/fyst 1
+2021/05/28 00:39:10 MD5Sum verification successful for 428_5_file3.txt
+2021/05/28 00:39:10 /records/428_5_file3.txt/fyst 1
+2021/05/28 00:39:10 /records/428_6_file3.txt/fyst 2
+2021/05/28 00:39:10 /records/428_6_file3.txt/fyst 3
+2021/05/28 00:39:10 /records/428_6_file3.txt/fyst 4
+2021/05/28 00:39:10 /records/428_3_file3.txt/fyst 2
+2021/05/28 00:39:10 /records/428_3_file3.txt/fyst 3
+2021/05/28 00:39:10 /records/428_5_file3.txt/fyst 2
+2021/05/28 00:39:10 /records/428_5_file3.txt/fyst 3
+2021/05/28 00:39:10 /records/428_3_file3.txt/fyst 4
+2021/05/28 00:39:10 /records/428_5_file3.txt/fyst 4
+2021/05/28 00:39:10 /records/428_6_file3.txt/fyst 5
+2021/05/28 00:39:10 /records/428_5_file3.txt/fyst 5
+2021/05/28 00:39:10 /records/428_8_file4.txt/fyst 5
+2021/05/28 00:39:10 /records/428_3_file3.txt/fyst 5
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_3_file3.txt/copies
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_5_file3.txt/copies
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_8_file4.txt/copies
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_6_file3.txt/copies
+2021/05/28 00:39:10 Added file=4 with rule=3 into Records table
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_2_file3.txt 1 7646d1aedbd83df1a418296a1480a688 2021-05-28 00:39:10.374892203 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_2_file3.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_2_file3.txt/fyst
+2021/05/28 00:39:10 MD5Sum verification successful for 428_2_file3.txt
+2021/05/28 00:39:10 /records/428_2_file3.txt/fyst 1
+2021/05/28 00:39:10 /records/428_2_file3.txt/fyst 2
+2021/05/28 00:39:10 /records/428_2_file3.txt/fyst 3
+2021/05/28 00:39:10 /records/428_2_file3.txt/fyst 4
+2021/05/28 00:39:10 /records/428_2_file3.txt/fyst 5
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_2_file3.txt/copies
+2021/05/28 00:39:10 Added file=5 with rule=5 into Records table
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_9_file4.txt 1 045fc620f3ac1a74c51e28d4ee2daf78 2021-05-28 00:39:10.469702391 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_9_file4.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_9_file4.txt/fyst
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_8_file5.txt 1 ac06f68450ce3540dcab2b641df6077a 2021-05-28 00:39:10.553536852 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_8_file5.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_6_file4.txt 1 ef5fc67c92350ef15cf39354052cf96d 2021-05-28 00:39:10.545374879 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_6_file4.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 MD5Sum verification successful for 428_9_file4.txt
+2021/05/28 00:39:10 /records/428_9_file4.txt/fyst 1
+2021/05/28 00:39:10 /records/428_9_file4.txt/fyst 2
+2021/05/28 00:39:10 /records/428_9_file4.txt/fyst 3
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 /records/428_9_file4.txt/fyst 4
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 /records/428_9_file4.txt/fyst 5
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_9_file4.txt/copies
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_1_file3.txt 1 ef13df7f7ccf33f23ca9e93f095ed673 2021-05-28 00:39:10.613267342 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_1_file3.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_6_file4.txt/fyst
+2021/05/28 00:39:10 AddRecordToDBEndpoint - /records/428_8_file5.txt/fyst
+2021/05/28 00:39:10 Added file=5 with rule=3 into Records table
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_4_file3.txt 1 a9b0c94a2bd319e9fc6dd244f8df52d0 2021-05-28 00:39:10.648166772 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_4_file3.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:10 new file:  {428_7_file3.txt 1 00b8371d6241ba6958405c3fd84c69a0 2021-05-28 00:39:10.657593573 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_7_file3.txt}
+2021/05/28 00:39:10 Number of fields 6
+2021/05/28 00:39:10 MD5Sum verification successful for 428_8_file5.txt
+2021/05/28 00:39:10 /records/428_8_file5.txt/fyst 1
+2021/05/28 00:39:10 MD5Sum verification successful for 428_6_file4.txt
+2021/05/28 00:39:10 /records/428_6_file4.txt/fyst 1
+2021/05/28 00:39:10 /records/428_6_file4.txt/fyst 2
+2021/05/28 00:39:10 /records/428_6_file4.txt/fyst 3
+2021/05/28 00:39:10 /records/428_8_file5.txt/fyst 2
+2021/05/28 00:39:10 /records/428_8_file5.txt/fyst 3
+2021/05/28 00:39:10 /records/428_8_file5.txt/fyst 4
+2021/05/28 00:39:10 /records/428_6_file4.txt/fyst 4
+2021/05/28 00:39:10 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:10 /records/428_8_file5.txt/fyst 5
+2021/05/28 00:39:10 /records/428_6_file4.txt/fyst 5
+2021/05/28 00:39:10 AddRowToCopiesTableEndpoint - /files/428_6_file4.txt/copies
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_8_file5.txt/copies
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_10_file5.txt 1 344bdab450ee84974d64125e6e6637db 2021-05-28 00:39:10.764906668 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_10_file5.txt}
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 new file:  {428_6_file5.txt 1 a03a5d29f3b2e8965f2efef6dc53ebc6 2021-05-28 00:39:10.848214644 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_6_file5.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 new file:  {428_5_file4.txt 1 d22ddff05a4169e9a9bf1f1510090061 2021-05-28 00:39:11.192259252 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_5_file4.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 new file:  {428_9_file5.txt 1 3af27c07bda02011ace735e1b81a17f7 2021-05-28 00:39:10.781557655 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_9_file5.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_1_file3.txt/fyst
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_3_file4.txt 1 aee01e48759c9207b4aded92b04955f0 2021-05-28 00:39:10.783659442 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_3_file4.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 MD5Sum verification successful for 428_1_file3.txt
+2021/05/28 00:39:11 /records/428_1_file3.txt/fyst 1
+2021/05/28 00:39:11 /records/428_1_file3.txt/fyst 2
+2021/05/28 00:39:11 /records/428_1_file3.txt/fyst 3
+2021/05/28 00:39:11 /records/428_1_file3.txt/fyst 4
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_2_file4.txt 1 2973aafbb1fd72a092fdcb8eb16bdec4 2021-05-28 00:39:11.29417087 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_2_file4.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 /records/428_1_file3.txt/fyst 5
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_5_file4.txt/fyst
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_3_file4.txt/fyst
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_10_file5.txt/fyst
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_9_file5.txt/fyst
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 MD5Sum verification successful for 428_5_file4.txt
+2021/05/28 00:39:11 /records/428_5_file4.txt/fyst 1
+2021/05/28 00:39:11 /records/428_5_file4.txt/fyst 2
+2021/05/28 00:39:11 /records/428_5_file4.txt/fyst 3
+2021/05/28 00:39:11 /records/428_5_file4.txt/fyst 4
+2021/05/28 00:39:11 MD5Sum verification successful for 428_10_file5.txt
+2021/05/28 00:39:11 /records/428_10_file5.txt/fyst 1
+2021/05/28 00:39:11 MD5Sum verification successful for 428_3_file4.txt
+2021/05/28 00:39:11 /records/428_3_file4.txt/fyst 1
+2021/05/28 00:39:11 /records/428_10_file5.txt/fyst 2
+2021/05/28 00:39:11 /records/428_10_file5.txt/fyst 3
+2021/05/28 00:39:11 /records/428_3_file4.txt/fyst 2
+2021/05/28 00:39:11 /records/428_3_file4.txt/fyst 3
+2021/05/28 00:39:11 /records/428_3_file4.txt/fyst 4
+2021/05/28 00:39:11 /records/428_10_file5.txt/fyst 4
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_8_file6.txt 1 b172f08e88ca5de768c4f62a49742d32 2021-05-28 00:39:11.334607389 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_8_file6.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 MD5Sum verification successful for 428_9_file5.txt
+2021/05/28 00:39:11 /records/428_9_file5.txt/fyst 1
+2021/05/28 00:39:11 /records/428_9_file5.txt/fyst 2
+2021/05/28 00:39:11 /records/428_9_file5.txt/fyst 3
+2021/05/28 00:39:11 /records/428_9_file5.txt/fyst 4
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_1_file4.txt 1 0448c4db71ed396e95588be7ef5d298c 2021-05-28 00:39:11.335455536 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_1_file4.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 Added file=6 with rule=5 into Records table
+2021/05/28 00:39:11 /records/428_5_file4.txt/fyst 5
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_5_file4.txt/copies
+2021/05/28 00:39:11 /records/428_10_file5.txt/fyst 5
+2021/05/28 00:39:11 /records/428_9_file5.txt/fyst 5
+2021/05/28 00:39:11 /records/428_3_file4.txt/fyst 5
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_10_file5.txt/copies
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_9_file5.txt/copies
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_3_file4.txt/copies
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_2_file4.txt/fyst
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_6_file5.txt/fyst
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_8_file6.txt/fyst
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_1_file4.txt/fyst
+2021/05/28 00:39:11 MD5Sum verification successful for 428_2_file4.txt
+2021/05/28 00:39:11 /records/428_2_file4.txt/fyst 1
+2021/05/28 00:39:11 MD5Sum verification successful for 428_6_file5.txt
+2021/05/28 00:39:11 /records/428_6_file5.txt/fyst 1
+2021/05/28 00:39:11 /records/428_2_file4.txt/fyst 2
+2021/05/28 00:39:11 /records/428_2_file4.txt/fyst 3
+2021/05/28 00:39:11 /records/428_6_file5.txt/fyst 2
+2021/05/28 00:39:11 /records/428_6_file5.txt/fyst 3
+2021/05/28 00:39:11 /records/428_2_file4.txt/fyst 4
+2021/05/28 00:39:11 /records/428_6_file5.txt/fyst 4
+2021/05/28 00:39:11 MD5Sum verification successful for 428_8_file6.txt
+2021/05/28 00:39:11 /records/428_8_file6.txt/fyst 1
+2021/05/28 00:39:11 /records/428_8_file6.txt/fyst 2
+2021/05/28 00:39:11 /records/428_8_file6.txt/fyst 3
+2021/05/28 00:39:11 /records/428_8_file6.txt/fyst 4
+2021/05/28 00:39:11 MD5Sum verification successful for 428_1_file4.txt
+2021/05/28 00:39:11 /records/428_1_file4.txt/fyst 1
+2021/05/28 00:39:11 /records/428_1_file4.txt/fyst 2
+2021/05/28 00:39:11 /records/428_1_file4.txt/fyst 3
+2021/05/28 00:39:11 /records/428_1_file4.txt/fyst 4
+2021/05/28 00:39:11 /records/428_2_file4.txt/fyst 5
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_2_file4.txt/copies
+2021/05/28 00:39:11 /records/428_8_file6.txt/fyst 5
+2021/05/28 00:39:11 /records/428_6_file5.txt/fyst 5
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_8_file6.txt/copies
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_6_file5.txt/copies
+2021/05/28 00:39:11 /records/428_1_file4.txt/fyst 5
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_1_file4.txt/copies
+2021/05/28 00:39:11 Added file=6 with rule=3 into Records table
+2021/05/28 00:39:11 ??? [{8 428_4_file1.txt 1048576 2021-05-28 00:39:09 386b6e37f224488e64a041ec168f2c73 3 germany Max Plack Bonn} {7 428_6_file1.txt 1048576 2021-05-28 00:39:09 b58144b7f4a05ec201dd1e2d7d0f9227 5 toronto CITA Canada} {7 428_6_file1.txt 1048576 2021-05-28 00:39:09 b58144b7f4a05ec201dd1e2d7d0f9227 3 germany Max Plack Bonn} {16 428_6_file2.txt 1048576 2021-05-28 00:39:09 13fe42cfe6a85ca5992b19b2fbef27fa 5 toronto CITA Canada} {16 428_6_file2.txt 1048576 2021-05-28 00:39:09 13fe42cfe6a85ca5992b19b2fbef27fa 3 germany Max Plack Bonn} {15 428_5_file2.txt 1048576 2021-05-28 00:39:09 2eb884f1d7caf767a915760d887a7705 5 toronto CITA Canada} {15 428_5_file2.txt 1048576 2021-05-28 00:39:09 2eb884f1d7caf767a915760d887a7705 3 germany Max Plack Bonn} {8 428_4_file1.txt 1048576 2021-05-28 00:39:09 386b6e37f224488e64a041ec168f2c73 5 toronto CITA Canada} {24 428_10_file4.txt 1048576 2021-05-28 00:39:10 a7e6510932d5eae6fa852e29db2478bf 3 germany Max Plack Bonn} {25 428_8_file4.txt 1048576 2021-05-28 00:39:10 31b2ea014c71396ba4fd8542bec245c6 3 germany Max Plack Bonn} {26 428_3_file3.txt 1048576 2021-05-28 00:39:10 2b8bc16d4f87aaf9adec4b6527c485d3 5 toronto CITA Canada} {26 428_3_file3.txt 1048576 2021-05-28 00:39:10 2b8bc16d4f87aaf9adec4b6527c485d3 3 germany Max Plack Bonn} {28 428_6_file3.txt 1048576 2021-05-28 00:39:10 a5c9fbda81514388069250195e05414a 5 toronto CITA Canada} {28 428_6_file3.txt 1048576 2021-05-28 00:39:10 a5c9fbda81514388069250195e05414a 3 germany Max Plack Bonn} {25 428_8_file4.txt 1048576 2021-05-28 00:39:10 31b2ea014c71396ba4fd8542bec245c6 5 toronto CITA Canada} {27 428_5_file3.txt 1048576 2021-05-28 00:39:10 1a3ae1fce9e50b21b59f2dba0ae40d96 5 toronto CITA Canada} {27 428_5_file3.txt 1048576 2021-05-28 00:39:10 1a3ae1fce9e50b21b59f2dba0ae40d96 3 germany Max Plack Bonn} {29 428_2_file3.txt 1048576 2021-05-28 00:39:10 7646d1aedbd83df1a418296a1480a688 5 toronto CITA Canada} {29 428_2_file3.txt 1048576 2021-05-28 00:39:10 7646d1aedbd83df1a418296a1480a688 3 germany Max Plack Bonn} {30 428_9_file4.txt 1048576 2021-05-28 00:39:10 045fc620f3ac1a74c51e28d4ee2daf78 5 toronto CITA Canada} {30 428_9_file4.txt 1048576 2021-05-28 00:39:10 045fc620f3ac1a74c51e28d4ee2daf78 3 germany Max Plack Bonn} {23 428_1_file2.txt 1048576 2021-05-28 00:39:10 006fec0cee331d67b468c8a02eb75299 3 germany Max Plack Bonn} {24 428_10_file4.txt 1048576 2021-05-28 00:39:10 a7e6510932d5eae6fa852e29db2478bf 5 toronto CITA Canada} {19 428_10_file3.txt 1048576 2021-05-28 00:39:10 04ad7b3c28b85f2fd276dd59e7703d0b 5 toronto CITA Canada} {19 428_10_file3.txt 1048576 2021-05-28 00:39:10 04ad7b3c28b85f2fd276dd59e7703d0b 3 germany Max Plack Bonn} {18 428_9_file3.txt 1048576 2021-05-28 00:39:10 7fab29358791c15557185e0549b1ea32 5 toronto CITA Canada} {18 428_9_file3.txt 1048576 2021-05-28 00:39:10 7fab29358791c15557185e0549b1ea32 3 germany Max Plack Bonn} {20 428_8_file3.txt 1048576 2021-05-28 00:39:10 bcfd2c5af50a82f40b3afc03c56088c5 5 toronto CITA Canada} {20 428_8_file3.txt 1048576 2021-05-28 00:39:10 bcfd2c5af50a82f40b3afc03c56088c5 3 germany Max Plack Bonn} {22 428_4_file2.txt 1048576 2021-05-28 00:39:10 4e79e56269dc01ffd4548c5bb054bc2e 5 toronto CITA Canada} {22 428_4_file2.txt 1048576 2021-05-28 00:39:10 4e79e56269dc01ffd4548c5bb054bc2e 3 germany Max Plack Bonn} {21 428_7_file2.txt 1048576 2021-05-28 00:39:10 11b2cdb128fded8d42edf0517d252d06 5 toronto CITA Canada} {21 428_7_file2.txt 1048576 2021-05-28 00:39:10 11b2cdb128fded8d42edf0517d252d06 3 germany Max Plack Bonn} {23 428_1_file2.txt 1048576 2021-05-28 00:39:10 006fec0cee331d67b468c8a02eb75299 5 toronto CITA Canada} {43 428_1_file4.txt 1048576 2021-05-28 00:39:11 0448c4db71ed396e95588be7ef5d298c 3 germany Max Plack Bonn} {43 428_1_file4.txt 1048576 2021-05-28 00:39:11 0448c4db71ed396e95588be7ef5d298c 5 toronto CITA Canada} {40 428_6_file5.txt 1048576 2021-05-28 00:39:11 a03a5d29f3b2e8965f2efef6dc53ebc6 3 germany Max Plack Bonn} {40 428_6_file5.txt 1048576 2021-05-28 00:39:11 a03a5d29f3b2e8965f2efef6dc53ebc6 5 toronto CITA Canada} {42 428_8_file6.txt 1048576 2021-05-28 00:39:11 b172f08e88ca5de768c4f62a49742d32 3 germany Max Plack Bonn} {42 428_8_file6.txt 1048576 2021-05-28 00:39:11 b172f08e88ca5de768c4f62a49742d32 5 toronto CITA Canada} {41 428_2_file4.txt 1048576 2021-05-28 00:39:11 2973aafbb1fd72a092fdcb8eb16bdec4 3 germany Max Plack Bonn} {41 428_2_file4.txt 1048576 2021-05-28 00:39:11 2973aafbb1fd72a092fdcb8eb16bdec4 5 toronto CITA Canada} {37 428_10_file5.txt 1048576 2021-05-28 00:39:11 344bdab450ee84974d64125e6e6637db 3 germany Max Plack Bonn} {37 428_10_file5.txt 1048576 2021-05-28 00:39:11 344bdab450ee84974d64125e6e6637db 5 toronto CITA Canada} {38 428_3_file4.txt 1048576 2021-05-28 00:39:11 aee01e48759c9207b4aded92b04955f0 3 germany Max Plack Bonn} {38 428_3_file4.txt 1048576 2021-05-28 00:39:11 aee01e48759c9207b4aded92b04955f0 5 toronto CITA Canada} {36 428_9_file5.txt 1048576 2021-05-28 00:39:11 3af27c07bda02011ace735e1b81a17f7 3 germany Max Plack Bonn} {36 428_9_file5.txt 1048576 2021-05-28 00:39:11 3af27c07bda02011ace735e1b81a17f7 5 toronto CITA Canada} {39 428_5_file4.txt 1048576 2021-05-28 00:39:11 d22ddff05a4169e9a9bf1f1510090061 3 germany Max Plack Bonn} {39 428_5_file4.txt 1048576 2021-05-28 00:39:11 d22ddff05a4169e9a9bf1f1510090061 5 toronto CITA Canada} {31 428_8_file5.txt 1048576 2021-05-28 00:39:11 ac06f68450ce3540dcab2b641df6077a 3 germany Max Plack Bonn} {31 428_8_file5.txt 1048576 2021-05-28 00:39:11 ac06f68450ce3540dcab2b641df6077a 5 toronto CITA Canada} {32 428_6_file4.txt 1048576 2021-05-28 00:39:11 ef5fc67c92350ef15cf39354052cf96d 3 germany Max Plack Bonn} {32 428_6_file4.txt 1048576 2021-05-28 00:39:11 ef5fc67c92350ef15cf39354052cf96d 5 toronto CITA Canada}]
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_5_file5.txt 1 f48a57182b920c248682696c0a41464d 2021-05-28 00:39:11.607592269 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_5_file5.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_2_file5.txt 1 424f0861216c05dec74dd8d0a8451486 2021-05-28 00:39:11.625728232 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_2_file5.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_6_file6.txt 1 675c4445b086680ae03bfeceab3323b6 2021-05-28 00:39:11.638942954 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_6_file6.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_1_file5.txt 1 a777a9f3345652b8ddf104d7ad7554be 2021-05-28 00:39:11.642823743 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_1_file5.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_5_file5.txt/fyst
+2021/05/28 00:39:11 Added file=8 with rule=3 into Records table
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 MD5Sum verification successful for 428_5_file5.txt
+2021/05/28 00:39:11 /records/428_5_file5.txt/fyst 1
+2021/05/28 00:39:11 /records/428_5_file5.txt/fyst 2
+2021/05/28 00:39:11 /records/428_5_file5.txt/fyst 3
+2021/05/28 00:39:11 /records/428_5_file5.txt/fyst 4
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_2_file5.txt/fyst
+2021/05/28 00:39:11 MD5Sum verification successful for 428_2_file5.txt
+2021/05/28 00:39:11 /records/428_2_file5.txt/fyst 1
+2021/05/28 00:39:11 /records/428_5_file5.txt/fyst 5
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_5_file5.txt/copies
+2021/05/28 00:39:11 /records/428_2_file5.txt/fyst 2
+2021/05/28 00:39:11 /records/428_2_file5.txt/fyst 3
+2021/05/28 00:39:11 /records/428_2_file5.txt/fyst 4
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_6_file6.txt/fyst
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_1_file5.txt/fyst
+2021/05/28 00:39:11 new file:  {428_9_file6.txt 1 a8d0130b7ea9296d484e4bad9089cbcf 2021-05-28 00:39:11.730380009 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_9_file6.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 MD5Sum verification successful for 428_6_file6.txt
+2021/05/28 00:39:11 /records/428_6_file6.txt/fyst 1
+2021/05/28 00:39:11 MD5Sum verification successful for 428_1_file5.txt
+2021/05/28 00:39:11 /records/428_1_file5.txt/fyst 1
+2021/05/28 00:39:11 /records/428_6_file6.txt/fyst 2
+2021/05/28 00:39:11 /records/428_6_file6.txt/fyst 3
+2021/05/28 00:39:11 /records/428_1_file5.txt/fyst 2
+2021/05/28 00:39:11 /records/428_1_file5.txt/fyst 3
+2021/05/28 00:39:11 /records/428_6_file6.txt/fyst 4
+2021/05/28 00:39:11 /records/428_1_file5.txt/fyst 4
+2021/05/28 00:39:11 /records/428_2_file5.txt/fyst 5
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_2_file5.txt/copies
+2021/05/28 00:39:11 /records/428_1_file5.txt/fyst 5
+2021/05/28 00:39:11 /records/428_6_file6.txt/fyst 5
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_6_file6.txt/copies
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_1_file5.txt/copies
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_3_file5.txt 1 386d3b34925611e4425a7429cf949227 2021-05-28 00:39:11.802546088 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_3_file5.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_9_file6.txt/fyst
+2021/05/28 00:39:11 Added file=7 with rule=5 into Records table
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 MD5Sum verification successful for 428_9_file6.txt
+2021/05/28 00:39:11 /records/428_9_file6.txt/fyst 1
+2021/05/28 00:39:11 /records/428_9_file6.txt/fyst 2
+2021/05/28 00:39:11 /records/428_9_file6.txt/fyst 3
+2021/05/28 00:39:11 /records/428_9_file6.txt/fyst 4
+2021/05/28 00:39:11 /records/428_9_file6.txt/fyst 5
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_3_file5.txt/fyst
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_9_file6.txt/copies
+2021/05/28 00:39:11 new file:  {428_8_file7.txt 1 7ab15f9f64eabaffd7ec6ea9890f69d4 2021-05-28 00:39:11.856243009 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_8_file7.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 MD5Sum verification successful for 428_3_file5.txt
+2021/05/28 00:39:11 /records/428_3_file5.txt/fyst 1
+2021/05/28 00:39:11 /records/428_3_file5.txt/fyst 2
+2021/05/28 00:39:11 /records/428_3_file5.txt/fyst 3
+2021/05/28 00:39:11 /records/428_3_file5.txt/fyst 4
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_4_file4.txt 1 24784676bff205a3d349f99ec1368f84 2021-05-28 00:39:11.943289094 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_4_file4.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:11 new file:  {428_10_file6.txt 1 6b67127bb1d4e0e72f84aaeb38daf7d0 2021-05-28 00:39:11.946034653 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_10_file6.txt}
+2021/05/28 00:39:11 Number of fields 6
+2021/05/28 00:39:11 /records/428_3_file5.txt/fyst 5
+2021/05/28 00:39:11 AddRowToCopiesTableEndpoint - /files/428_3_file5.txt/copies
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:11 AddRecordToDBEndpoint - /records/428_8_file7.txt/fyst
+2021/05/28 00:39:11 MD5Sum verification successful for 428_8_file7.txt
+2021/05/28 00:39:11 /records/428_8_file7.txt/fyst 1
+2021/05/28 00:39:11 /records/428_8_file7.txt/fyst 2
+2021/05/28 00:39:11 /records/428_8_file7.txt/fyst 3
+2021/05/28 00:39:11 /records/428_8_file7.txt/fyst 4
+2021/05/28 00:39:12 /records/428_8_file7.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_8_file7.txt/copies
+2021/05/28 00:39:12 Added file=7 with rule=3 into Records table
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_7_file4.txt 1 85e163d7674bfe963f039657f9dd14c5 2021-05-28 00:39:12.013042151 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_7_file4.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_4_file4.txt/fyst
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_10_file6.txt/fyst
+2021/05/28 00:39:12 MD5Sum verification successful for 428_4_file4.txt
+2021/05/28 00:39:12 /records/428_4_file4.txt/fyst 1
+2021/05/28 00:39:12 /records/428_4_file4.txt/fyst 2
+2021/05/28 00:39:12 /records/428_4_file4.txt/fyst 3
+2021/05/28 00:39:12 MD5Sum verification successful for 428_10_file6.txt
+2021/05/28 00:39:12 /records/428_4_file4.txt/fyst 4
+2021/05/28 00:39:12 /records/428_10_file6.txt/fyst 1
+2021/05/28 00:39:12 /records/428_10_file6.txt/fyst 2
+2021/05/28 00:39:12 /records/428_10_file6.txt/fyst 3
+2021/05/28 00:39:12 /records/428_10_file6.txt/fyst 4
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_2_file6.txt 1 2b9b019514edf8b0de20400990f55bdb 2021-05-28 00:39:12.128537493 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_2_file6.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 /records/428_4_file4.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_4_file4.txt/copies
+2021/05/28 00:39:12 /records/428_10_file6.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_10_file6.txt/copies
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_3_file6.txt 1 1af5e93f0f553c7e41aee55ee25c7c7a 2021-05-28 00:39:12.136519191 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_3_file6.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_7_file4.txt/fyst
+2021/05/28 00:39:12 MD5Sum verification successful for 428_7_file4.txt
+2021/05/28 00:39:12 /records/428_7_file4.txt/fyst 1
+2021/05/28 00:39:12 /records/428_7_file4.txt/fyst 2
+2021/05/28 00:39:12 /records/428_7_file4.txt/fyst 3
+2021/05/28 00:39:12 /records/428_7_file4.txt/fyst 4
+2021/05/28 00:39:12 Added file=16 with rule=5 into Records table
+2021/05/28 00:39:12 /records/428_7_file4.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_7_file4.txt/copies
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_2_file6.txt/fyst
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_3_file6.txt/fyst
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_9_file7.txt 1 e7c3d79155e178e300ffe66b5c6cbea3 2021-05-28 00:39:12.202407725 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_9_file7.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 MD5Sum verification successful for 428_2_file6.txt
+2021/05/28 00:39:12 /records/428_2_file6.txt/fyst 1
+2021/05/28 00:39:12 /records/428_2_file6.txt/fyst 2
+2021/05/28 00:39:12 /records/428_2_file6.txt/fyst 3
+2021/05/28 00:39:12 /records/428_2_file6.txt/fyst 4
+2021/05/28 00:39:12 MD5Sum verification successful for 428_3_file6.txt
+2021/05/28 00:39:12 /records/428_3_file6.txt/fyst 1
+2021/05/28 00:39:12 /records/428_3_file6.txt/fyst 2
+2021/05/28 00:39:12 /records/428_3_file6.txt/fyst 3
+2021/05/28 00:39:12 /records/428_3_file6.txt/fyst 4
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 /records/428_2_file6.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_2_file6.txt/copies
+2021/05/28 00:39:12 /records/428_3_file6.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_3_file6.txt/copies
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_9_file7.txt/fyst
+2021/05/28 00:39:12 MD5Sum verification successful for 428_9_file7.txt
+2021/05/28 00:39:12 /records/428_9_file7.txt/fyst 1
+2021/05/28 00:39:12 /records/428_9_file7.txt/fyst 2
+2021/05/28 00:39:12 /records/428_9_file7.txt/fyst 3
+2021/05/28 00:39:12 /records/428_9_file7.txt/fyst 4
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_10_file7.txt 1 38cd0cdb88cf60a2b6abfbf49fb7cdf2 2021-05-28 00:39:12.30878509 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_10_file7.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 Added file=16 with rule=3 into Records table
+2021/05/28 00:39:12 /records/428_9_file7.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_9_file7.txt/copies
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_6_file7.txt 1 4b58c15228c1837386369d7f41936c6a 2021-05-28 00:39:12.344652411 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_6_file7.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_1_file6.txt 1 26eaca3fd7bcdbd052d37d820810e95e 2021-05-28 00:39:12.464035362 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_1_file6.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_10_file7.txt/fyst
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 MD5Sum verification successful for 428_10_file7.txt
+2021/05/28 00:39:12 /records/428_10_file7.txt/fyst 1
+2021/05/28 00:39:12 /records/428_10_file7.txt/fyst 2
+2021/05/28 00:39:12 /records/428_10_file7.txt/fyst 3
+2021/05/28 00:39:12 /records/428_10_file7.txt/fyst 4
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_6_file7.txt/fyst
+2021/05/28 00:39:12 /records/428_10_file7.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_10_file7.txt/copies
+2021/05/28 00:39:12 Added file=15 with rule=5 into Records table
+2021/05/28 00:39:12 MD5Sum verification successful for 428_6_file7.txt
+2021/05/28 00:39:12 /records/428_6_file7.txt/fyst 1
+2021/05/28 00:39:12 /records/428_6_file7.txt/fyst 2
+2021/05/28 00:39:12 /records/428_6_file7.txt/fyst 3
+2021/05/28 00:39:12 /records/428_6_file7.txt/fyst 4
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_1_file6.txt/fyst
+2021/05/28 00:39:12 /records/428_6_file7.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_6_file7.txt/copies
+2021/05/28 00:39:12 MD5Sum verification successful for 428_1_file6.txt
+2021/05/28 00:39:12 /records/428_1_file6.txt/fyst 1
+2021/05/28 00:39:12 /records/428_1_file6.txt/fyst 2
+2021/05/28 00:39:12 /records/428_1_file6.txt/fyst 3
+2021/05/28 00:39:12 /records/428_1_file6.txt/fyst 4
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_3_file7.txt 1 98b8cc9df6a416ce95100af3b62a6f89 2021-05-28 00:39:12.626431579 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_3_file7.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 /records/428_1_file6.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_1_file6.txt/copies
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_9_file8.txt 1 70eb75e2614ee949c9bea7cbaac811d1 2021-05-28 00:39:12.643591162 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_9_file8.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_5_file6.txt 1 8f6f464a6f0d747262bfb1dd7ca2bc06 2021-05-28 00:39:12.642868955 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_5_file6.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 Added file=15 with rule=3 into Records table
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_3_file7.txt/fyst
+2021/05/28 00:39:12 MD5Sum verification successful for 428_3_file7.txt
+2021/05/28 00:39:12 /records/428_3_file7.txt/fyst 1
+2021/05/28 00:39:12 /records/428_3_file7.txt/fyst 2
+2021/05/28 00:39:12 /records/428_3_file7.txt/fyst 3
+2021/05/28 00:39:12 /records/428_3_file7.txt/fyst 4
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_9_file8.txt/fyst
+2021/05/28 00:39:12 /records/428_3_file7.txt/fyst 5
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_5_file6.txt/fyst
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_4_file5.txt 1 a64f556ded353cd1788343643faeb6fc 2021-05-28 00:39:12.708977805 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_4_file5.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_3_file7.txt/copies
+2021/05/28 00:39:12 MD5Sum verification successful for 428_9_file8.txt
+2021/05/28 00:39:12 /records/428_9_file8.txt/fyst 1
+2021/05/28 00:39:12 MD5Sum verification successful for 428_5_file6.txt
+2021/05/28 00:39:12 /records/428_5_file6.txt/fyst 1
+2021/05/28 00:39:12 /records/428_5_file6.txt/fyst 2
+2021/05/28 00:39:12 /records/428_5_file6.txt/fyst 3
+2021/05/28 00:39:12 /records/428_9_file8.txt/fyst 2
+2021/05/28 00:39:12 /records/428_9_file8.txt/fyst 3
+2021/05/28 00:39:12 /records/428_5_file6.txt/fyst 4
+2021/05/28 00:39:12 /records/428_9_file8.txt/fyst 4
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 /records/428_9_file8.txt/fyst 5
+2021/05/28 00:39:12 /records/428_5_file6.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_9_file8.txt/copies
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_5_file6.txt/copies
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_4_file5.txt/fyst
+2021/05/28 00:39:12 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:12 new file:  {428_8_file8.txt 1 229dddd7e31182b32b885cf5f6f1f4d1 2021-05-28 00:39:12.856042956 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_8_file8.txt}
+2021/05/28 00:39:12 Number of fields 6
+2021/05/28 00:39:12 MD5Sum verification successful for 428_4_file5.txt
+2021/05/28 00:39:12 /records/428_4_file5.txt/fyst 1
+2021/05/28 00:39:12 /records/428_4_file5.txt/fyst 2
+2021/05/28 00:39:12 /records/428_4_file5.txt/fyst 3
+2021/05/28 00:39:12 /records/428_4_file5.txt/fyst 4
+2021/05/28 00:39:12 Added file=8 with rule=5 into Records table
+2021/05/28 00:39:12 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:12 /records/428_4_file5.txt/fyst 5
+2021/05/28 00:39:12 AddRowToCopiesTableEndpoint - /files/428_4_file5.txt/copies
+2021/05/28 00:39:12 AddRecordToDBEndpoint - /records/428_8_file8.txt/fyst
+2021/05/28 00:39:12 MD5Sum verification successful for 428_8_file8.txt
+2021/05/28 00:39:12 /records/428_8_file8.txt/fyst 1
+2021/05/28 00:39:12 /records/428_8_file8.txt/fyst 2
+2021/05/28 00:39:12 /records/428_8_file8.txt/fyst 3
+2021/05/28 00:39:12 /records/428_8_file8.txt/fyst 4
+2021/05/28 00:39:12 /records/428_8_file8.txt/fyst 5
+2021/05/28 00:39:13 AddRowToCopiesTableEndpoint - /files/428_8_file8.txt/copies
+2021/05/28 00:39:13 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:13 new file:  {428_7_file5.txt 1 c148857397a70708e1c1c4c66c84d095 2021-05-28 00:39:13.034812638 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_7_file5.txt}
+2021/05/28 00:39:13 Number of fields 6
+2021/05/28 00:39:13 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:13 new file:  {428_10_file8.txt 1 09de959266873a5f279a5c0b216b3baa 2021-05-28 00:39:13.036788442 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_10_file8.txt}
+2021/05/28 00:39:13 Number of fields 6
+2021/05/28 00:39:13 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:13 new file:  {428_9_file9.txt 1 af775513f39da3495b5e2e818b73e91e 2021-05-28 00:39:13.045080738 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_9_file9.txt}
+2021/05/28 00:39:13 Number of fields 6
+2021/05/28 00:39:13 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:13 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:13 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:13 Added file=24 with rule=3 into Records table
+2021/05/28 00:39:13 AddRecordToDBEndpoint - /records/428_7_file5.txt/fyst
+2021/05/28 00:39:13 AddRecordToDBEndpoint - /records/428_10_file8.txt/fyst
+2021/05/28 00:39:13 MD5Sum verification successful for 428_7_file5.txt
+2021/05/28 00:39:13 /records/428_7_file5.txt/fyst 1
+2021/05/28 00:39:13 /records/428_7_file5.txt/fyst 2
+2021/05/28 00:39:13 /records/428_7_file5.txt/fyst 3
+2021/05/28 00:39:13 /records/428_7_file5.txt/fyst 4
+2021/05/28 00:39:13 AddRecordToDBEndpoint - /records/428_9_file9.txt/fyst
+2021/05/28 00:39:13 MD5Sum verification successful for 428_10_file8.txt
+2021/05/28 00:39:13 /records/428_10_file8.txt/fyst 1
+2021/05/28 00:39:13 /records/428_10_file8.txt/fyst 2
+2021/05/28 00:39:13 /records/428_10_file8.txt/fyst 3
+2021/05/28 00:39:13 /records/428_10_file8.txt/fyst 4
+2021/05/28 00:39:13 MD5Sum verification successful for 428_9_file9.txt
+2021/05/28 00:39:13 /records/428_9_file9.txt/fyst 1
+2021/05/28 00:39:13 /records/428_9_file9.txt/fyst 2
+2021/05/28 00:39:13 /records/428_9_file9.txt/fyst 3
+2021/05/28 00:39:13 /records/428_9_file9.txt/fyst 4
+2021/05/28 00:39:13 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:13 new file:  {428_1_file7.txt 1 1002565e93e07f2db6fae06c136a2558 2021-05-28 00:39:13.209671686 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_1_file7.txt}
+2021/05/28 00:39:13 Number of fields 6
+2021/05/28 00:39:13 /records/428_7_file5.txt/fyst 5
+2021/05/28 00:39:13 AddRowToCopiesTableEndpoint - /files/428_7_file5.txt/copies
+2021/05/28 00:39:13 /records/428_9_file9.txt/fyst 5
+2021/05/28 00:39:13 /records/428_10_file8.txt/fyst 5
+2021/05/28 00:39:13 AddRowToCopiesTableEndpoint - /files/428_10_file8.txt/copies
+2021/05/28 00:39:13 AddRowToCopiesTableEndpoint - /files/428_9_file9.txt/copies
+2021/05/28 00:39:13 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:13 Added file=25 with rule=3 into Records table
+2021/05/28 00:39:13 AddRecordToDBEndpoint - /records/428_1_file7.txt/fyst
+2021/05/28 00:39:13 MD5Sum verification successful for 428_1_file7.txt
+2021/05/28 00:39:13 /records/428_1_file7.txt/fyst 1
+2021/05/28 00:39:13 /records/428_1_file7.txt/fyst 2
+2021/05/28 00:39:13 /records/428_1_file7.txt/fyst 3
+2021/05/28 00:39:13 /records/428_1_file7.txt/fyst 4
+2021/05/28 00:39:13 /records/428_1_file7.txt/fyst 5
+2021/05/28 00:39:13 AddRowToCopiesTableEndpoint - /files/428_1_file7.txt/copies
+2021/05/28 00:39:13 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:13 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:13 new file:  {428_2_file7.txt 1 b225b630e1e926a085868c04841af8d6 2021-05-28 00:39:13.271819599 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_2_file7.txt}
+2021/05/28 00:39:13 Number of fields 6
+2021/05/28 00:39:13 new file:  {428_6_file8.txt 1 ce13c0315c398fc5880b7fef0c446f41 2021-05-28 00:39:13.287522684 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_6_file8.txt}
+2021/05/28 00:39:13 Number of fields 6
+2021/05/28 00:39:13 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:13 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:13 AddRecordToDBEndpoint - /records/428_2_file7.txt/fyst
+2021/05/28 00:39:13 AddRecordToDBEndpoint - /records/428_6_file8.txt/fyst
+2021/05/28 00:39:13 Added file=26 with rule=5 into Records table
+2021/05/28 00:39:13 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:13 new file:  {428_3_file8.txt 1 25499f5c77983bdee6edc926456575b9 2021-05-28 00:39:13.474999771 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_3_file8.txt}
+2021/05/28 00:39:13 Number of fields 6
+2021/05/28 00:39:13 MD5Sum verification successful for 428_6_file8.txt
+2021/05/28 00:39:13 /records/428_6_file8.txt/fyst 1
+2021/05/28 00:39:13 MD5Sum verification successful for 428_2_file7.txt
+2021/05/28 00:39:13 /records/428_2_file7.txt/fyst 1
+2021/05/28 00:39:13 /records/428_6_file8.txt/fyst 2
+2021/05/28 00:39:13 /records/428_6_file8.txt/fyst 3
+2021/05/28 00:39:13 /records/428_6_file8.txt/fyst 4
+2021/05/28 00:39:13 /records/428_2_file7.txt/fyst 2
+2021/05/28 00:39:13 /records/428_2_file7.txt/fyst 3
+2021/05/28 00:39:13 /records/428_2_file7.txt/fyst 4
+2021/05/28 00:39:13 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:13 /records/428_6_file8.txt/fyst 5
+2021/05/28 00:39:13 /records/428_2_file7.txt/fyst 5
+2021/05/28 00:39:13 AddRowToCopiesTableEndpoint - /files/428_2_file7.txt/copies
+2021/05/28 00:39:13 AddRowToCopiesTableEndpoint - /files/428_6_file8.txt/copies
+2021/05/28 00:39:13 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:13 new file:  {428_4_file6.txt 1 8d7fa502aaf0ba511cf775c6738acb5e 2021-05-28 00:39:13.51301943 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_4_file6.txt}
+2021/05/28 00:39:13 Number of fields 6
+2021/05/28 00:39:13 AddRecordToDBEndpoint - /records/428_3_file8.txt/fyst
+2021/05/28 00:39:13 MD5Sum verification successful for 428_3_file8.txt
+2021/05/28 00:39:13 /records/428_3_file8.txt/fyst 1
+2021/05/28 00:39:13 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:13 /records/428_3_file8.txt/fyst 2
+2021/05/28 00:39:13 /records/428_3_file8.txt/fyst 3
+2021/05/28 00:39:13 /records/428_3_file8.txt/fyst 4
+2021/05/28 00:39:13 Added file=26 with rule=3 into Records table
+2021/05/28 00:39:13 /records/428_3_file8.txt/fyst 5
+2021/05/28 00:39:13 AddRecordToDBEndpoint - /records/428_4_file6.txt/fyst
+2021/05/28 00:39:13 AddRowToCopiesTableEndpoint - /files/428_3_file8.txt/copies
+2021/05/28 00:39:13 MD5Sum verification successful for 428_4_file6.txt
+2021/05/28 00:39:13 /records/428_4_file6.txt/fyst 1
+2021/05/28 00:39:13 /records/428_4_file6.txt/fyst 2
+2021/05/28 00:39:13 /records/428_4_file6.txt/fyst 3
+2021/05/28 00:39:13 /records/428_4_file6.txt/fyst 4
+2021/05/28 00:39:13 /records/428_4_file6.txt/fyst 5
+2021/05/28 00:39:13 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:13 new file:  {428_8_file9.txt 1 adbf8e260296d3aeee2de540f0873233 2021-05-28 00:39:13.659258025 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_8_file9.txt}
+2021/05/28 00:39:13 Number of fields 6
+2021/05/28 00:39:13 AddRowToCopiesTableEndpoint - /files/428_4_file6.txt/copies
+2021/05/28 00:39:13 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:13 Added file=28 with rule=5 into Records table
+2021/05/28 00:39:13 AddRecordToDBEndpoint - /records/428_8_file9.txt/fyst
+2021/05/28 00:39:13 MD5Sum verification successful for 428_8_file9.txt
+2021/05/28 00:39:13 /records/428_8_file9.txt/fyst 1
+2021/05/28 00:39:13 /records/428_8_file9.txt/fyst 2
+2021/05/28 00:39:13 /records/428_8_file9.txt/fyst 3
+2021/05/28 00:39:13 /records/428_8_file9.txt/fyst 4
+2021/05/28 00:39:13 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:13 new file:  {428_5_file7.txt 1 3cb140402c9b0a5c2f4847348cdca1be 2021-05-28 00:39:13.806092618 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_5_file7.txt}
+2021/05/28 00:39:13 Number of fields 6
+2021/05/28 00:39:13 /records/428_8_file9.txt/fyst 5
+2021/05/28 00:39:13 AddRowToCopiesTableEndpoint - /files/428_8_file9.txt/copies
+2021/05/28 00:39:13 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:13 AddRecordToDBEndpoint - /records/428_5_file7.txt/fyst
+2021/05/28 00:39:13 MD5Sum verification successful for 428_5_file7.txt
+2021/05/28 00:39:13 /records/428_5_file7.txt/fyst 1
+2021/05/28 00:39:13 /records/428_5_file7.txt/fyst 2
+2021/05/28 00:39:13 /records/428_5_file7.txt/fyst 3
+2021/05/28 00:39:13 /records/428_5_file7.txt/fyst 4
+2021/05/28 00:39:13 Added file=28 with rule=3 into Records table
+2021/05/28 00:39:13 /records/428_5_file7.txt/fyst 5
+2021/05/28 00:39:13 AddRowToCopiesTableEndpoint - /files/428_5_file7.txt/copies
+2021/05/28 00:39:13 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:13 new file:  {428_9_file10.txt 1 f95a8a7689670fbcd619a45bf18ab24b 2021-05-28 00:39:13.875876719 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_9_file10.txt}
+2021/05/28 00:39:13 Number of fields 6
+2021/05/28 00:39:13 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_9_file10.txt/fyst
+2021/05/28 00:39:14 MD5Sum verification successful for 428_9_file10.txt
+2021/05/28 00:39:14 /records/428_9_file10.txt/fyst 1
+2021/05/28 00:39:14 /records/428_9_file10.txt/fyst 2
+2021/05/28 00:39:14 /records/428_9_file10.txt/fyst 3
+2021/05/28 00:39:14 /records/428_9_file10.txt/fyst 4
+2021/05/28 00:39:14 /records/428_9_file10.txt/fyst 5
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_9_file10.txt/copies
+2021/05/28 00:39:14 Added file=25 with rule=5 into Records table
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 new file:  {428_7_file6.txt 1 a458566af0a5aa59cc0588cf4668b62b 2021-05-28 00:39:14.115750165 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_7_file6.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 new file:  {428_10_file9.txt 1 b507816b206234770236bbb251c6bfdb 2021-05-28 00:39:14.123910399 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_10_file9.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:14 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_7_file6.txt/fyst
+2021/05/28 00:39:14 MD5Sum verification successful for 428_7_file6.txt
+2021/05/28 00:39:14 /records/428_7_file6.txt/fyst 1
+2021/05/28 00:39:14 /records/428_7_file6.txt/fyst 2
+2021/05/28 00:39:14 /records/428_7_file6.txt/fyst 3
+2021/05/28 00:39:14 /records/428_7_file6.txt/fyst 4
+2021/05/28 00:39:14 Added file=27 with rule=5 into Records table
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_10_file9.txt/fyst
+2021/05/28 00:39:14 MD5Sum verification successful for 428_10_file9.txt
+2021/05/28 00:39:14 /records/428_10_file9.txt/fyst 1
+2021/05/28 00:39:14 /records/428_10_file9.txt/fyst 2
+2021/05/28 00:39:14 /records/428_10_file9.txt/fyst 3
+2021/05/28 00:39:14 /records/428_10_file9.txt/fyst 4
+2021/05/28 00:39:14 /records/428_7_file6.txt/fyst 5
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_7_file6.txt/copies
+2021/05/28 00:39:14 /records/428_10_file9.txt/fyst 5
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_10_file9.txt/copies
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 new file:  {428_1_file8.txt 1 bf9b9225a6b2275418cefbfb8a7eba7a 2021-05-28 00:39:14.236925756 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_1_file8.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 new file:  {428_4_file7.txt 1 1fb94d2026bf4a190f1cfa311bc7214d 2021-05-28 00:39:14.295543367 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_4_file7.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:14 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 new file:  {428_6_file9.txt 1 2d045e0672cec7d70fbf1895c20307be 2021-05-28 00:39:14.309412302 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_6_file9.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 new file:  {428_2_file8.txt 1 17c1ebdf4eb61c9c2d928f22a0c6100c 2021-05-28 00:39:14.317109998 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_2_file8.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 new file:  {428_8_file10.txt 1 d8b92720474d573d4cd4995a7f8150ee 2021-05-28 00:39:14.315516864 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_8_file10.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:14 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_1_file8.txt/fyst
+2021/05/28 00:39:14 MD5Sum verification successful for 428_1_file8.txt
+2021/05/28 00:39:14 /records/428_1_file8.txt/fyst 1
+2021/05/28 00:39:14 /records/428_1_file8.txt/fyst 2
+2021/05/28 00:39:14 /records/428_1_file8.txt/fyst 3
+2021/05/28 00:39:14 /records/428_1_file8.txt/fyst 4
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_4_file7.txt/fyst
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_6_file9.txt/fyst
+2021/05/28 00:39:14 MD5Sum verification successful for 428_4_file7.txt
+2021/05/28 00:39:14 /records/428_4_file7.txt/fyst 1
+2021/05/28 00:39:14 /records/428_4_file7.txt/fyst 2
+2021/05/28 00:39:14 /records/428_4_file7.txt/fyst 3
+2021/05/28 00:39:14 Added file=27 with rule=3 into Records table
+2021/05/28 00:39:14 /records/428_4_file7.txt/fyst 4
+2021/05/28 00:39:14 MD5Sum verification successful for 428_6_file9.txt
+2021/05/28 00:39:14 /records/428_6_file9.txt/fyst 1
+2021/05/28 00:39:14 /records/428_6_file9.txt/fyst 2
+2021/05/28 00:39:14 /records/428_6_file9.txt/fyst 3
+2021/05/28 00:39:14 /records/428_6_file9.txt/fyst 4
+2021/05/28 00:39:14 /records/428_1_file8.txt/fyst 5
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_1_file8.txt/copies
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_2_file8.txt/fyst
+2021/05/28 00:39:14 /records/428_4_file7.txt/fyst 5
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_4_file7.txt/copies
+2021/05/28 00:39:14 /records/428_6_file9.txt/fyst 5
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_8_file10.txt/fyst
+2021/05/28 00:39:14 MD5Sum verification successful for 428_2_file8.txt
+2021/05/28 00:39:14 /records/428_2_file8.txt/fyst 1
+2021/05/28 00:39:14 /records/428_2_file8.txt/fyst 2
+2021/05/28 00:39:14 /records/428_2_file8.txt/fyst 3
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_6_file9.txt/copies
+2021/05/28 00:39:14 /records/428_2_file8.txt/fyst 4
+2021/05/28 00:39:14 MD5Sum verification successful for 428_8_file10.txt
+2021/05/28 00:39:14 /records/428_8_file10.txt/fyst 1
+2021/05/28 00:39:14 /records/428_8_file10.txt/fyst 2
+2021/05/28 00:39:14 /records/428_8_file10.txt/fyst 3
+2021/05/28 00:39:14 /records/428_8_file10.txt/fyst 4
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 new file:  {428_3_file9.txt 1 32c444842b2950b35a2fdb5e67240193 2021-05-28 00:39:14.50506646 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_3_file9.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:14 new file:  {428_5_file8.txt 1 8ec2d9f6412d044f46e226166e0a3a51 2021-05-28 00:39:14.503149813 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_5_file8.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 new file:  {428_10_file10.txt 1 47b371b9c034bcbf530c5f8c8fba5c47 2021-05-28 00:39:14.492570739 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_10_file10.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:14 /records/428_2_file8.txt/fyst 5
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_2_file8.txt/copies
+2021/05/28 00:39:14 /records/428_8_file10.txt/fyst 5
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_8_file10.txt/copies
+2021/05/28 00:39:14 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 Added file=29 with rule=5 into Records table
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_5_file8.txt/fyst
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_10_file10.txt/fyst
+2021/05/28 00:39:14 MD5Sum verification successful for 428_10_file10.txt
+2021/05/28 00:39:14 /records/428_10_file10.txt/fyst 1
+2021/05/28 00:39:14 MD5Sum verification successful for 428_5_file8.txt
+2021/05/28 00:39:14 /records/428_5_file8.txt/fyst 1
+2021/05/28 00:39:14 /records/428_10_file10.txt/fyst 2
+2021/05/28 00:39:14 /records/428_10_file10.txt/fyst 3
+2021/05/28 00:39:14 /records/428_5_file8.txt/fyst 2
+2021/05/28 00:39:14 /records/428_5_file8.txt/fyst 3
+2021/05/28 00:39:14 /records/428_10_file10.txt/fyst 4
+2021/05/28 00:39:14 /records/428_5_file8.txt/fyst 4
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_3_file9.txt/fyst
+2021/05/28 00:39:14 /records/428_10_file10.txt/fyst 5
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_10_file10.txt/copies
+2021/05/28 00:39:14 MD5Sum verification successful for 428_3_file9.txt
+2021/05/28 00:39:14 /records/428_3_file9.txt/fyst 1
+2021/05/28 00:39:14 /records/428_3_file9.txt/fyst 2
+2021/05/28 00:39:14 /records/428_3_file9.txt/fyst 3
+2021/05/28 00:39:14 /records/428_3_file9.txt/fyst 4
+2021/05/28 00:39:14 /records/428_5_file8.txt/fyst 5
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_5_file8.txt/copies
+2021/05/28 00:39:14 /records/428_3_file9.txt/fyst 5
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_3_file9.txt/copies
+2021/05/28 00:39:14 Added file=29 with rule=3 into Records table
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 new file:  {428_4_file8.txt 1 dd20e3f7f72960c2e2e2352556626d7b 2021-05-28 00:39:14.743348259 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_4_file8.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:14 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:14 Added file=30 with rule=5 into Records table
+2021/05/28 00:39:14 AddRecordToDBEndpoint - /records/428_4_file8.txt/fyst
+2021/05/28 00:39:14 MD5Sum verification successful for 428_4_file8.txt
+2021/05/28 00:39:14 /records/428_4_file8.txt/fyst 1
+2021/05/28 00:39:14 /records/428_4_file8.txt/fyst 2
+2021/05/28 00:39:14 /records/428_4_file8.txt/fyst 3
+2021/05/28 00:39:14 /records/428_4_file8.txt/fyst 4
+2021/05/28 00:39:14 /records/428_4_file8.txt/fyst 5
+2021/05/28 00:39:14 AddRowToCopiesTableEndpoint - /files/428_4_file8.txt/copies
+2021/05/28 00:39:14 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:14 new file:  {428_3_file10.txt 1 ce5b28e6ae2d55b212b3178129ab59a7 2021-05-28 00:39:14.980141314 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_3_file10.txt}
+2021/05/28 00:39:14 Number of fields 6
+2021/05/28 00:39:15 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:15 AddRecordToDBEndpoint - /records/428_3_file10.txt/fyst
+2021/05/28 00:39:15 Added file=30 with rule=3 into Records table
+2021/05/28 00:39:15 MD5Sum verification successful for 428_3_file10.txt
+2021/05/28 00:39:15 /records/428_3_file10.txt/fyst 1
+2021/05/28 00:39:15 /records/428_3_file10.txt/fyst 2
+2021/05/28 00:39:15 /records/428_3_file10.txt/fyst 3
+2021/05/28 00:39:15 /records/428_3_file10.txt/fyst 4
+2021/05/28 00:39:15 /records/428_3_file10.txt/fyst 5
+2021/05/28 00:39:15 AddRowToCopiesTableEndpoint - /files/428_3_file10.txt/copies
+2021/05/28 00:39:15 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:15 new file:  {428_7_file7.txt 1 fa134e93d492a749676dffd1d9b56315 2021-05-28 00:39:15.04778888 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_7_file7.txt}
+2021/05/28 00:39:15 Number of fields 6
+2021/05/28 00:39:15 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:15 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:15 new file:  {428_1_file9.txt 1 5fb0e7e4bb4b425222115291901d01d3 2021-05-28 00:39:15.154930791 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_1_file9.txt}
+2021/05/28 00:39:15 Number of fields 6
+2021/05/28 00:39:15 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:15 AddRecordToDBEndpoint - /records/428_7_file7.txt/fyst
+2021/05/28 00:39:15 MD5Sum verification successful for 428_7_file7.txt
+2021/05/28 00:39:15 /records/428_7_file7.txt/fyst 1
+2021/05/28 00:39:15 /records/428_7_file7.txt/fyst 2
+2021/05/28 00:39:15 /records/428_7_file7.txt/fyst 3
+2021/05/28 00:39:15 /records/428_7_file7.txt/fyst 4
+2021/05/28 00:39:15 Added file=23 with rule=3 into Records table
+2021/05/28 00:39:15 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:15 new file:  {428_2_file9.txt 1 0c23bd492b32d38c37304989c3bfb870 2021-05-28 00:39:15.210724796 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_2_file9.txt}
+2021/05/28 00:39:15 Number of fields 6
+2021/05/28 00:39:15 /records/428_7_file7.txt/fyst 5
+2021/05/28 00:39:15 AddRowToCopiesTableEndpoint - /files/428_7_file7.txt/copies
+2021/05/28 00:39:15 AddRecordToDBEndpoint - /records/428_1_file9.txt/fyst
+2021/05/28 00:39:15 MD5Sum verification successful for 428_1_file9.txt
+2021/05/28 00:39:15 /records/428_1_file9.txt/fyst 1
+2021/05/28 00:39:15 /records/428_1_file9.txt/fyst 2
+2021/05/28 00:39:15 /records/428_1_file9.txt/fyst 3
+2021/05/28 00:39:15 /records/428_1_file9.txt/fyst 4
+2021/05/28 00:39:15 /records/428_1_file9.txt/fyst 5
+2021/05/28 00:39:15 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:15 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:15 new file:  {428_6_file10.txt 1 8c8d455d6f789702c4a4ecfc8fb78799 2021-05-28 00:39:15.287392077 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_6_file10.txt}
+2021/05/28 00:39:15 Number of fields 6
+2021/05/28 00:39:15 AddRowToCopiesTableEndpoint - /files/428_1_file9.txt/copies
+2021/05/28 00:39:15 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:15 AddRecordToDBEndpoint - /records/428_2_file9.txt/fyst
+2021/05/28 00:39:15 AddRecordToDBEndpoint - /records/428_6_file10.txt/fyst
+2021/05/28 00:39:15 MD5Sum verification successful for 428_2_file9.txt
+2021/05/28 00:39:15 /records/428_2_file9.txt/fyst 1
+2021/05/28 00:39:15 /records/428_2_file9.txt/fyst 2
+2021/05/28 00:39:15 /records/428_2_file9.txt/fyst 3
+2021/05/28 00:39:15 /records/428_2_file9.txt/fyst 4
+2021/05/28 00:39:15 MD5Sum verification successful for 428_6_file10.txt
+2021/05/28 00:39:15 /records/428_6_file10.txt/fyst 1
+2021/05/28 00:39:15 /records/428_6_file10.txt/fyst 2
+2021/05/28 00:39:15 /records/428_6_file10.txt/fyst 3
+2021/05/28 00:39:15 /records/428_6_file10.txt/fyst 4
+2021/05/28 00:39:15 Added file=24 with rule=5 into Records table
+2021/05/28 00:39:15 /records/428_2_file9.txt/fyst 5
+2021/05/28 00:39:15 AddRowToCopiesTableEndpoint - /files/428_2_file9.txt/copies
+2021/05/28 00:39:15 /records/428_6_file10.txt/fyst 5
+2021/05/28 00:39:15 AddRowToCopiesTableEndpoint - /files/428_6_file10.txt/copies
+2021/05/28 00:39:15 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:15 new file:  {428_4_file9.txt 1 9267bed1214ed8cdb86f22c697184a3d 2021-05-28 00:39:15.485159418 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_4_file9.txt}
+2021/05/28 00:39:15 Number of fields 6
+2021/05/28 00:39:15 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:15 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:15 new file:  {428_7_file8.txt 1 b736c1030d251d53be28eada3656d324 2021-05-28 00:39:15.518104304 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_7_file8.txt}
+2021/05/28 00:39:15 Number of fields 6
+2021/05/28 00:39:15 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:15 Added file=19 with rule=5 into Records table
+2021/05/28 00:39:15 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:15 new file:  {428_5_file9.txt 1 3cac102192dac85133a790df518da483 2021-05-28 00:39:15.553528947 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_5_file9.txt}
+2021/05/28 00:39:15 Number of fields 6
+2021/05/28 00:39:15 AddRecordToDBEndpoint - /records/428_4_file9.txt/fyst
+2021/05/28 00:39:15 MD5Sum verification successful for 428_4_file9.txt
+2021/05/28 00:39:15 /records/428_4_file9.txt/fyst 1
+2021/05/28 00:39:15 /records/428_4_file9.txt/fyst 2
+2021/05/28 00:39:15 /records/428_4_file9.txt/fyst 3
+2021/05/28 00:39:15 /records/428_4_file9.txt/fyst 4
+2021/05/28 00:39:15 AddRecordToDBEndpoint - /records/428_7_file8.txt/fyst
+2021/05/28 00:39:15 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:15 MD5Sum verification successful for 428_7_file8.txt
+2021/05/28 00:39:15 /records/428_7_file8.txt/fyst 1
+2021/05/28 00:39:15 /records/428_7_file8.txt/fyst 2
+2021/05/28 00:39:15 /records/428_7_file8.txt/fyst 3
+2021/05/28 00:39:15 /records/428_7_file8.txt/fyst 4
+2021/05/28 00:39:15 /records/428_4_file9.txt/fyst 5
+2021/05/28 00:39:15 AddRowToCopiesTableEndpoint - /files/428_4_file9.txt/copies
+2021/05/28 00:39:15 /records/428_7_file8.txt/fyst 5
+2021/05/28 00:39:15 AddRowToCopiesTableEndpoint - /files/428_7_file8.txt/copies
+2021/05/28 00:39:15 AddRecordToDBEndpoint - /records/428_5_file9.txt/fyst
+2021/05/28 00:39:15 MD5Sum verification successful for 428_5_file9.txt
+2021/05/28 00:39:15 /records/428_5_file9.txt/fyst 1
+2021/05/28 00:39:15 /records/428_5_file9.txt/fyst 2
+2021/05/28 00:39:15 /records/428_5_file9.txt/fyst 3
+2021/05/28 00:39:15 /records/428_5_file9.txt/fyst 4
+2021/05/28 00:39:15 Added file=19 with rule=3 into Records table
+2021/05/28 00:39:15 /records/428_5_file9.txt/fyst 5
+2021/05/28 00:39:15 AddRowToCopiesTableEndpoint - /files/428_5_file9.txt/copies
+2021/05/28 00:39:15 Added file=18 with rule=5 into Records table
+2021/05/28 00:39:15 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:15 new file:  {428_5_file10.txt 1 4d4d55caaefe439089bcd7846f392d8f 2021-05-28 00:39:15.85423146 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_5_file10.txt}
+2021/05/28 00:39:15 Number of fields 6
+2021/05/28 00:39:15 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:15 AddRecordToDBEndpoint - /records/428_5_file10.txt/fyst
+2021/05/28 00:39:15 MD5Sum verification successful for 428_5_file10.txt
+2021/05/28 00:39:15 /records/428_5_file10.txt/fyst 1
+2021/05/28 00:39:15 /records/428_5_file10.txt/fyst 2
+2021/05/28 00:39:15 /records/428_5_file10.txt/fyst 3
+2021/05/28 00:39:15 /records/428_5_file10.txt/fyst 4
+2021/05/28 00:39:15 /records/428_5_file10.txt/fyst 5
+2021/05/28 00:39:15 AddRowToCopiesTableEndpoint - /files/428_5_file10.txt/copies
+2021/05/28 00:39:15 Added file=18 with rule=3 into Records table
+2021/05/28 00:39:16 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:16 new file:  {428_2_file10.txt 1 649716d7a76dc86cf9dad6d779144961 2021-05-28 00:39:16.069414666 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_2_file10.txt}
+2021/05/28 00:39:16 Number of fields 6
+2021/05/28 00:39:16 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:16 new file:  {428_4_file10.txt 1 8b979919b28f06fcbe16c4d237b4029e 2021-05-28 00:39:16.008180293 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_4_file10.txt}
+2021/05/28 00:39:16 Number of fields 6
+2021/05/28 00:39:16 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:16 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:16 AddRecordToDBEndpoint - /records/428_2_file10.txt/fyst
+2021/05/28 00:39:16 AddRecordToDBEndpoint - /records/428_4_file10.txt/fyst
+2021/05/28 00:39:16 MD5Sum verification successful for 428_2_file10.txt
+2021/05/28 00:39:16 /records/428_2_file10.txt/fyst 1
+2021/05/28 00:39:16 MD5Sum verification successful for 428_4_file10.txt
+2021/05/28 00:39:16 /records/428_4_file10.txt/fyst 1
+2021/05/28 00:39:16 /records/428_2_file10.txt/fyst 2
+2021/05/28 00:39:16 /records/428_2_file10.txt/fyst 3
+2021/05/28 00:39:16 /records/428_4_file10.txt/fyst 2
+2021/05/28 00:39:16 /records/428_4_file10.txt/fyst 3
+2021/05/28 00:39:16 /records/428_2_file10.txt/fyst 4
+2021/05/28 00:39:16 /records/428_4_file10.txt/fyst 4
+2021/05/28 00:39:16 /records/428_4_file10.txt/fyst 5
+2021/05/28 00:39:16 AddRowToCopiesTableEndpoint - /files/428_4_file10.txt/copies
+2021/05/28 00:39:16 Added file=20 with rule=5 into Records table
+2021/05/28 00:39:16 /records/428_2_file10.txt/fyst 5
+2021/05/28 00:39:16 AddRowToCopiesTableEndpoint - /files/428_2_file10.txt/copies
+2021/05/28 00:39:16 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:16 new file:  {428_1_file10.txt 1 cc314f3dbd9e52b62841c8db252066ee 2021-05-28 00:39:16.214954619 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_1_file10.txt}
+2021/05/28 00:39:16 Number of fields 6
+2021/05/28 00:39:16 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:16 AddRecordToDBEndpoint - /records/428_1_file10.txt/fyst
+2021/05/28 00:39:16 MD5Sum verification successful for 428_1_file10.txt
+2021/05/28 00:39:16 /records/428_1_file10.txt/fyst 1
+2021/05/28 00:39:16 /records/428_1_file10.txt/fyst 2
+2021/05/28 00:39:16 /records/428_1_file10.txt/fyst 3
+2021/05/28 00:39:16 /records/428_1_file10.txt/fyst 4
+2021/05/28 00:39:16 Added file=20 with rule=3 into Records table
+2021/05/28 00:39:16 /records/428_1_file10.txt/fyst 5
+2021/05/28 00:39:16 AddRowToCopiesTableEndpoint - /files/428_1_file10.txt/copies
+2021/05/28 00:39:16 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:16 new file:  {428_7_file9.txt 1 f5bf824ac3f15495e207e6c9499acf90 2021-05-28 00:39:16.423604399 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_7_file9.txt}
+2021/05/28 00:39:16 Number of fields 6
+2021/05/28 00:39:16 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:16 Added file=22 with rule=5 into Records table
+2021/05/28 00:39:16 AddRecordToDBEndpoint - /records/428_7_file9.txt/fyst
+2021/05/28 00:39:16 MD5Sum verification successful for 428_7_file9.txt
+2021/05/28 00:39:16 /records/428_7_file9.txt/fyst 1
+2021/05/28 00:39:16 /records/428_7_file9.txt/fyst 2
+2021/05/28 00:39:16 /records/428_7_file9.txt/fyst 3
+2021/05/28 00:39:16 /records/428_7_file9.txt/fyst 4
+2021/05/28 00:39:16 /records/428_7_file9.txt/fyst 5
+2021/05/28 00:39:16 AddRowToCopiesTableEndpoint - /files/428_7_file9.txt/copies
+2021/05/28 00:39:16 Added file=22 with rule=3 into Records table
+2021/05/28 00:39:16 AddFileToDatabaseEndpoint - /files
+2021/05/28 00:39:16 new file:  {428_7_file10.txt 1 850419959becc6de2be4e621458d4e82 2021-05-28 00:39:16.711724595 +0000 UTC 1048576 /home/iisharankov/go/src/github.com/iisharankov/FYSTDatabase/Testing/428_7_file10.txt}
+2021/05/28 00:39:16 Number of fields 6
+2021/05/28 00:39:16 Added file=21 with rule=5 into Records table
+2021/05/28 00:39:16 [{1 Observatory fyst 0.0.0.0:9001 iisharankov iisharankov false}]
+2021/05/28 00:39:16 AddRecordToDBEndpoint - /records/428_7_file10.txt/fyst
+2021/05/28 00:39:16 MD5Sum verification successful for 428_7_file10.txt
+2021/05/28 00:39:16 /records/428_7_file10.txt/fyst 1
+2021/05/28 00:39:16 /records/428_7_file10.txt/fyst 2
+2021/05/28 00:39:16 /records/428_7_file10.txt/fyst 3
+2021/05/28 00:39:16 /records/428_7_file10.txt/fyst 4
+2021/05/28 00:39:16 /records/428_7_file10.txt/fyst 5
+2021/05/28 00:39:16 AddRowToCopiesTableEndpoint - /files/428_7_file10.txt/copies
+2021/05/28 00:39:16 Added file=21 with rule=3 into Records table
+2021/05/28 00:39:16 Added file=23 with rule=5 into Records table
+2021/05/28 00:39:17 Added file=43 with rule=3 into Records table
+2021/05/28 00:39:17 Added file=43 with rule=5 into Records table
+2021/05/28 00:39:17 Added file=40 with rule=3 into Records table
+2021/05/28 00:39:17 Added file=40 with rule=5 into Records table
+2021/05/28 00:39:17 Added file=42 with rule=3 into Records table
+2021/05/28 00:39:17 Added file=42 with rule=5 into Records table
+2021/05/28 00:39:17 Added file=41 with rule=3 into Records table
+2021/05/28 00:39:17 Added file=41 with rule=5 into Records table
+2021/05/28 00:39:17 Added file=37 with rule=3 into Records table
+2021/05/28 00:39:18 Added file=37 with rule=5 into Records table
+2021/05/28 00:39:18 Added file=38 with rule=3 into Records table
+2021/05/28 00:39:18 Added file=38 with rule=5 into Records table
+2021/05/28 00:39:18 Added file=36 with rule=3 into Records table
+2021/05/28 00:39:18 Added file=36 with rule=5 into Records table
+2021/05/28 00:39:18 Added file=39 with rule=3 into Records table
+2021/05/28 00:39:18 Added file=39 with rule=5 into Records table
+2021/05/28 00:39:18 Added file=31 with rule=3 into Records table
+2021/05/28 00:39:18 Added file=31 with rule=5 into Records table
+2021/05/28 00:39:19 Added file=32 with rule=3 into Records table
+2021/05/28 00:39:19 Added file=32 with rule=5 into Records table
+2021/05/28 00:39:19 ??? [{44 428_5_file5.txt 1048576 2021-05-28 00:39:12 f48a57182b920c248682696c0a41464d 5 toronto CITA Canada} {44 428_5_file5.txt 1048576 2021-05-28 00:39:12 f48a57182b920c248682696c0a41464d 3 germany Max Plack Bonn} {45 428_2_file5.txt 1048576 2021-05-28 00:39:12 424f0861216c05dec74dd8d0a8451486 5 toronto CITA Canada} {45 428_2_file5.txt 1048576 2021-05-28 00:39:12 424f0861216c05dec74dd8d0a8451486 3 germany Max Plack Bonn} {46 428_6_file6.txt 1048576 2021-05-28 00:39:12 675c4445b086680ae03bfeceab3323b6 5 toronto CITA Canada} {46 428_6_file6.txt 1048576 2021-05-28 00:39:12 675c4445b086680ae03bfeceab3323b6 3 germany Max Plack Bonn} {47 428_1_file5.txt 1048576 2021-05-28 00:39:12 a777a9f3345652b8ddf104d7ad7554be 5 toronto CITA Canada} {47 428_1_file5.txt 1048576 2021-05-28 00:39:12 a777a9f3345652b8ddf104d7ad7554be 3 germany Max Plack Bonn} {48 428_9_file6.txt 1048576 2021-05-28 00:39:12 a8d0130b7ea9296d484e4bad9089cbcf 5 toronto CITA Canada} {48 428_9_file6.txt 1048576 2021-05-28 00:39:12 a8d0130b7ea9296d484e4bad9089cbcf 3 germany Max Plack Bonn} {49 428_3_file5.txt 1048576 2021-05-28 00:39:12 386d3b34925611e4425a7429cf949227 5 toronto CITA Canada} {49 428_3_file5.txt 1048576 2021-05-28 00:39:12 386d3b34925611e4425a7429cf949227 3 germany Max Plack Bonn} {50 428_8_file7.txt 1048576 2021-05-28 00:39:12 7ab15f9f64eabaffd7ec6ea9890f69d4 5 toronto CITA Canada} {50 428_8_file7.txt 1048576 2021-05-28 00:39:12 7ab15f9f64eabaffd7ec6ea9890f69d4 3 germany Max Plack Bonn} {51 428_4_file4.txt 1048576 2021-05-28 00:39:12 24784676bff205a3d349f99ec1368f84 5 toronto CITA Canada} {51 428_4_file4.txt 1048576 2021-05-28 00:39:12 24784676bff205a3d349f99ec1368f84 3 germany Max Plack Bonn} {52 428_10_file6.txt 1048576 2021-05-28 00:39:12 6b67127bb1d4e0e72f84aaeb38daf7d0 5 toronto CITA Canada} {52 428_10_file6.txt 1048576 2021-05-28 00:39:12 6b67127bb1d4e0e72f84aaeb38daf7d0 3 germany Max Plack Bonn} {53 428_7_file4.txt 1048576 2021-05-28 00:39:12 85e163d7674bfe963f039657f9dd14c5 5 toronto CITA Canada} {53 428_7_file4.txt 1048576 2021-05-28 00:39:12 85e163d7674bfe963f039657f9dd14c5 3 germany Max Plack Bonn} {54 428_2_file6.txt 1048576 2021-05-28 00:39:12 2b9b019514edf8b0de20400990f55bdb 5 toronto CITA Canada} {54 428_2_file6.txt 1048576 2021-05-28 00:39:12 2b9b019514edf8b0de20400990f55bdb 3 germany Max Plack Bonn} {55 428_3_file6.txt 1048576 2021-05-28 00:39:12 1af5e93f0f553c7e41aee55ee25c7c7a 5 toronto CITA Canada} {55 428_3_file6.txt 1048576 2021-05-28 00:39:12 1af5e93f0f553c7e41aee55ee25c7c7a 3 germany Max Plack Bonn} {56 428_9_file7.txt 1048576 2021-05-28 00:39:12 e7c3d79155e178e300ffe66b5c6cbea3 5 toronto CITA Canada} {56 428_9_file7.txt 1048576 2021-05-28 00:39:12 e7c3d79155e178e300ffe66b5c6cbea3 3 germany Max Plack Bonn} {57 428_10_file7.txt 1048576 2021-05-28 00:39:12 38cd0cdb88cf60a2b6abfbf49fb7cdf2 5 toronto CITA Canada} {57 428_10_file7.txt 1048576 2021-05-28 00:39:12 38cd0cdb88cf60a2b6abfbf49fb7cdf2 3 germany Max Plack Bonn} {58 428_6_file7.txt 1048576 2021-05-28 00:39:12 4b58c15228c1837386369d7f41936c6a 5 toronto CITA Canada} {58 428_6_file7.txt 1048576 2021-05-28 00:39:12 4b58c15228c1837386369d7f41936c6a 3 germany Max Plack Bonn} {59 428_1_file6.txt 1048576 2021-05-28 00:39:12 26eaca3fd7bcdbd052d37d820810e95e 5 toronto CITA Canada} {59 428_1_file6.txt 1048576 2021-05-28 00:39:12 26eaca3fd7bcdbd052d37d820810e95e 3 germany Max Plack Bonn} {60 428_3_file7.txt 1048576 2021-05-28 00:39:13 98b8cc9df6a416ce95100af3b62a6f89 5 toronto CITA Canada} {60 428_3_file7.txt 1048576 2021-05-28 00:39:13 98b8cc9df6a416ce95100af3b62a6f89 3 germany Max Plack Bonn} {61 428_9_file8.txt 1048576 2021-05-28 00:39:13 70eb75e2614ee949c9bea7cbaac811d1 5 toronto CITA Canada} {61 428_9_file8.txt 1048576 2021-05-28 00:39:13 70eb75e2614ee949c9bea7cbaac811d1 3 germany Max Plack Bonn} {62 428_5_file6.txt 1048576 2021-05-28 00:39:13 8f6f464a6f0d747262bfb1dd7ca2bc06 5 toronto CITA Canada} {62 428_5_file6.txt 1048576 2021-05-28 00:39:13 8f6f464a6f0d747262bfb1dd7ca2bc06 3 germany Max Plack Bonn} {63 428_4_file5.txt 1048576 2021-05-28 00:39:13 a64f556ded353cd1788343643faeb6fc 5 toronto CITA Canada} {63 428_4_file5.txt 1048576 2021-05-28 00:39:13 a64f556ded353cd1788343643faeb6fc 3 germany Max Plack Bonn} {64 428_8_file8.txt 1048576 2021-05-28 00:39:13 229dddd7e31182b32b885cf5f6f1f4d1 5 toronto CITA Canada} {64 428_8_file8.txt 1048576 2021-05-28 00:39:13 229dddd7e31182b32b885cf5f6f1f4d1 3 germany Max Plack Bonn} {65 428_7_file5.txt 1048576 2021-05-28 00:39:13 c148857397a70708e1c1c4c66c84d095 5 toronto CITA Canada} {65 428_7_file5.txt 1048576 2021-05-28 00:39:13 c148857397a70708e1c1c4c66c84d095 3 germany Max Plack Bonn} {66 428_10_file8.txt 1048576 2021-05-28 00:39:13 09de959266873a5f279a5c0b216b3baa 5 toronto CITA Canada} {66 428_10_file8.txt 1048576 2021-05-28 00:39:13 09de959266873a5f279a5c0b216b3baa 3 germany Max Plack Bonn} {67 428_9_file9.txt 1048576 2021-05-28 00:39:13 af775513f39da3495b5e2e818b73e91e 5 toronto CITA Canada} {67 428_9_file9.txt 1048576 2021-05-28 00:39:13 af775513f39da3495b5e2e818b73e91e 3 germany Max Plack Bonn} {68 428_1_file7.txt 1048576 2021-05-28 00:39:13 1002565e93e07f2db6fae06c136a2558 5 toronto CITA Canada} {68 428_1_file7.txt 1048576 2021-05-28 00:39:13 1002565e93e07f2db6fae06c136a2558 3 germany Max Plack Bonn} {70 428_6_file8.txt 1048576 2021-05-28 00:39:13 ce13c0315c398fc5880b7fef0c446f41 5 toronto CITA Canada} {70 428_6_file8.txt 1048576 2021-05-28 00:39:13 ce13c0315c398fc5880b7fef0c446f41 3 germany Max Plack Bonn} {69 428_2_file7.txt 1048576 2021-05-28 00:39:13 b225b630e1e926a085868c04841af8d6 5 toronto CITA Canada} {69 428_2_file7.txt 1048576 2021-05-28 00:39:13 b225b630e1e926a085868c04841af8d6 3 germany Max Plack Bonn} {71 428_3_file8.txt 1048576 2021-05-28 00:39:13 25499f5c77983bdee6edc926456575b9 5 toronto CITA Canada} {71 428_3_file8.txt 1048576 2021-05-28 00:39:13 25499f5c77983bdee6edc926456575b9 3 germany Max Plack Bonn} {72 428_4_file6.txt 1048576 2021-05-28 00:39:14 8d7fa502aaf0ba511cf775c6738acb5e 5 toronto CITA Canada} {72 428_4_file6.txt 1048576 2021-05-28 00:39:14 8d7fa502aaf0ba511cf775c6738acb5e 3 germany Max Plack Bonn} {73 428_8_file9.txt 1048576 2021-05-28 00:39:14 adbf8e260296d3aeee2de540f0873233 5 toronto CITA Canada} {73 428_8_file9.txt 1048576 2021-05-28 00:39:14 adbf8e260296d3aeee2de540f0873233 3 germany Max Plack Bonn} {74 428_5_file7.txt 1048576 2021-05-28 00:39:14 3cb140402c9b0a5c2f4847348cdca1be 5 toronto CITA Canada} {74 428_5_file7.txt 1048576 2021-05-28 00:39:14 3cb140402c9b0a5c2f4847348cdca1be 3 germany Max Plack Bonn} {75 428_9_file10.txt 1048576 2021-05-28 00:39:14 f95a8a7689670fbcd619a45bf18ab24b 5 toronto CITA Canada} {75 428_9_file10.txt 1048576 2021-05-28 00:39:14 f95a8a7689670fbcd619a45bf18ab24b 3 germany Max Plack Bonn} {76 428_7_file6.txt 1048576 2021-05-28 00:39:14 a458566af0a5aa59cc0588cf4668b62b 5 toronto CITA Canada} {76 428_7_file6.txt 1048576 2021-05-28 00:39:14 a458566af0a5aa59cc0588cf4668b62b 3 germany Max Plack Bonn} {77 428_10_file9.txt 1048576 2021-05-28 00:39:14 b507816b206234770236bbb251c6bfdb 5 toronto CITA Canada} {77 428_10_file9.txt 1048576 2021-05-28 00:39:14 b507816b206234770236bbb251c6bfdb 3 germany Max Plack Bonn} {78 428_1_file8.txt 1048576 2021-05-28 00:39:14 bf9b9225a6b2275418cefbfb8a7eba7a 5 toronto CITA Canada} {78 428_1_file8.txt 1048576 2021-05-28 00:39:14 bf9b9225a6b2275418cefbfb8a7eba7a 3 germany Max Plack Bonn} {79 428_4_file7.txt 1048576 2021-05-28 00:39:14 1fb94d2026bf4a190f1cfa311bc7214d 5 toronto CITA Canada} {79 428_4_file7.txt 1048576 2021-05-28 00:39:14 1fb94d2026bf4a190f1cfa311bc7214d 3 germany Max Plack Bonn} {80 428_6_file9.txt 1048576 2021-05-28 00:39:14 2d045e0672cec7d70fbf1895c20307be 5 toronto CITA Canada} {80 428_6_file9.txt 1048576 2021-05-28 00:39:14 2d045e0672cec7d70fbf1895c20307be 3 germany Max Plack Bonn} {81 428_2_file8.txt 1048576 2021-05-28 00:39:14 17c1ebdf4eb61c9c2d928f22a0c6100c 5 toronto CITA Canada} {81 428_2_file8.txt 1048576 2021-05-28 00:39:14 17c1ebdf4eb61c9c2d928f22a0c6100c 3 germany Max Plack Bonn} {82 428_8_file10.txt 1048576 2021-05-28 00:39:14 d8b92720474d573d4cd4995a7f8150ee 5 toronto CITA Canada} {82 428_8_file10.txt 1048576 2021-05-28 00:39:14 d8b92720474d573d4cd4995a7f8150ee 3 germany Max Plack Bonn} {84 428_10_file10.txt 1048576 2021-05-28 00:39:14 47b371b9c034bcbf530c5f8c8fba5c47 5 toronto CITA Canada} {84 428_10_file10.txt 1048576 2021-05-28 00:39:14 47b371b9c034bcbf530c5f8c8fba5c47 3 germany Max Plack Bonn} {85 428_5_file8.txt 1048576 2021-05-28 00:39:15 8ec2d9f6412d044f46e226166e0a3a51 5 toronto CITA Canada} {85 428_5_file8.txt 1048576 2021-05-28 00:39:15 8ec2d9f6412d044f46e226166e0a3a51 3 germany Max Plack Bonn} {83 428_3_file9.txt 1048576 2021-05-28 00:39:15 32c444842b2950b35a2fdb5e67240193 5 toronto CITA Canada} {83 428_3_file9.txt 1048576 2021-05-28 00:39:15 32c444842b2950b35a2fdb5e67240193 3 germany Max Plack Bonn} {86 428_4_file8.txt 1048576 2021-05-28 00:39:15 dd20e3f7f72960c2e2e2352556626d7b 5 toronto CITA Canada} {86 428_4_file8.txt 1048576 2021-05-28 00:39:15 dd20e3f7f72960c2e2e2352556626d7b 3 germany Max Plack Bonn} {87 428_3_file10.txt 1048576 2021-05-28 00:39:15 ce5b28e6ae2d55b212b3178129ab59a7 5 toronto CITA Canada} {87 428_3_file10.txt 1048576 2021-05-28 00:39:15 ce5b28e6ae2d55b212b3178129ab59a7 3 germany Max Plack Bonn} {88 428_7_file7.txt 1048576 2021-05-28 00:39:15 fa134e93d492a749676dffd1d9b56315 5 toronto CITA Canada} {88 428_7_file7.txt 1048576 2021-05-28 00:39:15 fa134e93d492a749676dffd1d9b56315 3 germany Max Plack Bonn} {89 428_1_file9.txt 1048576 2021-05-28 00:39:15 5fb0e7e4bb4b425222115291901d01d3 5 toronto CITA Canada} {89 428_1_file9.txt 1048576 2021-05-28 00:39:15 5fb0e7e4bb4b425222115291901d01d3 3 germany Max Plack Bonn} {90 428_2_file9.txt 1048576 2021-05-28 00:39:15 0c23bd492b32d38c37304989c3bfb870 5 toronto CITA Canada} {90 428_2_file9.txt 1048576 2021-05-28 00:39:15 0c23bd492b32d38c37304989c3bfb870 3 germany Max Plack Bonn} {91 428_6_file10.txt 1048576 2021-05-28 00:39:15 8c8d455d6f789702c4a4ecfc8fb78799 5 toronto CITA Canada} {91 428_6_file10.txt 1048576 2021-05-28 00:39:15 8c8d455d6f789702c4a4ecfc8fb78799 3 germany Max Plack Bonn} {92 428_4_file9.txt 1048576 2021-05-28 00:39:15 9267bed1214ed8cdb86f22c697184a3d 5 toronto CITA Canada} {92 428_4_file9.txt 1048576 2021-05-28 00:39:15 9267bed1214ed8cdb86f22c697184a3d 3 germany Max Plack Bonn} {93 428_7_file8.txt 1048576 2021-05-28 00:39:16 b736c1030d251d53be28eada3656d324 5 toronto CITA Canada} {93 428_7_file8.txt 1048576 2021-05-28 00:39:16 b736c1030d251d53be28eada3656d324 3 germany Max Plack Bonn} {94 428_5_file9.txt 1048576 2021-05-28 00:39:16 3cac102192dac85133a790df518da483 5 toronto CITA Canada} {94 428_5_file9.txt 1048576 2021-05-28 00:39:16 3cac102192dac85133a790df518da483 3 germany Max Plack Bonn} {95 428_5_file10.txt 1048576 2021-05-28 00:39:16 4d4d55caaefe439089bcd7846f392d8f 5 toronto CITA Canada} {95 428_5_file10.txt 1048576 2021-05-28 00:39:16 4d4d55caaefe439089bcd7846f392d8f 3 germany Max Plack Bonn} {97 428_4_file10.txt 1048576 2021-05-28 00:39:16 8b979919b28f06fcbe16c4d237b4029e 5 toronto CITA Canada} {97 428_4_file10.txt 1048576 2021-05-28 00:39:16 8b979919b28f06fcbe16c4d237b4029e 3 germany Max Plack Bonn} {96 428_2_file10.txt 1048576 2021-05-28 00:39:16 649716d7a76dc86cf9dad6d779144961 5 toronto CITA Canada} {96 428_2_file10.txt 1048576 2021-05-28 00:39:16 649716d7a76dc86cf9dad6d779144961 3 germany Max Plack Bonn} {98 428_1_file10.txt 1048576 2021-05-28 00:39:16 cc314f3dbd9e52b62841c8db252066ee 5 toronto CITA Canada} {98 428_1_file10.txt 1048576 2021-05-28 00:39:16 cc314f3dbd9e52b62841c8db252066ee 3 germany Max Plack Bonn} {99 428_7_file9.txt 1048576 2021-05-28 00:39:16 f5bf824ac3f15495e207e6c9499acf90 5 toronto CITA Canada} {99 428_7_file9.txt 1048576 2021-05-28 00:39:16 f5bf824ac3f15495e207e6c9499acf90 3 germany Max Plack Bonn} {100 428_7_file10.txt 1048576 2021-05-28 00:39:17 850419959becc6de2be4e621458d4e82 5 toronto CITA Canada} {100 428_7_file10.txt 1048576 2021-05-28 00:39:17 850419959becc6de2be4e621458d4e82 3 germany Max Plack Bonn}]
+2021/05/28 00:39:19 Added file=44 with rule=5 into Records table
+2021/05/28 00:39:19 Added file=44 with rule=3 into Records table
+2021/05/28 00:39:19 Added file=45 with rule=5 into Records table
+2021/05/28 00:39:19 Added file=45 with rule=3 into Records table
+2021/05/28 00:39:19 Added file=46 with rule=5 into Records table
+2021/05/28 00:39:19 Added file=46 with rule=3 into Records table
+2021/05/28 00:39:20 Added file=47 with rule=5 into Records table
+2021/05/28 00:39:20 Added file=47 with rule=3 into Records table
+2021/05/28 00:39:20 Added file=48 with rule=5 into Records table
+2021/05/28 00:39:20 Added file=48 with rule=3 into Records table
+2021/05/28 00:39:20 Added file=49 with rule=5 into Records table
+2021/05/28 00:39:20 Added file=49 with rule=3 into Records table
+2021/05/28 00:39:20 Added file=50 with rule=5 into Records table
+2021/05/28 00:39:20 Added file=50 with rule=3 into Records table
+2021/05/28 00:39:21 Added file=51 with rule=5 into Records table
+2021/05/28 00:39:21 Added file=51 with rule=3 into Records table
+2021/05/28 00:39:21 Added file=52 with rule=5 into Records table
+2021/05/28 00:39:21 Added file=52 with rule=3 into Records table
+2021/05/28 00:39:21 Added file=53 with rule=5 into Records table
+2021/05/28 00:39:21 Added file=53 with rule=3 into Records table
+2021/05/28 00:39:21 Added file=54 with rule=5 into Records table
+2021/05/28 00:39:22 Added file=54 with rule=3 into Records table
+2021/05/28 00:39:22 Added file=55 with rule=5 into Records table
+2021/05/28 00:39:22 Added file=55 with rule=3 into Records table
+2021/05/28 00:39:22 Added file=56 with rule=5 into Records table
+2021/05/28 00:39:22 Added file=56 with rule=3 into Records table
+2021/05/28 00:39:22 Added file=57 with rule=5 into Records table
+2021/05/28 00:39:22 Added file=57 with rule=3 into Records table
+2021/05/28 00:39:22 Added file=58 with rule=5 into Records table
+2021/05/28 00:39:22 Added file=58 with rule=3 into Records table
+2021/05/28 00:39:22 Added file=59 with rule=5 into Records table
+2021/05/28 00:39:23 Added file=59 with rule=3 into Records table
+2021/05/28 00:39:23 Added file=60 with rule=5 into Records table
+2021/05/28 00:39:23 Added file=60 with rule=3 into Records table
+2021/05/28 00:39:23 Added file=61 with rule=5 into Records table
+2021/05/28 00:39:23 Added file=61 with rule=3 into Records table
+2021/05/28 00:39:23 Added file=62 with rule=5 into Records table
+2021/05/28 00:39:23 Added file=62 with rule=3 into Records table
+2021/05/28 00:39:23 Added file=63 with rule=5 into Records table
+2021/05/28 00:39:23 Added file=63 with rule=3 into Records table
+2021/05/28 00:39:24 Added file=64 with rule=5 into Records table
+2021/05/28 00:39:24 Added file=64 with rule=3 into Records table
+2021/05/28 00:39:24 Added file=65 with rule=5 into Records table
+2021/05/28 00:39:24 Added file=65 with rule=3 into Records table
+2021/05/28 00:39:24 Added file=66 with rule=5 into Records table
+2021/05/28 00:39:24 Added file=66 with rule=3 into Records table
+2021/05/28 00:39:24 Added file=67 with rule=5 into Records table
+2021/05/28 00:39:25 Added file=67 with rule=3 into Records table
+2021/05/28 00:39:25 Added file=68 with rule=5 into Records table
+2021/05/28 00:39:25 Added file=68 with rule=3 into Records table
+2021/05/28 00:39:25 Added file=70 with rule=5 into Records table
+2021/05/28 00:39:25 Added file=70 with rule=3 into Records table
+2021/05/28 00:39:25 Added file=69 with rule=5 into Records table
+2021/05/28 00:39:25 Added file=69 with rule=3 into Records table
+2021/05/28 00:39:25 Added file=71 with rule=5 into Records table
+2021/05/28 00:39:25 Added file=71 with rule=3 into Records table
+2021/05/28 00:39:26 Added file=72 with rule=5 into Records table
+2021/05/28 00:39:26 Added file=72 with rule=3 into Records table
+2021/05/28 00:39:26 Added file=73 with rule=5 into Records table
+2021/05/28 00:39:26 Added file=73 with rule=3 into Records table
+2021/05/28 00:39:26 Added file=74 with rule=5 into Records table
+2021/05/28 00:39:26 Added file=74 with rule=3 into Records table
+2021/05/28 00:39:26 Added file=75 with rule=5 into Records table
+2021/05/28 00:39:26 Added file=75 with rule=3 into Records table
+2021/05/28 00:39:27 Added file=76 with rule=5 into Records table
+2021/05/28 00:39:27 Added file=76 with rule=3 into Records table
+2021/05/28 00:39:27 Added file=77 with rule=5 into Records table
+2021/05/28 00:39:27 Added file=77 with rule=3 into Records table
+2021/05/28 00:39:27 Added file=78 with rule=5 into Records table
+2021/05/28 00:39:27 Added file=78 with rule=3 into Records table
+2021/05/28 00:39:27 Added file=79 with rule=5 into Records table
+2021/05/28 00:39:27 Added file=79 with rule=3 into Records table
+2021/05/28 00:39:27 Added file=80 with rule=5 into Records table
+2021/05/28 00:39:28 Added file=80 with rule=3 into Records table
+2021/05/28 00:39:28 Added file=81 with rule=5 into Records table
+2021/05/28 00:39:28 Added file=81 with rule=3 into Records table
+2021/05/28 00:39:28 Added file=82 with rule=5 into Records table
+2021/05/28 00:39:28 Added file=82 with rule=3 into Records table
+2021/05/28 00:39:28 Added file=84 with rule=5 into Records table
+2021/05/28 00:39:28 Added file=84 with rule=3 into Records table
+2021/05/28 00:39:28 Added file=85 with rule=5 into Records table
+2021/05/28 00:39:29 Added file=85 with rule=3 into Records table
+2021/05/28 00:39:29 Added file=83 with rule=5 into Records table
+2021/05/28 00:39:29 Added file=83 with rule=3 into Records table
+2021/05/28 00:39:29 Added file=86 with rule=5 into Records table
+2021/05/28 00:39:29 Added file=86 with rule=3 into Records table
+2021/05/28 00:39:29 Added file=87 with rule=5 into Records table
+2021/05/28 00:39:29 Added file=87 with rule=3 into Records table
+2021/05/28 00:39:29 Added file=88 with rule=5 into Records table
+2021/05/28 00:39:29 Added file=88 with rule=3 into Records table
+2021/05/28 00:39:30 Added file=89 with rule=5 into Records table
+2021/05/28 00:39:30 Added file=89 with rule=3 into Records table
+2021/05/28 00:39:30 Added file=90 with rule=5 into Records table
+2021/05/28 00:39:30 Added file=90 with rule=3 into Records table
+2021/05/28 00:39:30 Added file=91 with rule=5 into Records table
+2021/05/28 00:39:30 Added file=91 with rule=3 into Records table
+2021/05/28 00:39:30 Added file=92 with rule=5 into Records table
+2021/05/28 00:39:30 Added file=92 with rule=3 into Records table
+2021/05/28 00:39:30 Added file=93 with rule=5 into Records table
+2021/05/28 00:39:31 Added file=93 with rule=3 into Records table
+2021/05/28 00:39:31 Added file=94 with rule=5 into Records table
+2021/05/28 00:39:31 Added file=94 with rule=3 into Records table
+2021/05/28 00:39:31 Added file=95 with rule=5 into Records table
+2021/05/28 00:39:31 Added file=95 with rule=3 into Records table
+2021/05/28 00:39:31 Added file=97 with rule=5 into Records table
+2021/05/28 00:39:31 Added file=97 with rule=3 into Records table
+2021/05/28 00:39:31 Added file=96 with rule=5 into Records table
+2021/05/28 00:39:31 Added file=96 with rule=3 into Records table
+2021/05/28 00:39:32 Added file=98 with rule=5 into Records table
+2021/05/28 00:39:32 Added file=98 with rule=3 into Records table
+2021/05/28 00:39:32 Added file=99 with rule=5 into Records table
+2021/05/28 00:39:32 Added file=99 with rule=3 into Records table
+2021/05/28 00:39:32 Added file=100 with rule=5 into Records table
+2021/05/28 00:39:32 Added file=100 with rule=3 into Records table
+2021/05/28 00:39:32 ??? []
+2021/05/28 00:39:33 ??? []
