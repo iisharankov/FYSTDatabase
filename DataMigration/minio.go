@@ -17,12 +17,11 @@ file can probably be removed and integrated where the minio methods are used dir
 
 func (minioInstance *ObjectMetadata) initMinio() {
 	// Initialize minio client object.
-	client, err := minio.New(minioInstance.endpoint, &minio.Options{
-		Creds:  credentials.NewStaticV4(minioInstance.id, minioInstance.password, ""),
+	// TODO: Return error for this!
+	if client, err := minio.New(minioInstance.address, &minio.Options{
+		Creds:  credentials.NewStaticV4(minioInstance.accessID, minioInstance.secretID, ""),
 		Secure: minioInstance.useSSL,
-	})
-
-	if err != nil {
+	}); err != nil {
 		log.Println(err)
 	} else {
 		minioInstance.minioClient = client
