@@ -2,136 +2,135 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
-	"strconv"
-	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/iisharankov/FYSTDatabase/datasets"
 )
 
-func AddLogToDBEndpoint(w http.ResponseWriter, r *http.Request) {
+func AddRecordToDBEndpoint(w http.ResponseWriter, r *http.Request) {
+	log.Println("AddRecordToDBEndpoint -", r.URL)
 	params := mux.Vars(r)
 
-	// Extract the body of the POST request
-	var fileName string
-	dec := json.NewDecoder(r.Body)
-	dec.DisallowUnknownFields()
-	err := dec.Decode(&fileName)
-
-	// Make sure the ID in the header is actually an integer
-	FileID, err := strconv.Atoi(params["id"])
-	if err != nil {
-		combinedErrors := concatErrors(err, "File ID could not be converted to an int!")
-		jsonResponse(w, combinedErrors, http.StatusServiceUnavailable)
-		return
-	}
-
-	// Tells you which RuleID corresponds to a FileID and Location string (locationName in BackupLocation)
-	query := fmt.Sprintf(`select r.RuleID from Rule r 
-		join ObjectFile o on o.InstrumentID=r.InstrumentID 
-		join BackupLocation b on b.LocationID=r.LocationID
-		where o.FileId = %v and b.S3Bucket = "%v"`, params["id"], params["location"])
-	queryReturn, err := dbCon.QueryRead(query, &struct{ RuleID int }{})
-	if err != nil {
-		jsonResponse(w, err, http.StatusBadRequest)
-		return
-	}
-	returnQuery, _ := queryReturn.Interface().([]struct{ RuleID int }) // type assert from reflect.Value to struct
-
-	if err = addRowToLog(FileID, returnQuery[0].RuleID, fileName); err != nil {
-		jsonResponse(w, err, http.StatusBadRequest)
-		return
-	}
-
-	jsonResponse(w, nil, http.StatusAccepted)
-}
-
-func GetCopiesOFLogFromDBEndpoint(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-
-	// Check to see if input is an actual integer
-	_, err := strconv.Atoi(params["id"])
-	if err != nil {
-		errMsg := errors.New("Could not convert ID given to int, check value after 'files/'")
+	// v // check that the MD5 of the object on Minio is the same as the given one in the database
+	if err := verifyObject(params["filename"]); err != nil {
+		errMsg := fmt.Errorf("Error verifying object at Files endpoint: " + err.Error())
 		jsonResponse(w, errMsg, http.StatusBadRequest)
 		return
 	}
+	// ^ //
 
-	// if int, use string version for simplicity
-	SQLQuery := "select * from Log where Log.FileID=" + params["id"]
-	var objectTable datasets.LogTable
-	outputRows, err := dbCon.QueryRead(SQLQuery, &objectTable)
+	// v // Finds which RuleID corresponds to FileName & Location string given
+	var ruleIDRow []struct{ RuleID int }
+	query := fmt.Sprintf(`select r.RuleID from Rules r 
+		join Files f on f.InstrumentID=r.InstrumentID join Locations l on l.LocationID=r.LocationID
+		where f.FileName="%v" and l.S3Bucket="%v" and r.Active=1;`, params["filename"], params["location"])
+
+	outputRows, err := dbCon.QueryRead(query, &struct{ RuleID int }{})
 	if err != nil {
 		jsonResponse(w, err, http.StatusBadRequest)
 		return
 	}
 
-	outputData, _ := outputRows.Interface().([]datasets.LogTable)
-	for _, val := range outputData {
-		data, _ := json.Marshal(val)
-		w.Write(data)
+	// v // Convert reflect.Value() to RecordsTable and check if empty or server error
+	ruleIDRow, ok := outputRows.Interface().([]struct{ RuleID int })
+	if !ok {
+		jsonResponse(w, fmt.Errorf("Server error in casting database response"), http.StatusInternalServerError)
+		return
+	} else if len(ruleIDRow) == 0 {
+		// Will only trigger if file has no local object storage rule, or rule is not active
+		jsonResponse(w, fmt.Errorf("No records in database to return"), http.StatusBadRequest)
+		return
 	}
-	jsonResponse(w, err, http.StatusAccepted)
+	// ^ //
+
+	// v // Find the FileID to add a entry to record, since we only were given FileName
+	FileID, err := getFileIDFromFileName(params["filename"])
+	if err != nil {
+		jsonResponse(w, err, http.StatusBadRequest)
+		return
+	}
+	// ^ //
+
+	// v // Attempt to add the log to the Records table
+	if err = addRowToRecord(FileID, ruleIDRow[0].RuleID); err != nil {
+		jsonResponse(w, err, http.StatusBadRequest)
+		return
+	}
+	// ^ //
+
+	jsonResponse(w, nil, http.StatusOK)
 }
 
-func GetLogsFromDBEndpoint(w http.ResponseWriter, r *http.Request) {
+func GetRecordFromDBEndpoint(w http.ResponseWriter, r *http.Request) {
+	log.Println("GetRecordFromDBEndpoint -", r.URL)
 	params := mux.Vars(r)
 
-	// Set up SQL Query depending if request asks for one file or multiple
-	var SQLQuery string
-	if strings.Contains(params["id"], "-") {
-		splitRange := strings.Split(params["id"], "-")
-
-		a, _ := strconv.Atoi(splitRange[0])
-		b, _ := strconv.Atoi(splitRange[1])
-		SQLQuery = "select * from Log ORDER BY FileID LIMIT " + strconv.Itoa(b-a+1) + " OFFSET " + strconv.Itoa(a-1)
-	} else {
-		// if int, use string version for simplicity. No worry about SQL injection since above Atoi didn't fail
-		SQLQuery = "select * from Log where Log.FileID=" + params["id"]
-	}
-
-	var logTable datasets.LogTable
-	outputRows, err := dbCon.QueryRead(SQLQuery, &logTable)
+	// v // Find the fileID for the given filename
+	fileID, err := getFileIDFromFileName(params["filename"])
 	if err != nil {
 		jsonResponse(w, err, http.StatusBadRequest)
 		return
 	}
+	// ^ //
 
-	outputData, ok := outputRows.Interface().([]datasets.LogTable)
-	if !ok || len(outputData) == 0 { // Len will be 0 if index is out of range (nothing is returned)
-		errMsg := errors.New("Error with ID given, may be out of range of last element")
-		jsonResponse(w, errMsg, http.StatusBadRequest)
+	// v // Send query to database asking for records corresponding to fileID
+	SQLQuery := fmt.Sprintf(`select * from Records where FileID=%v;`, fileID)
+	outputRows, err := dbCon.QueryRead(SQLQuery, &datasets.RecordsTable{})
+	if err != nil {
+		jsonResponse(w, err, http.StatusBadRequest)
 		return
 	}
-	var i int
+	// ^ //
+
+	// v // Convert reflect.Value() to RecordsTable and check if empty or server error
+	outputData, ok := outputRows.Interface().([]datasets.RecordsTable)
+	if !ok {
+		jsonResponse(w, fmt.Errorf("Server error in casting database response"), http.StatusInternalServerError)
+		return
+	} else if len(outputData) == 0 { // Will only trigger when single row rested
+		jsonResponse(w, fmt.Errorf("Record '%v' does not exist in database", params["filename"]), http.StatusBadRequest)
+		return
+	}
+	// ^ //
+
+	// v // Print out values within outputData
 	for _, val := range outputData {
 		data, _ := json.Marshal(val)
-		w.Write(data)
-		i++
+		w.Write(append(data, "\n"...))
 	}
-	log.Println(i)
-	jsonResponse(w, err, http.StatusAccepted)
+	// ^ //
 }
 
-func GetAllLogsFromDBEndpoint(w http.ResponseWriter, r *http.Request) {
+func GetAllRecordsFromDBEndpoint(w http.ResponseWriter, r *http.Request) {
+	log.Println("GetAllRecordsFromDBEndpoint -", r.URL)
 
-	// if int, use string version for simplicity
-	SQLQuery := "select * from Log"
-	var objectTable datasets.LogTable
-	outputRows, err := dbCon.QueryRead(SQLQuery, &objectTable)
+	// v // Send query to database requesting all records
+	SQLQuery := "select * from Records ORDER BY FileID DESC LIMIT 50;"
+	outputRows, err := dbCon.QueryRead(SQLQuery, &datasets.RecordsTable{})
 	if err != nil {
 		jsonResponse(w, err, http.StatusBadRequest)
 		return
 	}
+	// ^ //
 
-	outputData, _ := outputRows.Interface().([]datasets.LogTable)
+	// v // Convert reflect.Value() to RecordsTable and check if empty or server error
+	outputData, ok := outputRows.Interface().([]datasets.RecordsTable)
+	if !ok {
+		jsonResponse(w, fmt.Errorf("Server error in casting database response"), http.StatusInternalServerError)
+		return
+	} else if len(outputData) == 0 { // Will only trigger when single row rested
+		jsonResponse(w, fmt.Errorf("No records in database to return"), http.StatusBadRequest)
+		return
+	}
+	// ^ //
+
+	// v // Print out values within outputData
 	for _, val := range outputData {
 		data, _ := json.Marshal(val)
-		w.Write(data)
+		w.Write(append(data, "\n"...))
 	}
-	jsonResponse(w, err, http.StatusAccepted)
+	// ^ //
 }
