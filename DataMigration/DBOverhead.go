@@ -144,6 +144,7 @@ func (dpCon *DatabaseConnection) QueryRead(SQLQuery string, p interface{}) (empt
 	if err := rows.Err(); err != nil {
 		panic(err)
 	}
+	// TODO: Add check to make sure outputData is not nil otherwise index error causes panic everywhere else
 	return outputData, nil
 }
 
