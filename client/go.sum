@@ -11,8 +11,10 @@ github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1 h1:EGx4pi6eqNxGa
 github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1/go.mod h1:wJfORRmW1u3UXTncJ5qlYoELFm8eSnnEO6hX4iZ3EWY=
 github.com/gopherjs/gopherjs v0.0.0-20210202160940-bed99a852dfe h1:rcf1P0fm+1l0EjG16p06mYLj9gW9X36KgdHJ/88hS4g=
 github.com/gopherjs/gopherjs v0.0.0-20210202160940-bed99a852dfe/go.mod h1:wJfORRmW1u3UXTncJ5qlYoELFm8eSnnEO6hX4iZ3EWY=
-github.com/iisharankov/FYSTDatabase/datasets v0.0.0-20210517024321-b2704aa85a1c h1:Gna6FIOkl7tXpS95uozoXq52R9Y8aXd0hh/S2OQHI2o=
-github.com/iisharankov/FYSTDatabase/datasets v0.0.0-20210517024321-b2704aa85a1c/go.mod h1:vvVhaYulQ74mfZAzFitKONFNiI0l8eM6TnBRbf5ITuE=
+github.com/iisharankov/FYSTDatabase/datasets v0.0.0-20210526054153-b810525c9158 h1:UbiwPr2zKVO8+EBpBSW58D8L7SRQK1/jVRNzXQnAwTE=
+github.com/iisharankov/FYSTDatabase/datasets v0.0.0-20210526054153-b810525c9158/go.mod h1:vvVhaYulQ74mfZAzFitKONFNiI0l8eM6TnBRbf5ITuE=
+github.com/iisharankov/FYSTDatabase/datasets v0.0.0-20210527205405-0f4943ef6396 h1:o/wYNFjQ83VfZ7Hd7sSWbExjgDhMKmpFes43Mgli/Iw=
+github.com/iisharankov/FYSTDatabase/datasets v0.0.0-20210527205405-0f4943ef6396/go.mod h1:vvVhaYulQ74mfZAzFitKONFNiI0l8eM6TnBRbf5ITuE=
 github.com/json-iterator/go v1.1.10 h1:Kz6Cvnvv2wGdaG/V8yMvfkmNiXq9Ya2KUv4rouJJr68=
 github.com/json-iterator/go v1.1.10/go.mod h1:KdQUCv79m/52Kvf8AW2vK1V8akMuk1QjK/uOdHXbAo4=
 github.com/jtolds/gls v4.20.0+incompatible h1:xdiiI2gbIgH/gLH7ADydsJ1uDOEzR8yvV7C0MuV77Wo=

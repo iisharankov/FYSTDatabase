@@ -51,6 +51,6 @@ func copyFile(minioInstance ObjectMetadata, file datasets.File, serverReply data
 	// Upload the zip file
 	log.Println(file.Name, file.URL)
 
-	minioInstance.UploadObject(reply, file.Name, file.URL, "application/zip")
+	minioInstance.UploadObject(reply, file.Name, file.URL, "application/")
 	return 0, nil
 }

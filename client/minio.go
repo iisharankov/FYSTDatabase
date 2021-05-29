@@ -76,7 +76,7 @@ func (minioInstance *ObjectMetadata) ListBuckets() ([]minio.BucketInfo, error) {
 func (minioInstance *ObjectMetadata) UploadObject(bucketName, objectName, filePath, contentType string) {
 	// Upload the zip file with FPutObject
 	// TODO: Setting filePath as objectName as well to help uniqueness
-	n, err := minioInstance.minioClient.FPutObject(minioInstance.ctx, bucketName, filePath, filePath, minio.PutObjectOptions{ContentType: contentType})
+	n, err := minioInstance.minioClient.FPutObject(minioInstance.ctx, bucketName, objectName, filePath, minio.PutObjectOptions{ContentType: contentType})
 	if err != nil {
 		log.Fatalln(err)
 	}

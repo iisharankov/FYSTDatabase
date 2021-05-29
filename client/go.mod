@@ -5,7 +5,7 @@ go 1.15
 require (
 	github.com/google/uuid v1.2.0 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20210202160940-bed99a852dfe // indirect
-	github.com/iisharankov/FYSTDatabase/datasets v0.0.0-20210517024321-b2704aa85a1c
+	github.com/iisharankov/FYSTDatabase/datasets v0.0.0-20210527205405-0f4943ef6396
 	github.com/klauspost/cpuid/v2 v2.0.6 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect

@@ -29,21 +29,37 @@ func NewDBAPI(host string) *DBAPI {
 }
 
 func (dbapi *DBAPI) do(req *http.Request) ([]byte, error) {
+	// Send request req to server
 	resp, err := dbapi.client.Do(req)
 	if err != nil {
 		return nil, err
 	}
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf(resp.Status)
-	}
+	// Read the body of the http response into b
 	b, err := ioutil.ReadAll(resp.Body)
+	defer resp.Body.Close()
 	if err != nil {
 		return nil, err
 	}
-	if string(b[:7]) == "Failed:" {
+
+	// Send request req to server
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		return nil, fmt.Errorf(string(b))
 	}
+
+	// // unpack b into the struct it was encoded as
+	// var response datasets.ServerHTTPResponse
+	// if err = json.Unmarshal(b, &response); err != nil {
+	// 	log.Println("REFREFREFERFs")
+	// 	log.Println(err)
+	// }
+	//
+	// log.Println(response)
+	// // Server responds with Status S of "ok" or "error". Respond accordingly
+	// if response.S == "error" {
+	// 	return nil, fmt.Errorf("Error from Server: " + response.M)
+	// }
+	// return []byte(response.M), nil
 	return b, nil
 }
 
@@ -73,6 +89,7 @@ func (dbapi *DBAPI) post(path, contentType string, body io.Reader) ([]byte, erro
 	return dbapi.do(req)
 }
 
+// Patch command depreciated
 // func (dbapi *DBAPI) patch(path, contentType string, body io.Reader) ([]byte, error) {
 // 	req, err := dbapi.newRequest("PATCH", path, body)
 // 	if err != nil {
@@ -82,20 +99,19 @@ func (dbapi *DBAPI) post(path, contentType string, body io.Reader) ([]byte, erro
 // 	return dbapi.do(req)
 // }
 
-////////////////////////////////////////////////// Mine
+// * // * // client specific functions below // * // * //
 func (dbapi *DBAPI) getFiles(id string) ([]byte, error) {
 	var endpoint string = "/files"
-	if id != "" { // If a specific ID was given, make sure to query that item only
+	if id != "" { // If a specific ID was given, add ID to endpoint
 		endpoint += "/" + id
 	}
 
-	a, err := dbapi.get(endpoint)
-	return a, err
+	return dbapi.get(endpoint)
 }
 
 func (dbapi *DBAPI) getRules(id string) ([]byte, error) {
 	var endpoint string = "/rules"
-	if id != "" { // If a specific ID was given, make sure to query that item only
+	if id != "" { // If a specific ID was given, add ID to endpoint
 		endpoint += "/" + id
 	}
 
@@ -122,21 +138,19 @@ func (dbapi *DBAPI) requestToUploadFile(file datasets.File) ([]byte, error) {
 
 func (dbapi *DBAPI) requestToUpdateLog(name string, reply datasets.ClientUploadReply) ([]byte, error) {
 	var body bytes.Buffer
-	dec := json.NewEncoder(&body)
-	err := dec.Encode(name)
 
-	endpoint := fmt.Sprintf("/logs/%d/%v", reply.FileID, reply.UploadLocation)
+	endpoint := fmt.Sprintf("/records/%v/%v", reply.FileName, reply.UploadLocation)
 	a, err := dbapi.post(endpoint, "application/x-www-form-urlencoded", &body)
 	return a, err
 }
 
-func (dbapi *DBAPI) requestToUpdateCopies(reply datasets.CopiesTable) ([]byte, error) {
+func (dbapi *DBAPI) requestToUpdateCopies(filename string, LocationID int) ([]byte, error) {
 	var body bytes.Buffer
 	dec := json.NewEncoder(&body)
-	err := dec.Encode(reply)
+	err := dec.Encode(LocationID)
 
 	// TODO: Still pass locationID AND FileID to endpoint in body to populate Copies table, normalization!
-	endpoint := fmt.Sprintf("/files/%d/copies", reply.FileID)
+	endpoint := fmt.Sprintf("/files/%v/copies", filename)
 	a, err := dbapi.post(endpoint, "application/x-www-form-urlencoded", &body)
 	return a, err
 }
@@ -157,7 +171,7 @@ func (dbapi *DBAPI) requestToUpdateCopies(reply datasets.CopiesTable) ([]byte, e
 // 	err := dec.Encode(reply.UploadLocation)
 
 // 	endpoint := fmt.Sprintf("/files/%d", reply.FileID)
-// 	// endpoint = "/logs"
+// 	// endpoint = "/records"
 // 	log.Println(endpoint)
 // 	// a, err := dbapi.post(endpoint, "application/x-www-form-urlencoded", &body)
 // 	a, err := dbapi.post(endpoint, "application/x-www-form-urlencoded", &body)
@@ -165,7 +179,7 @@ func (dbapi *DBAPI) requestToUpdateCopies(reply datasets.CopiesTable) ([]byte, e
 // }
 
 func (dbapi *DBAPI) logGET() ([]byte, error) {
-	var endpoint string = "/logs"
+	var endpoint string = "/records"
 	a, err := dbapi.get(endpoint)
 	return a, err
 }

@@ -24,6 +24,7 @@ func getenv(key, def string) string {
 }
 
 func main() {
+	log.SetFlags(log.LstdFlags | log.Lmicroseconds)
 	apiAddr := flag.String("api", getenv("FYST_DB_ADDR", "localhost:8700"), "DB API address")
 	connection := NewDBAPI(*apiAddr)
 
@@ -36,11 +37,16 @@ func main() {
 		id := filescmd.String("id", "", "Files to query")
 		filescmd.Parse(os.Args[2:])
 
-		ans, err := connection.getFiles(*id)
+		reply, err := connection.getFiles(*id)
 		if err != nil {
 			fmt.Println(err)
+		}
+
+		var ans datasets.FilesTable
+		if err = json.Unmarshal(reply, &ans); err != nil {
+			log.Println(err)
 		} else {
-			fmt.Println(string(ans))
+			log.Println(ans)
 		}
 
 	case "rules":
@@ -79,8 +85,9 @@ func main() {
 
 		// Tell server new file exists and unmarshal the reply for use
 		var ans datasets.ClientUploadReply
-		if reply, err := connection.requestToUploadFile(file); err != nil {
-			log.Println(err.Error())
+		reply, err := connection.requestToUploadFile(file)
+		if err != nil {
+			log.Println(err)
 			return
 		} else if err = json.Unmarshal(reply, &ans); err != nil {
 			panic(err)
@@ -90,7 +97,6 @@ func main() {
 
 		// a, err := connection.logGET()
 		// log.Println("a was", string(a), "err was", err)
-
 		// upload file to bucket URL in JSON reply and then ask server to update log
 		err = uploadData(ans, file)
 		if err != nil {
@@ -100,24 +106,16 @@ func main() {
 			a, err := connection.requestToUpdateLog(file.Name, ans)
 			if err != nil {
 				log.Println(err)
+				return
 			}
 			log.Println("Log response:", string(a))
 
-			temp := datasets.CopiesTable{
-				FileID:     ans.FileID,
-				LocationID: ans.LocationID,
-				URL:        file.URL,
-			}
-			a, err = connection.requestToUpdateCopies(temp)
+			b, err := connection.requestToUpdateCopies(ans.FileName, ans.LocationID)
 			if err != nil {
 				log.Println(err)
+				return
 			}
-			log.Println("Copies response:", string(a))
-
-			// _, err = connection.requestToUpdateObjectFile(file, ans)
-			// if err != nil {
-			// 	log.Println(err)
-			// }
+			log.Println("Copies response:", string(b))
 		}
 
 	default:
