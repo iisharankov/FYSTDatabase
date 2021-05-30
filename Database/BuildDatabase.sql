@@ -5,19 +5,43 @@ drop table if exists `Locations`;
 drop table if exists `Instrument`;
 
 use mydb;
-DELETE FROM Files WHERE FileID between 0 and 100;
+DELETE FROM Copies WHERE FileID between 0 and 10000;
+DELETE FROM Records WHERE FileID between 0 and 10000;
+DELETE FROM Files WHERE FileID between 0 and 10000;
+
 
 select * from Instruments;
+
+
+select r.RuleID from Rules r 
+join Files f on f.InstrumentID=r.InstrumentID 
+join Locations l on l.LocationID=r.LocationID
+where f.FileName ="LetItBe" and l.S3Bucket ="fyst";
+
+select ifnull(MAX(FileID), 0) FROM Files;
+
+select * from Files where FileID="e"
+
 select * from Locations;
+select * from Rules;
 select * from Files;
 select * from Records;
-select * from Rules;
+select * from Copies;
 
-UPDATE Records SET IsCopying=001 WHERE FileID=1 AND RuleID = 1;
+
+INSERT INTO Copies (FileID, LocationID, URL)
+SELECT FileID, RuleId, 'DEF' FROM Records WHERE FileID = 18 and RuleID=1;
+select * from Copies;
+
+    
+    
+ 
+
 
 select f.FileID, r.RuleID, f.Size, i.InstrumentID,
-i.InstrumentName, f.DateCreated, f.ObjectStorage, f.HashOfBytes, BL.S3Bucket, l.IsCopying
+i.InstrumentName, f.DateCreated, f.HashOfBytes, BL.S3Bucket
 from Files f
+join Copies c on c.FileID=f.FileID
 join Instruments i on i.InstrumentID=f.InstrumentID
 join Rules r on r.InstrumentID=i.InstrumentID
 join Locations BL on BL.LocationID=r.LocationID
@@ -25,8 +49,15 @@ left join Records l on l.FileID=f.FileID and r.RuleID=l.RuleID
 where l.FileID is null AND r.Active=1 order by f.DateCreated;
 
 
-
-select l.URL from Records l join Rules r on r.RuleID=l.RuleID 
+select r.RuleID from Rules r 
+		join Files f on f.InstrumentID=r.InstrumentID 
+		join Locations l on l.LocationID=r.LocationID
+where f.FileI =1 and l.S3Bucket = "fyst";
+        
+select c.URL from Copies c
+join Files l on l.FileId=c.FileID
+join Records re on l.FileID=re.FileID
+join Rules r on r.RuleID=re.RuleID 
 join Locations BL on BL.LocationID=r.LocationID 
 where l.FileID=1 and BL.S3Bucket="fyst";
 
@@ -43,27 +74,25 @@ select FileID from Records group by FileID having count(*)>3);
 insert into Instruments values(1,'CHAI','expanded CHAI name','Multi-pixel heterodyne receiver for 2 frequency bands observable simultaneously', 64,450,495);
 insert into Instruments values(2,'PCAM','Primary Camera','It is very big',1024,25,900);
 
-
 -- Add Locations
 insert into Locations values(1, 'Observatory', 'fyst', '0.0.0.0', '9000', 'iisharankov', 'iisharankov', false);
 insert into Locations values(2, 'Max Plack Bonn', 'germany', '0.0.0.0', '9000', 'iisharankov', 'iisharankov', false);
 insert into Locations values(3, 'Cornell USA', 'cornell', '0.0.0.0', '9000', 'iisharankov', 'iisharankov', false);
 insert into Locations values(4, 'CITA Canada', 'toronto', '0.0.0.0', '9000', 'iisharankov', 'iisharankov', false);
 
-
 -- Add Rules
 insert into Rules values(1, 'copy all files onto FYST server', 1, 1, 1);
 insert into Rules values(2, 'copy all files onto FYST server', 2, 1, 1);
 insert into Rules values(3, 'copy all CHAI files to Germany', 1, 2, 1);
 insert into Rules values(4, 'copy all CHAI files to Cornell', 1, 3, 0);
-insert into Ruless values(5, 'copy all CHAI files to Toronto', 1, 4, 1);
-insert into Ruless values(6, 'copy all PCAM files to Germany', 2, 2, 0);
-insert into Ruless values(7, 'copy all PCAM files to Cornell', 2, 3, 1);
-insert into Ruless values(8, 'copy all PCAM files to Toronto', 2, 4, 1); 
+insert into Rules values(5, 'copy all CHAI files to Toronto', 1, 4, 1);
+insert into Rules values(6, 'copy all PCAM files to Germany', 2, 2, 0);
+insert into Rules values(7, 'copy all PCAM files to Cornell', 2, 3, 1);
+insert into Rules values(8, 'copy all PCAM files to Toronto', 2, 4, 1); 
 
 
 -- Data! 
-insert into Files values(7, '2020-10-11 12:50:00', 1, 1024, '658b939dc9896f7');
+insert into Files values(102, '2020-10-11 12:50:00', 1, 1024, '658b939dc9896f7');
 
 insert into Records values (112, 1, date_add(sysdate(), interval 1 day), 1, '');
 
@@ -166,7 +195,7 @@ group by f.FileID having count(l.FileID)<2;
 
 -- Get last record of Records
 SELECT * FROM Records ORDER BY FileID DESC LIMIT 1;
-SELECT * FROM Files ORDER BY FileID DESC LIMIT 1;
+SELECT * FROM Files Where HashOfBytes="badc2e9ea90821b51e7624168b50b9b5" ORDER BY FileID DESC LIMIT 1;
 
 -- select FileID from Files where FileID = (select max(FileID) from Records)
 -- Get last row of Files table that has been added to Records
