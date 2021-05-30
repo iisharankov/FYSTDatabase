@@ -1,31 +1,97 @@
-version: '3' 
+version: '3.7' 
 
 services: 
-  myminio:
-    image: minio/minio
-    command: server http://minio{1...4}/data{1...2}
-    ports:
-      - "9000:9000"
-    environment:
-    - MINIO_ACCESS_KEY:iisharankov
-    - MINIO_SECRET_KEY:iisharankov
-  # -e "MINIO_ROOT_USER=AKIAIOSFODNN7EXAMPLE" \
-  # -e "MINIO_ROOT_PASSWORD=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \
-
   mySQL:
-    image: mysql/mysql-server:latest
-    # build:
-      # context: kafka-connect-redis/
+    image: mysql/mysql-server:latest    
+    container_name: mySQL
     environment:
-    - MYSQL_ROOT_PASSWORD=root
     - MYSQL_USER=iisharankov
     - MYSQL_PASSWORD=iisharankov
     - MYSQL_DATABASE=mydb
-    ports:
+    - MYSQL_ROOT_PASSWORD=root
+    ports: 
       - 3306:3306
     volumes:
-    - ./mysql-dump:/docker-entrypoint-initdb.d
-    # volumes:
-      # - ./Database/DBForwardEngineer.sql/docker-entrypoint-initdb.d
-      # - "./data/db/mysql:/var/lib/mysql"
+        - "./Database/DBForwardEngineer.sql:/docker-entrypoint-initdb.d/1.sql"  # Builds schema
+        # Adds basic rows like Instruments and Locations
+        - "./Database/initdb.sql:/docker-entrypoint-initdb.d/2.sql" 
 
+    healthcheck:
+        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+        timeout: 10s
+        retries: 10
+  
+  # server:
+  #   image: test_server
+  #   ports:
+  #     - 8700:8700
+  #   environment:
+  #     - DATABASE_NAME=mydb
+  #     - MYSQL_IP=mySQL
+  #     - MYSQL_USER=iisharankov
+  #     - MYSQL_PASSWORD=iisharankov
+  #     - MINIO_ENDPOINT=minio:9000
+  #     - MINIO_ACCESS_ID=iisharankov
+  #     - MINIO_SECRET_KEY=iisharankov
+  #     - MINIO_SSL=false
+    
+  #   depends_on:
+  #     mySQL:
+  #       condition: service_healthy
+  
+  minio1:
+    image: minio/minio:RELEASE.2021-03-17T02-33-02Z
+    container_name: minio1
+    volumes:
+      - data1-1:/data1
+      - data1-2:/data2
+      - data1-3:/data3
+      - data1-4:/data4
+      
+    ports:
+    # Need to bind 0.0.0.0 otherwise 127.0.0.1 will cause 'connection reset by peer' error
+      - 0.0.0.0:9001:9000 
+    environment:
+      MINIO_ROOT_USER: iisharankov
+      MINIO_ROOT_PASSWORD: iisharankov
+    command: server http://minio1/data{1...4}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+
+  minio2:
+    image: minio/minio:RELEASE.2021-03-17T02-33-02Z
+    container_name: minio2
+    volumes:
+      - data2-1:/data1
+      - data2-2:/data2
+      - data2-3:/data3
+      - data2-4:/data4
+    ports:
+    # Need to bind 0.0.0.0 otherwise 127.0.0.1 will cause 'connection reset by peer' error
+      - 0.0.0.0:9002:9000
+    environment:
+      MINIO_ROOT_USER: iisharankov
+      MINIO_ROOT_PASSWORD: iisharankov
+    command: server http://minio2/data{1...4}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+
+
+## By default this config uses default local driver,
+## For custom volumes replace with volume driver configuration.
+volumes:
+  data1-1:
+  data1-2:
+  data1-3:
+  data1-4:
+
+  data2-1:
+  data2-2:
+  data2-3:
+  data2-4:
