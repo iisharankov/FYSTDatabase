@@ -19,12 +19,11 @@ USE `mydb` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Locations` (
   `LocationID` INT NOT NULL AUTO_INCREMENT,
-  `LocationName` VARCHAR(45) NOT NULL,
-  `S3Bucket` VARCHAR(45) NOT NULL,
-  `IPAddress` VARCHAR(100) NULL DEFAULT NULL,
-  `Port` INT NULL,
-  `Username` VARCHAR(100) NULL,
-  `Password` VARCHAR(100) NULL,
+  `LocationName` VARCHAR(32) NOT NULL,
+  `S3Bucket` VARCHAR(32) NOT NULL,
+  `Address` VARCHAR(128) NULL DEFAULT NULL,
+  `AccessID` VARCHAR(128) NULL,
+  `SecretID` VARCHAR(128) NULL,
   `SSL` TINYINT NULL,
   PRIMARY KEY (`LocationID`))
 ENGINE = InnoDB
@@ -37,9 +36,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Instruments` (
   `InstrumentID` INT NOT NULL AUTO_INCREMENT,
-  `InstrumentName` VARCHAR(10) NOT NULL COMMENT 'Mianly CHAI and P-CAM for now',
-  `FullName` VARCHAR(45) NOT NULL COMMENT 'Unabbreviated name',
-  `Description` VARCHAR(2000) NOT NULL,
+  `InstrumentName` VARCHAR(16) NOT NULL COMMENT 'Mianly CHAI and P-CAM for now',
+  `FullName` VARCHAR(64) NOT NULL COMMENT 'Unabbreviated name',
+  `Description` VARCHAR(2048) NOT NULL,
   `NumberOfPixels` INT NOT NULL,
   `FrequencyMin` INT NOT NULL,
   `FrequencyMax` INT NOT NULL,
@@ -54,7 +53,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Rules` (
   `RuleID` INT NOT NULL AUTO_INCREMENT,
-  `RuleDescription` VARCHAR(2000) NULL DEFAULT NULL,
+  `RuleDescription` VARCHAR(2048) NULL DEFAULT NULL,
   `InstrumentID` INT NOT NULL,
   `LocationID` INT NOT NULL,
   `Active` TINYINT NOT NULL,
@@ -79,12 +78,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Files` (
   `FileID` INT NOT NULL AUTO_INCREMENT,
+  `FileName` VARCHAR(512) NOT NULL,
   `DateCreated` DATETIME NOT NULL,
   `InstrumentID` INT NOT NULL,
   `Size` INT UNSIGNED NOT NULL COMMENT 'In bytes',
-  `HashOfBytes` VARCHAR(500) NOT NULL,
+  `MD5sum` VARCHAR(128) NOT NULL,
   PRIMARY KEY (`FileID`),
   INDEX `FK_Files_InstrumentID` (`InstrumentID` ASC) VISIBLE,
+  UNIQUE INDEX `FileName_UNIQUE` (`FileName` ASC) VISIBLE,
   CONSTRAINT `FK_Files_InstrumentID`
     FOREIGN KEY (`InstrumentID`)
     REFERENCES `mydb`.`Instruments` (`InstrumentID`)
@@ -125,7 +126,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `mydb`.`Copies` (
   `FileID` INT NULL,
   `LocationID` INT NULL,
-  `URL` VARCHAR(1000) NULL,
+  `URL` VARCHAR(1024) NULL,
   INDEX `FK_Copies_FileID` (`FileID` ASC) VISIBLE,
   INDEX `FK_Copies_LocationID` (`LocationID` ASC) VISIBLE,
   CONSTRAINT `FK_Copies_FileID`
