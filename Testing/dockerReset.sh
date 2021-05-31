@@ -10,7 +10,7 @@ yes | docker volume prune
 # Start up docker contianers
 docker-compose up -d
 
-echo "sleeping for 20 seconds"
+echo "Initializing Database"
 sleep 20
-echo "waking soon"
+echo "Done"
 sleep 5
