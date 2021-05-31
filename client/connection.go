@@ -100,10 +100,10 @@ func (dbapi *DBAPI) post(path, contentType string, body io.Reader) ([]byte, erro
 // }
 
 // * // * // client specific functions below // * // * //
-func (dbapi *DBAPI) getFiles(id string) ([]byte, error) {
+func (dbapi *DBAPI) getFiles(filename string) ([]byte, error) {
 	var endpoint string = "/files"
-	if id != "" { // If a specific ID was given, add ID to endpoint
-		endpoint += "/" + id
+	if filename != "" { // If a specific ID was given, add ID to endpoint
+		endpoint += "/" + filename
 	}
 
 	return dbapi.get(endpoint)
