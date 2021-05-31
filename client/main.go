@@ -34,10 +34,10 @@ func main() {
 
 	switch os.Args[1] {
 	case "files":
-		id := filescmd.String("id", "", "Files to query")
+		filename := filescmd.String("filename", "", "Files to query")
 		filescmd.Parse(os.Args[2:])
 
-		reply, err := connection.getFiles(*id)
+		reply, err := connection.getFiles(*filename)
 		if err != nil {
 			fmt.Println(err)
 		}
