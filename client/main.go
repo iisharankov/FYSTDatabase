@@ -87,7 +87,7 @@ func main() {
 		var ans datasets.ClientUploadReply
 		reply, err := connection.requestToUploadFile(file)
 		if err != nil {
-			log.Println(err)
+			log.Println(file.Name, err)
 			return
 		} else if err = json.Unmarshal(reply, &ans); err != nil {
 			panic(err)
@@ -101,22 +101,23 @@ func main() {
 		err = uploadData(ans, file)
 		if err != nil {
 			log.Println(err)
+			return
 			// TODO: what to do if upload fails?
-		} else {
-			a, err := connection.requestToUpdateLog(file.Name, ans)
-			if err != nil {
-				log.Println(err)
-				return
-			}
-			log.Println("Log response:", string(a))
-
-			b, err := connection.requestToUpdateCopies(ans.FileName, ans.LocationID)
-			if err != nil {
-				log.Println(err)
-				return
-			}
-			log.Println("Copies response:", string(b))
 		}
+
+		a, err := connection.requestToUpdateLog(file.Name, ans)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		log.Println("Log response:", string(a))
+
+		b, err := connection.requestToUpdateCopies(ans.FileName, ans.LocationID)
+		if err != nil {
+			log.Println("-", err)
+			return
+		}
+		log.Println("Copies response:", string(b))
 
 	default:
 		fmt.Println("unexpected command")

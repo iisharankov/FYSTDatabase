@@ -7,6 +7,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/iisharankov/FYSTDatabase/datasets"
@@ -23,7 +24,7 @@ func NewDBAPI(host string) *DBAPI {
 	return &DBAPI{
 		Host: host,
 		client: &http.Client{
-			Timeout: 500 * time.Millisecond,
+			Timeout: 10000 * time.Millisecond,
 		},
 	}
 }
@@ -41,10 +42,11 @@ func (dbapi *DBAPI) do(req *http.Request) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	trimmedString := strings.Trim(string(b), "\n") // Trims extra newline
 
 	// Send request req to server
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		return nil, fmt.Errorf(string(b))
+		return nil, fmt.Errorf(trimmedString)
 	}
 
 	// // unpack b into the struct it was encoded as
@@ -60,7 +62,7 @@ func (dbapi *DBAPI) do(req *http.Request) ([]byte, error) {
 	// 	return nil, fmt.Errorf("Error from Server: " + response.M)
 	// }
 	// return []byte(response.M), nil
-	return b, nil
+	return []byte(trimmedString), nil
 }
 
 func (dbapi *DBAPI) newRequest(method, path string, body io.Reader) (*http.Request, error) {
